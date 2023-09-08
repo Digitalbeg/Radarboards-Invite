@@ -1,2 +1,2 @@
 # Radarboards-Invite
-Visualization of technological dimensions for educational platforms 
+Visualization of educational and technological dimensions for educational platforms 
