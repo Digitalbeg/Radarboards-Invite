@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitalbegleitung Radarboards</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        /* Stil für die Schaltflächen */
+        #button1,
+        #button2,
+        #button3,
+        #button4 {
+            font-size: 15px;
+            /* Größe der Schrift */
+            cursor: pointer;
+            /* Hand-Cursor beim Überfahren */
+            background-color: #f0f0f0;
+            /* Hintergrundfarbe der Schaltfläche */
+            border: 1px solid #ccc;
+            /* Rand der Schaltfläche */
+            padding: 8px 10px;
+            /* Innenabstand */
+            /*  display: block; */
+            /* Block-Elemente untereinander anzeigen */
+            transition: background-color 0.3s;
+            /* Überblendungseffekt beim Überfahren */
+            margin-bottom: 5px;
+            /* Abstand zum nächsten Element */
+            width: fit-content;
+            /* Breite basierend auf Inhalt */
+        }
+
+
+        /* Stil für die Schaltflächen beim Überfahren */
+        #button1:hover,
+        #button2:hover,
+        #button3:hover,
+        #button4:hover {
+            background-color: #d6d6d6;
+            /* Hintergrundfarbe beim Überfahren */
+        }
+
+        /* Stil für die Bildschirm-Warnung */
+        #screenWarnung {
+            display: none;
+            /* Standardmäßig versteckt */
+            color: rgb(229, 9, 9);
+            /* Textfarbe */
+            font-weight: medium;
+            /* Fettdruck */
+            font-size: 18px;
+            /* Schriftgröße */
+            margin-bottom: 20px;
+            /* Abstand zum nächsten Element */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Warnmeldung für kleine Bildschirmgrößen oder Mobilgeräte -->
+    <div id="screenWarnung">
+        <h3>Diese Anwendung ist für größere Bildschirme (Desktop) optimiert.</h3>
+        <p>Maximieren Sie bitte Ihr Browserfenster
+            oder verschieben Sie falls möglich die Anwendung auf einen größeren Bildschirm.
+        <p> Sie können ggf. auch den Browser-Zoom verringern.
+            <br>(Drücken Sie dazu gleichzeitig „Strg“ und „-“ um den aktuellen Browserinhalt zu verkleinern.)
+        <h4>Diese Meldung wird dann automatisch ausgeblendet.</h4>
+    </div>
+
+    <h3>Fachlich-Didaktisch</h3>
+    <button id="button3" data-href="viz_module/radarboard/radarboards_gesamtprogramm_f.html">
+        Gesamtprogramm &rarr;
+    </button> &nbsp;
+    <button id="button4" data-href="viz_module/radarboard/radarboards_projekte_f.html">
+        Projekte &rarr;
+    </button>
+
+    <h3>Technologisch</h3>
+    <!-- Startschaltfläche für die Visualisierung des Gesamtprogramms -->
+    <button id="button1" data-href="viz_module/radarboard/radarboards_gesamtprogramm_t.html">
+        Gesamtprogramm &rarr;
+    </button> &nbsp;
+
+    <!-- Startschaltfläche für die Visualisierung der Projekte -->
+    <button id="button2" data-href="viz_module/radarboard/radarboards_projekte_t.html">
+        Projekte &rarr;
+    </button>
+
+    <!-- Verknüpfung zum externen JavaScript-Code -->
+    <script src="index.js"></script>
+</body>
+
+</html>
