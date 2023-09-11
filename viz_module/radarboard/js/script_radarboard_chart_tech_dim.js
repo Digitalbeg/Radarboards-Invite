@@ -273,7 +273,7 @@ series3TechDim.bullets.push(function () {
   circle.setAll({
     tooltip: tooltipCircle,
     //tooltipText: "[fontSize: 1em #fff]Dimension [fontSize: 1em fontWeight: bold]adressiert[/][#fff] in\n[fontSize: 1em fontWeight: bold #fff]{valueY}%[/][fontSize: 1em #fff] der Vorhaben",
-    tooltipText: "[fontSize: 0.85em]Dimension [fontSize: 0.85em fontWeight: bold]keine Aussage\noder keine Relevanz[/] in [fontSize: 0.85em fontWeight: bold]\n{valueY}%[/][fontSize: 0.85em] der Vorhaben (Ø)"
+    tooltipText: "[fontSize: 0.85em]Dimension [fontSize: 0.85em fontWeight: bold]in Ansätzen\n[fontSize: 0.85em]oder[fontSize: 0.85em fontWeight: bold] keine Aussage[/] in [fontSize: 0.85em fontWeight: bold]\n{valueY}%[/][fontSize: 0.85em] der Vorhaben (Ø)"
 
   });
 
@@ -356,7 +356,7 @@ series2TechDim.bullets.push(function () {
   circle.setAll({
     tooltip: tooltipCircle,
     //tooltipText: "[fontSize: 1em #fff]Dimension [fontSize: 1em fontWeight: bold]adressiert[/][#fff] in\n[fontSize: 1em fontWeight: bold #fff]{valueY}%[/][fontSize: 1em #fff] der Vorhaben",
-    tooltipText: "[fontSize: 0.9em ]Dimension [fontSize: 0.9em fontWeight: 500]adressiert[/] in\n[fontSize: 0.9em fontWeight: 500 ]{valueY}%[/][fontSize: 0.9em] der Vorhaben (Ø)",
+    tooltipText: "[fontSize: 0.9em ]Dimension [fontSize: 0.9em fontWeight: 500]vorhanden[/] in\n[fontSize: 0.9em fontWeight: 500 ]{valueY}%[/][fontSize: 0.9em] der Vorhaben (Ø)",
   });
 
   circle.states.create("hover", { scale: 1.5, fillOpacity: 0.3 }); //bei mouse over circle, diesen auf das doppelte vergrössern
@@ -541,7 +541,7 @@ seriesDimKeineAussageAusblenden.on("visible", function (visible, target) { //UDi
 
 /// pseudo series für in Ansätzen und wird adressiert ausblenden
 seriesDimWirdAdressiertAusblenden = chartTechDim.series.push(am5radar.RadarLineSeries.new(root, {
-  name: "Dim wird adressiert",
+  name: "Dim vorhanden",
   xAxis: xAxisTechDim,
   yAxis: yAxisTechDim,
   fill: ColorGrauValue1,
