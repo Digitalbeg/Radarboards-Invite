@@ -263,9 +263,9 @@ var tooltipNamenProjekteSeries1 = [];
 var tooltipNamenProjekteSeries2 = [];
 var tooltipNamenProjekteSeries3 = [];
 
-textTooltipProjekteSeries3 = "[fontSize: 14px fontWeight: 500]Dimension keine Aussage/keine Relevanz in den Vorhaben:\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]";
-textTooltipProjekteSeries2 = "[fontSize: 14px fontWeight: 500]Dimension adressiert in den Vorhaben:\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]";
-textTooltipProjekteSeries1 = "[fontSize: 14px #eee fontWeight: 500]Dimension ausgeprägt in den Vorhaben:\n[fontSize: 1.2em #fff][fontSize: 13px fontStyle: italic #fff]";
+textTooltipProjekteSeries3 = "[fontSize: 14px fontWeight: 500]Dimension in Ansätzen / keine Aussage in Vorhaben:\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]";
+textTooltipProjekteSeries2 = "[fontSize: 14px fontWeight: 500]Dimension vorhanden in Vorhaben:\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]";
+textTooltipProjekteSeries1 = "[fontSize: 14px #eee fontWeight: 500]Dimension ausgeprägt in Vorhaben:\n[fontSize: 1.2em #fff][fontSize: 13px fontStyle: italic #fff]";
 
 
 for (var i = 0; i <= 2; i++) {
@@ -293,7 +293,7 @@ function createTooltipNamenProjekte(nameDatensatz, indexDatensatz) {
 
         };
     }
-    console.log("tooltipProjekte:", tooltipNamenProjekteSeries1);
+    //console.log("tooltipProjekte:", tooltipNamenProjekteSeries1);
 
 };
 
@@ -344,7 +344,7 @@ series3TechUDim.bullets.push(function () {
 
     ///tooltip mit den Projektnamen ergänzen damit in UDim radar sichtbar welche Porjekte ausgeprägt, vorhaden etc sind
     //* textTooltip = "[fontSize: 1em]Dimension [fontSize: 1em fontWeight: bold]keine Aussage\noder keine Relevanz[/] in [fontSize: 1em fontWeight: bold]\n{valueY}%[/][fontSize: 1em] der Vorhaben"
-    textTooltip = "[fontSize: 14px fontWeight: 500]Dimension keine Aussage/keine Relevanz in den Vorhaben:";
+    textTooltip = "[fontSize: 14px fontWeight: 500]Dimension in Ansätzen/keine Aussage in Vorhaben:";
     tooltipMitProjektNamenSeries3 = textTooltip + "\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]" + tooltipNamenProjekteSeries3[0][series3TechUDimCounter];
     //tooltipMitProjektNamenSeries3 = textTooltip + ":\n[fontSize: 14px]" + tooltipNamenProjekteSeries3[series3TechUDimCounter];
 
@@ -442,64 +442,59 @@ var tooltipMitProjektNamenSeries2 = "";
 series2TechUDim.bullets.push(function () {
     color = series2TechUDimColors[series2TechUDimCounter];
     color = am5.Color.brighten(color, -0.3);
-    wertValue1 = dataUnterDimensionen[series2TechUDimCounter].value1; //value 1 = Dim ausgeprägt
-    wertValue2 = dataUnterDimensionen[series2TechUDimCounter].value2; //value 2 = Dim Merkmal vorhanden
-    wertValue3 = dataUnterDimensionen[series2TechUDimCounter].value3; //value 3 = Dim in Ansätzen
+
 
     ///tooltip mit den Projektnamen ergänzen damit in UDim radar sichtbar welche Porjekte ausgeprägt, vorhaden etc sind
-    textTooltip = "[fontSize: 14px fontWeight: 500]Dimension adressiert in den Vorhaben:";
+    textTooltip = "[fontSize: 14px fontWeight: 500]Dimension vorhanden in Vorhaben:";
     textTooltipMitProjektNamenSeries2 = textTooltip + "\n[fontSize: 1.2em][fontSize: 13px fontStyle: italic]" + tooltipNamenProjekteSeries2[0][series2TechUDimCounter];
 
     series2TechUDimCounter = series2TechUDimCounter + 1;
 
     var container = am5.Container.new(root, {});
-    if (wertValue2 > 0) { /// circle mit label nur an datenpunkt anbringen wenn wert value >0 ist
-        circleTechUDimSeries2[series2TechUDimCounter] = container.children.push(am5.Circle.new(root, {
-            interactive: true,
-            radius: radiusLabelUDimValue,
-            fill: ColorWhiteCircleFill,
-            fillOpacity: fillOpacityWhiteCircleSeries2,
+    //if (wertValue2 >= 0) { /// circle mit label nur an datenpunkt anbringen wenn wert value >0 ist
 
-            tooltipY: -7,
-            strokeWidth: 0.5,
-        }));
+    circleTechUDimSeries2[series2TechUDimCounter] = container.children.push(am5.Circle.new(root, {
+        interactive: true,
+        radius: radiusLabelUDimValue,
+        fill: ColorWhiteCircleFill,
+        fillOpacity: fillOpacityWhiteCircleSeries2,
 
-        var tooltipCircle = am5.Tooltip.new(root, { getFillFromSprite: false });
-        tooltipCircle.get("background").setAll({
-            fillOpacity: 0.95,
-            fill: am5.Color.brighten(color, 0.7)
-        });
+        tooltipY: -7,
+        strokeWidth: 0.5,
+    }));
 
-        tooltipCircle.label.setAll({ /// wrap automatisch in tooltip label funktioniert!!
-            oversizedBehavior: "wrap",
-            maxWidth: 350
-        });
+    var tooltipCircle = am5.Tooltip.new(root, { getFillFromSprite: false });
+    tooltipCircle.get("background").setAll({
+        fillOpacity: 0.95,
+        fill: am5.Color.brighten(color, 0.7)
+    });
 
-        circleTechUDimSeries2[series2TechUDimCounter].setAll({
-            tooltip: tooltipCircle,
-            //tooltipText: "[fontSize: 1em #fff]Dimension [fontSize: 1em fontWeight: bold]adressiert[/][#fff] in\n[fontSize: 1em fontWeight: bold #fff]{valueY}%[/][fontSize: 1em #fff] der Vorhaben",
-            tooltipText: textTooltipMitProjektNamenSeries2,
-        });
+    tooltipCircle.label.setAll({ /// wrap automatisch in tooltip label funktioniert!!
+        oversizedBehavior: "wrap",
+        maxWidth: 350
+    });
 
-        circleTechUDimSeries2[series2TechUDimCounter].states.create("hover", { scale: 1.4, fillOpacity: 0.2 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+    circleTechUDimSeries2[series2TechUDimCounter].setAll({
+        tooltip: tooltipCircle,
+        //tooltipText: "[fontSize: 1em #fff]Dimension [fontSize: 1em fontWeight: bold]adressiert[/][#fff] in\n[fontSize: 1em fontWeight: bold #fff]{valueY}%[/][fontSize: 1em #fff] der Vorhaben",
+        tooltipText: textTooltipMitProjektNamenSeries2,
+    });
 
-        labelTechUDimSeries2[series2TechUDimCounter] = container.children.push(am5.Label.new(root, {
-            text: "{valueY}",
-            fontSize: fontSizeUDimValue,
-            fontWeight: 400,
-            // fill: color,
-            fill: colorLabelCircleSeries2,
-            centerY: am5.p50,
-            centerX: am5.p50,
-            populateText: true
-        }));
-    };
+    circleTechUDimSeries2[series2TechUDimCounter].states.create("hover", { scale: 1.4, fillOpacity: 0.2 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+
+    labelTechUDimSeries2[series2TechUDimCounter] = container.children.push(am5.Label.new(root, {
+        text: "{valueY}",
+        fontSize: fontSizeUDimValue,
+        fontWeight: 400,
+        // fill: color,
+        fill: colorLabelCircleSeries2,
+        centerY: am5.p50,
+        centerX: am5.p50,
+        populateText: true
+    }));
 
     return am5.Bullet.new(root, {
         locationY: 0.5,
-        // locationX: 0.5,
-        //locationY: 1,
-        // locationY: (wertValue1 + wertValue2 > 95) ? 0.92 : 1, ///wenn datenwert zu gross dann zu nahm an rand und circle label nach innen rücken
         sprite: container
     });
 });
@@ -515,17 +510,12 @@ var series1TechUDim = chartTechUDim.series.push(am5radar.RadarColumnSeries.new(r
     valueYField: "value1",
     valueXField: "id",
     stroke: ColorWhite,
-    /* tooltip: am5.Tooltip.new(root, {
-      pointerOrientation: "down", 
-      dy: -45,
-      dx: -10,
-      labelText: "[fontSize: 14px fontWeight: 500]{name}:\n[fontSize: 13px fontWeight: 400]{textLang}"
-    }), */
+
     fill: fillSeriesAusgepraegt,  /// wird auch für legenden eintrag benutzt, color in column kommt von range, dann wir pro serie opacity angepasst
 }));
 
 series1TechUDim.columns.template.setAll({
-    //tooltipText: "[fontSize: 14px fontWeight: 500]{name}:\n[fontSize: 13px fontWeight: 400]{textLang}",
+
     fillOpacity: fillOpacitySeriesAusgepraegt,
     strokeWidth: 0.5,
     width: am5.percent(100)
@@ -545,67 +535,59 @@ var tooltipMitProjektNamenSeries1 = "";
 series1TechUDim.bullets.push(function () {
     color = series1TechUDimColors[series1TechUDimCounter];
     color = am5.Color.brighten(color, -0.3);
-    wertValue1 = dataUnterDimensionen[series1TechUDimCounter].value1; //value 1 = Dim ausgeprägt
-    wertValue2 = dataUnterDimensionen[series1TechUDimCounter].value2; //value 2 = Dim vorhanden
-    wertValue3 = dataUnterDimensionen[series1TechUDimCounter].value3; //value 2 = Dim in Ansätzen
 
     //console.log("value1=" + wertValue1);
-    textTooltip = "[fontSize: 14px #eee fontWeight: 500]Dimension ausgeprägt in den Vorhaben:";
-    //*  tooltipMitProjektNamenSeries1 = textTooltip + "\n[fontSize: 1.2em #fff]• [fontSize: 0.9em fontStyle: italic #fff]" + tooltipNamenProjekteSeries1[series1TechUDimCounter];
+    textTooltip = "[fontSize: 14px #eee fontWeight: 500]Dimension ausgeprägt in Vorhaben:";
     tooltipMitProjektNamenSeries1 = textTooltip + "\n[fontSize: 1.2em #fff][fontSize: 13px fontStyle: italic #fff]" + tooltipNamenProjekteSeries1[0][series1TechUDimCounter];
 
     series1TechUDimCounter = series1TechUDimCounter + 1;
 
     var series1bulletContainerTechUDim = am5.Container.new(root, {});
 
-    if (wertValue1 > 0) { /// circle mit label nur an datenpunkt anbringen wenn wert value >0 ist
-        circleTechUDimSeries1[series1TechUDimCounter] = series1bulletContainerTechUDim.children.push(am5.Circle.new(root, {
-            interactive: true,
-            radius: radiusLabelUDimValue,
-            tooltipY: -7,
-            fill: ColorWhiteCircleFill,
-            fillOpacity: fillOpacityWhiteCircleSeries1,
-            // stroke: root.interfaceColors.get("background"),
-            strokeWidth: 0.5,
-        }));
+    circleTechUDimSeries1[series1TechUDimCounter] = series1bulletContainerTechUDim.children.push(am5.Circle.new(root, {
+        interactive: true,
+        radius: radiusLabelUDimValue,
+        tooltipY: -7,
+        fill: ColorWhiteCircleFill,
+        fillOpacity: fillOpacityWhiteCircleSeries1,
+        strokeWidth: 0.5,
+    }));
 
-        var tooltipCircle = am5.Tooltip.new(root, { getFillFromSprite: false });
-        tooltipCircle.get("background").setAll({
-            fillOpacity: 0.95,
-            fill: am5.Color.lighten(color, 0.2)
-        });
+    var tooltipCircle = am5.Tooltip.new(root, { getFillFromSprite: false });
+    tooltipCircle.get("background").setAll({
+        fillOpacity: 0.95,
+        fill: am5.Color.lighten(color, 0.2)
+    });
 
-        tooltipCircle.label.setAll({ /// wrap automatisch in tooltip label funktioniert!!
-            oversizedBehavior: "wrap",
-            maxWidth: 350
-        });
+    tooltipCircle.label.setAll({ /// wrap automatisch in tooltip label funktioniert!!
+        oversizedBehavior: "wrap",
+        maxWidth: 350
+    });
 
-        circleTechUDimSeries1[series1TechUDimCounter].setAll({
-            tooltip: tooltipCircle,
-            tooltipText: tooltipMitProjektNamenSeries1
-        });
+    circleTechUDimSeries1[series1TechUDimCounter].setAll({
+        tooltip: tooltipCircle,
+        tooltipText: tooltipMitProjektNamenSeries1
+    });
 
-        labelTechUDimSeries1[series1TechUDimCounter] = series1bulletContainerTechUDim.children.push(am5.Label.new(root, {
-            text: "{valueY}",
-            fontSize: fontSizeUDimValue,
-            fontWeight: 400,
-            //fill: ColorWhite,
-            //fill: ColorCircleLabel,
-            // fill: color,
-            fill: colorLabelCircleSeries1,
-            centerY: am5.p50,
-            centerX: am5.p50,
-            populateText: true
-        }));
-        circleTechUDimSeries1[series1TechUDimCounter].states.create("hover", { scale: 1.3, fillOpacity: 0.3 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+    if (dataUnterDimensionen[series1TechUDimCounter - 1].value3 > 0) {
+        circleLabelText = "{valueY}"
+    } else { circleLabelText = "x" };
+    //circleLabelText = "99";
 
-    };
+    labelTechUDimSeries1[series1TechUDimCounter] = series1bulletContainerTechUDim.children.push(am5.Label.new(root, {
+        // text: "{valueY}",
+        text: circleLabelText,
+        fontSize: fontSizeUDimValue,
+        fontWeight: 400,
+        fill: colorLabelCircleSeries1,
+        centerY: am5.p50,
+        centerX: am5.p50,
+        populateText: true
+    }));
+    circleTechUDimSeries1[series1TechUDimCounter].states.create("hover", { scale: 1.3, fillOpacity: 0.3 }); //bei mouse over circle, diesen auf das doppelte vergrössern
 
     return am5.Bullet.new(root, {
-        //locationX: 0.5,
         locationY: 0.5,
-        // locationY: (wertValue1 > 90) ? 0.9 : 1, ///wenn datenwert zu gross dann zu nahm an rand und circle label nach innen rücken
-        //sprite: series1bulletContainerTechUDim
         sprite: (wertValue1 == 0) ? undefined : series1bulletContainerTechUDim //wenn wert von value1 (Dim ausgeprägt) 0 ist keine bullet zeichnen
     });
 });
@@ -643,15 +625,13 @@ seriesUDimKeineAussageAusblenden = chartTechUDim.series.push(am5radar.RadarLineS
 }));
 
 seriesUDimKeineAussageAusblenden.on("visible", function (visible, target) { //UDim werte in Ansätzen / nicht relevant ein und ausblenden
-    for (var index = 0; index < dataUnterDimensionen.length; index++) {
-        if (visible) { series3TechUDim.dataItems[index].show(); }
-        else { series3TechUDim.dataItems[index].hide(); }
-    }
+    if (visible) { series3TechUDim.show(); }
+    else { series3TechUDim.hide(); }
 });
 
 /// pseudo series für in Ansätzen und wird adressiert ausblenden
 seriesUDimWirdAdressiertAusblenden = chartTechUDim.series.push(am5radar.RadarLineSeries.new(root, {
-    name: "Dim wird adressiert",
+    name: "Dim vorhanden",
     xAxis: xAxisTechUDim,
     yAxis: yAxisTechUDim,
     fill: ColorGrauValue1,
@@ -668,7 +648,7 @@ seriesUDimWirdAdressiertAusblenden.on("visible", function (visible, target) { //
 
 /// pseudo series für alle UDim ausblenden 
 seriesUDimAusblenden = chartTechUDim.series.push(am5radar.RadarLineSeries.new(root, {
-    name: "Dimensionen anzeigen",
+    name: "alle Dimensionen anzeigen",
     xAxis: xAxisTechUDim,
     yAxis: yAxisTechUDim,
     fill: ColorGrauValue1,
@@ -677,23 +657,25 @@ seriesUDimAusblenden = chartTechUDim.series.push(am5radar.RadarLineSeries.new(ro
 }));
 
 seriesUDimAusblenden.on("visible", function (visible, target) { //Dim ausblenden
-    if (visible) {
-        for (var index = 0; index < dataUnterDimensionen.length; index++) {
-            console.log("udim einblenden", index)
-            series1TechUDim.dataItems[index].show();
-            series2TechUDim.dataItems[index].show();
-
-        }
-    }
-    else {
-        for (var index = 0; index < dataUnterDimensionen.length; index++) {
-            console.log("udim ausblenden", index)
+    var keineAussageUDimEingeblendet = seriesUDimKeineAussageAusblenden.get("visible");
+    for (var index = 0; index < dataUnterDimensionen.length; index++) { //ein UDim weniger sonst ubekanter hide() error
+        if (!visible) {
             series1TechUDim.dataItems[index].hide();
             series2TechUDim.dataItems[index].hide();
             series3TechUDim.dataItems[index].hide();
-
         }
-    }
+        else {
+            series1TechUDim.dataItems[index].show();
+            series2TechUDim.dataItems[index].show();
+            //* später series 3 show nur wenn entsprechnende legend box auf an steht
+            if (keineAussageUDimEingeblendet) {
+                series3TechUDim.dataItems[index].show();
+            }
+        }
+    };
+    indexlastUDim = dataUnterDimensionen.length - 1;
+    console.log("indexlastUDim:", indexlastUDim);
+
 });
 
 /// pseudo series für UDim Filter anzeigenn
@@ -992,16 +974,20 @@ function updateSliderDatensatzTechUDim(sliderWert) { /// bei slider move updatev
         updateValuesDatensatzTechUDim(dataUnterDimensionenEinzelStandAntrag, indexDatensatz = 0);
         createTooltipNamenProjekte(dataUnterDimensionenEinzelStandAntrag);
         titleHoleTechUDimDynamisch.set("text", textDynamischStandAntrag);
+        //updateSliderDatensatzTechDim(sliderWert); //wegn bug anzeige labels in corcle
+
     }
     else if (sliderWert == 4 || sliderWert == 5 || sliderWert == 6) {
         updateValuesDatensatzTechUDim(dataUnterDimensionenEinzelStandZB2021, indexDatensatz = 1);
         createTooltipNamenProjekte(dataUnterDimensionenEinzelStandZB2021);
         titleHoleTechUDimDynamisch.set("text", textDynamischStandZB2021);
+
     }
     else if (sliderWert == 9 || sliderWert == 10 || sliderWert == 11) {
         updateValuesDatensatzTechUDim(dataUnterDimensionenEinzelStandTagung2022, indexDatensatz = 2);
         createTooltipNamenProjekte(dataUnterDimensionenEinzelStandTagung2022);
         titleHoleTechUDimDynamisch.set("text", textDynamischStandTagung2021);
+
     };
 };
 //#endregion ///----------------------------Slider------------------------------------------------------------------------
@@ -1056,10 +1042,11 @@ seriesUDimFilterAnzeigen.hide();
 legendUDimFilterAnzeigen.data.push(seriesUDimFilterAnzeigen);
 
 
+legendTechUDim.data.push(seriesUDimAusblenden);
 legendTechUDim.data.push(seriesProzentValuesUDim);
-/* legendTechUDim.data.push(seriesUDimWirdAdressiertAusblenden); */
-//legendTechUDim.data.push(seriesUDimAusblenden);
+
 legendTechUDim.data.push(seriesUDimKeineAussageAusblenden);
+legendTechUDim.data.push(seriesUDimWirdAdressiertAusblenden);
 
 if (thema == "Fachlich") { //wenn fachliches Radarboard dann nur 15 UDim statt 20 UDim
     legendTechUDim.data.push(series1TechUDim.dataItems[0]);
@@ -1106,25 +1093,15 @@ if (thema == "Fachlich") { //wenn fachliches Radarboard dann nur 15 UDim statt 2
 //#endregion ///-----C END Init Datenstrukturen für serie, legende, chart beim ersten laden---------------------------------------------
 
 //#region ///--------D   Series & Chart Hide und appear------------------------------------------------------------------
-showHideProzentValuesUDim(true); seriesProzentValuesUDim.show(); // beim start gesamtvalues ausblenden
+showHideProzentValuesUDim(true);
+seriesProzentValuesUDim.show(); // beim start gesamtvalues ausblenden
 seriesUDimKeineAussageAusblenden.hide();
 
 //showHideProzentValuesUDim(false); seriesProzentValuesUDim.hide(); // beim start gesamtvalues ausblenden
 
 
 
-// hide all series at startup in chart
-/* var startDim = 1; /// kein hide bei startup 
-for (var i = startDim; i < series1TechUDim.dataItems.length; i++) { //start bei i=1 statt i=0 damit erste Dimension bereits sichtbar bei initialem Laden des charts
-  series1TechUDim.dataItems[i].hide();
-  series2TechUDim.dataItems[i].hide();
-  series3TechUDim.dataItems[i].hide();
-}; */
 
-/// unnötig da dim zuerst angezeigt wird
-/* series1TechUDim.appear(1000);
-series2TechUDim.appear(1000);
-series3TechUDim.appear(1000); */
 
 chartTechUDim.appear(3000, 100);
 
@@ -1134,4 +1111,5 @@ chartTechUDim.appear(3000, 100);
 //containerTechDim.hide(); // intial UDim nicht anzeigen, wir bei changeDatensatz gewechselt
 
 containerTechUDim.hide(); // intial UDim nicht anzeigen, wird bei changeDatensatz gewechselt
+
 
