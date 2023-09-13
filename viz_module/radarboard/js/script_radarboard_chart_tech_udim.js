@@ -863,11 +863,22 @@ playButtonTechUDim.events.on("click", function () {
     }
 })
 
-var sliderTechUDim = containerSliderTechUDim.children.push(am5.Slider.new(root, { orientation: "horizontal", start: 0.05, centerY: am5.p50 }));
+// slider steht zu Beginn rechts aussen
+var sliderTechUDim = containerSliderTechUDim.children.push(am5.Slider.new(root, {
+    orientation: "horizontal",
+    //start: 0.90,
+    start: 0.05,
+    centerY: am5.p50
+}));
+
+sliderTechUDimStand = sliderTechUDim.get("start");
+//console.log("sliderTechUDimStand:", sliderTechUDimStand);
+
 sliderTechUDim.on("start", function (start) { if (start === 1) { playButtonTechUDim.set("active", false); } });
 
 sliderTechUDim.events.on("rangechanged", function () {
     updateSliderDatensatzTechUDim(Math.round(sliderTechUDim.get("start", 0) * anzahlSliderKategorienDimUDim));
+    sliderTechUDimStand = sliderTechUDim.get("start");
 }); /// wenn slider bewegt wird dann aufruf funktions zum update der values
 
 
@@ -1000,6 +1011,9 @@ series1TechUDim.data.setAll(dataUnterDimensionen);
 series2TechUDim.data.setAll(dataUnterDimensionen);
 series3TechUDim.data.setAll(dataUnterDimensionen);
 
+
+
+
 //#endregion ///-----B.2  END Series füllen-------------------------------------------
 //#region ///--------B.3 Legend: series2+3 & range ausblenden bei klick in Legende ----------------------------
 /// evenbts für series2,3 ausblenden wenn 1 ausgeblendet wird
@@ -1099,17 +1113,13 @@ seriesUDimKeineAussageAusblenden.hide();
 
 //showHideProzentValuesUDim(false); seriesProzentValuesUDim.hide(); // beim start gesamtvalues ausblenden
 
-
-
-
-
 chartTechUDim.appear(3000, 100);
-
 
 //#endregion ///----D END Series & Chart appear-----------------------------------------------------------------------------
 
 //containerTechDim.hide(); // intial UDim nicht anzeigen, wir bei changeDatensatz gewechselt
-
 containerTechUDim.hide(); // intial UDim nicht anzeigen, wird bei changeDatensatz gewechselt
+
+
 
 

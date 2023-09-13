@@ -677,9 +677,13 @@ playButtonTechDim.events.on("click", function () {
 
 var sliderTechDim = containerSliderTechDim.children.push(am5.Slider.new(root, {
   orientation: "horizontal",
-  start: 0.05,
+  //start: 0.05,
+  start: 0.90, //slider zu beginn rechts aussen
   centerY: am5.p50
 }));
+
+sliderTechDimStand = sliderTechDim.get("start");
+//console.log("sliderTechDimStand:", sliderTechDimStand);
 
 sliderTechDim.on("start", function (start) {
   if (start === 1) {
@@ -689,6 +693,7 @@ sliderTechDim.on("start", function (start) {
 
 sliderTechDim.events.on("rangechanged", function () {
   updateSliderDatensatzTechDim(Math.round(sliderTechDim.get("start", 0) * anzahlSliderKategorienDimUDim));
+  sliderTechDimStand = sliderTechDim.get("start");
 });
 
 var sliderTextStandATechDim = chartTechDim.children.push(am5.Label.new(root, {

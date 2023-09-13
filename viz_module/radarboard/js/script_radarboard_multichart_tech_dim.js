@@ -26,16 +26,20 @@ function changeDatensatz(nameDatensatz) {
     // show chart Dim und hide chart UDim
     if (nameDatensatz == "Tech-Dimensionen") {
         aktuellerDatensatz = "Tech-Dimensionen";
+        sliderTechDim.set("start", sliderTechUDimStand); //slider Stand von UDim übernehmen bei umschalten datensatz, damit konsistent zu UDim Zeitpunkt
         containerTechDim.show(1000);
         containerTechUDim.hide(500);
-     
+
     }
     // show chart UDim und hide chart Dim
     else if (nameDatensatz == "Tech-UnterDimensionen") {
         aktuellerDatensatz = "Tech-UnterDimensionen";
-        containerTechUDim.show(1000);
         containerTechDim.hide(500);
-       
+
+        sliderTechUDim.set("start", sliderTechDimStand); //slider Stand von Dim übernehmen bei umschalten datensatz, damit konsistent zu Dim Zeitpunkt
+        containerTechUDim.show(1000);
+
+
     }
 
 }
