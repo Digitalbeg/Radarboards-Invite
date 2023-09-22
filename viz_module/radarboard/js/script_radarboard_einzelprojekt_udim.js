@@ -612,7 +612,7 @@ function erstelleLegendEventsTechUDimEinzel(index) { //noch nicht fertig
           seriesEinzelProjekt[i].show();
         }
         else {
-          console.log("i<>index hide", i, index)
+          //console.log("i<>index hide", i, index)
           seriesEinzelProjekt[i].hide();
         }
       };
@@ -667,7 +667,8 @@ playButton.events.on("click", function () {
 
 var slider = containerSlider.children.push(am5.Slider.new(root, {
   orientation: "horizontal",
-  start: 0.05,
+  //start: 0.05,
+  start: 0.90, //slider zu beginn rechts aussen
   centerY: am5.p50
 }));
 
@@ -728,7 +729,7 @@ var sliderTextStandC = chartTechUDimEinzel.children.push(am5.Label.new(root, {
   })
 }));
 
-function updateValuesDatensatz(datensatz) { ///update der value1..34 in series 1..34 bei slider bewegeung
+function updateValuesDatensatz(datensatz, indexDatensatz) { ///update der value1..34 in series 1..34 bei slider bewegeung
   dataUnterDimensionenEinzel = datensatz;
   //* alte version geht aber sehr langsam, slider kann nur schwer bewegt werden
   //* for (var index = 1; index <= projekteNamen.length; index++) {
@@ -739,24 +740,26 @@ function updateValuesDatensatz(datensatz) { ///update der value1..34 in series 1
     var counterDatensatz = 0;
     am5.array.each(seriesEinzelProjekt[index].dataItems, function (dataItem) {
       var newValue = dataUnterDimensionenEinzel[counterDatensatz]['value' + index]; //alle 34 series (34Projekte) durchgehen und value1..34 updaten
+
       //*console.log("newvalue1:" + newValue);
       counterDatensatz = counterDatensatz + 1;
       dataItem.set("valueY", newValue);
       dataItem.animate({ key: "valueYWorking", to: newValue, duration: 500 });
     });
   };
+  var newLabelGesamtValues = "";
 };
 
 function updateSliderDatensatz(sliderWert) { /// bei slider move updatevalues funktion aufrufen
   // console.log("slider wert:" + sliderWert);
   if (sliderWert == 0 || sliderWert == 1) {
-    updateValuesDatensatz(dataUnterDimensionenEinzelStandAntrag)
+    updateValuesDatensatz(dataUnterDimensionenEinzelStandAntrag, indexDatensatz = 0);
   }
   else if (sliderWert == 4 || sliderWert == 5 || sliderWert == 6) {
-    updateValuesDatensatz(dataUnterDimensionenEinzelStandZB2021)
+    updateValuesDatensatz(dataUnterDimensionenEinzelStandZB2021, indexDatensatz = 1);
   }
   else if (sliderWert == 9 || sliderWert == 10 || sliderWert == 11) {
-    updateValuesDatensatz(dataUnterDimensionenEinzelStandTagung2022);
+    updateValuesDatensatz(dataUnterDimensionenEinzelStandTagung2022, indexDatensatz = 2);
   }
 };
 
