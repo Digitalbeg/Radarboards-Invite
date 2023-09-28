@@ -118,6 +118,21 @@ body {
   color: #595959;
 }
 
+#helpvideo {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: auto;
+}
+
+#CloseButton {
+  color: rgb(10, 10, 10);
+  position: absolute;
+  right: 3px;
+}
+
 /* Hauptdiagramm-Container-Stil */
 #chartdiv {
   width: 100%;
