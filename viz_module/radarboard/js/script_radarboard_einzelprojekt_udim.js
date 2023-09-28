@@ -16,31 +16,105 @@ var container = root.container.children.push(
   })
 );
 
-var textProjektTitel1 = "[#535353] Technologisches Radarboard ";
-if (thema == "Fachlich") { textProjektTitel1 = "[#535353] Fachliches Radarboard " }
+var textProjektTitel1 = "[#535353] Radarboard - Technologie";
+if (thema == "Fachlich") { textProjektTitel1 = "[#535353] Radarboard - Fachlich & Didaktisch" }
 
-var textProjektTitel2 = "[#535353]Projekt_1 - ";
-
-//var textProjektTitel3 = "[#535353] und weitere Projekte - ";
-var textProjektTitel3 = "";
+//var textProjektTitel2 = "[#535353]Projekt_1 - ";
+var textProjektTitel2 = ""; //später wird dynamisch Name des projektes zugewiesen
+var textProjektTitel3 = ""; //für Umschalten Technisch / Fachlich einzelRadarboard 
 var textProjektTitel = textProjektTitel2 + textProjektTitel1;
 
+
 //------------------title------------------------------------------------
-var title = container.children.push(am5.Label.new(root, {
-  /*  text: textProjektTitel, */
-  text: " ", //wird später über update Title gesetzt
+var containerTitle = container.children.push(
+  am5.Container.new(root, {
+    layout: root.horizontalLayout
+  })
+);
+
+var title = containerTitle.children.push(am5.Label.new(root, {
+  text: "", //wird später über update Title gesetzt
   fontSize: 18,
-  /* fontSize: "1.85em", */
   fontWeight: 700,
-  x: am5.percent(56),
-  centerX: am5.percent(50)
+  paddingLeft: 540,
+  // x: 450,
 }));
 
-/* var textSkala = container.children.push(am5.Label.new(root, {
-  text: "[fontWeight: 500 fontSize: 0.9em]Legende:[/] [fontStyle: italic fontWeight: 400 fontSize: 0.85em]sehr ausgeprägt=3 | wird adressiert=2\nin Ansätzen=1 | keine Relevanz=0[/]",
-  x: 22,
-  y: 70,
-})); */
+var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
+  paddingLeft: -10,
+  text: " / Fachlich & Didaktisch",
+  fontSize: 18,
+  fontWeight: 600,
+  fill: ColorGrauValue2,
+  cursorOverStyle: "pointer",
+  tooltipText: "[fontWeight: 400 fontSize: 11px]zum Radarboard Fachlich-Didaktisch wechseln",
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
+if (thema == "Fachlich") {
+  labelTechFachUmschalten.set("text", " / Technologisch");
+  labelTechFachUmschalten.set("tooltipText", "[fontWeight: 400 fontSize: 11px]zum Radarboard Technologie wechseln");
+}
+
+labelTechFachUmschalten.events.on("click", function (ev) {
+  console.log("umschalten:" + nameProjekt);
+  if (thema == "Fachlich") {
+    console.log("Fach,p" + nameProjekt);
+    //window.location.href = "radar-broschuere-t.html?p=apollo";
+    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
+  }
+  else {
+    console.log("Technologisch");
+    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
+  }
+});
+
+var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
+  paddingLeft: 30,
+  x: am5.percent(0),
+  text: "🛈",
+  fontSize: 22,
+  //fontWeight: 200,
+  fill: ColorGrauValue2,
+  cursorOverStyle: "pointer",
+  tooltipText: "[fontWeight: 400 fontSize: 11px]Animierte Erklärung anzeigen / verbergen",
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
+/* var imgHilfe = containerTitle.children.push(am5.Picture.new(root, {
+  paddingLeft: 30,
+  paddingTop: 100,
+  x: am5.percent(0),
+  width: 650,
+  height: 650,
+  zindex: 999,
+  //src: "../img/hilfe-bild-v1.png.png",
+
+}));
+imgHilfe.hide(); */
+
+labelHilfe.events.on("click", function (ev) {
+  helpVideoStatus = document.getElementById('helpvideo').style.display;
+  //console.log("status:" + helpVideoStatus);
+
+  if (helpVideoStatus == 'none') {
+    //console.log("img visible");
+    document.getElementById('CloseButton').style.display = 'inline-block';
+    document.getElementById('helpvideo').style.display = 'inline-block';
+  }
+  else {
+    document.getElementById('helpvideo').style.display = 'none';
+    document.getElementById('CloseButton').style.display = 'none';
+  }
+  //console.log("status nach klick:" + document.getElementById('helpvideo').style.display);
+});
+
 
 function updateTitleText() {
   var counterVisible = 0; var indexSingle = 0;
@@ -200,16 +274,20 @@ xRendererTechUDimEinzel.labels.template.setAll({
 });
 
 var tooltip = am5.Tooltip.new(root, {
+  //tooltipX: am5.percent(50),
+  //tooltipY: am5.percent(100),
   getFillFromSprite: true,
   getLabelFillFromSprite: true,
   autoTextColor: true,
-  pointerOrientation: "up",
+  //pointerOrientation: "up",
+  pointerOrientation: "right",
   labelText: "[fontSize: 11px fontWeight: 500]{category}"
 });
 tooltip.get("background").setAll({
   fillOpacity: 0.82,
   fill: ColorGrauValue3,
 });
+
 
 var xAxisTechUDimEinzel = chartTechUDimEinzel.xAxes.push(am5xy.CategoryAxis.new(root, {
   maxDeviation: 0,
@@ -415,13 +493,30 @@ var rangeTechUDimEinzelGesamtValues = [];
 var rangeDataItemTechUDimEinzelGesamtValues = [];
 
 function erstelleRangeTechUDimEinzelGesamtValues(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
-  var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
+  var tooltip = am5.Tooltip.new(root, {
+    pointerOrientation: "down",
+    getFillFromSprite: true,
+    //keepTargetHover: true
+  });
   tooltip.get("background").setAll({ fillOpacity: 0.85 });
 
   // ändern und 2 dim array machen für datesatz 0,1,2 um später .set label text machen zu können wenn slider bewegt wird
   rangeDataItemTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
   rangeTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelGesamtValues[indexRange]);
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: 7, innerRadius: -29, tooltip: tooltip, tooltipText: tooltipText, cursorOverStyle: "pointer" }); //innerRadius dicke farbiger streifen
+
+  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({
+    visible: true,
+    fill: colorAchseLabel,
+    fillOpacity: 0.9,
+    dRadius: 7,
+    innerRadius: -29,
+    tooltip: tooltip,
+    tooltipText: tooltipText,
+    tooltipX: 430,
+    tooltipY: -300,
+    cursorOverStyle: "pointer"
+  }); //innerRadius dicke farbiger streifen
+
   rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("label").setAll({ fill: ColorWhite /* colorAchseLabel */, fontWeight: fontWeightLabel, radius: radiusLabel, fontSize: fontSize, text: labelText });
 
 }
@@ -436,8 +531,10 @@ function generiereRangesGesamtValues() {
       dim = Math.ceil(udim / 3);
     }
     // var labelText = "[bold]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt3;
-    var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt1;
-    var tooltipText = "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + " Vorhaben: Merkmal ausgeprägt[/]\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " Vorhaben: Merkmal vorhanden\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " Vorhaben: Merkmal in Ansätzen/nicht relevant";
+    //var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt1;
+    var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2;
+
+    var tooltipText = "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + " Vorhaben: Merkmal ausgeprägt[/]\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " Vorhaben: Merkmal vorhanden[/]\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " Vorhaben: Merkmal in Ansätzen/nicht relevant";
 
     erstelleRangeTechUDimEinzelGesamtValues(index - 1, eval('ColorDim' + dim + 'Value1'), radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
@@ -598,7 +695,7 @@ seriesGrauCircleInnen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries
 generiereRangesGrauCircleInnen();
 
 
-function erstelleLegendEventsTechUDimEinzel(index) { //noch nicht fertig
+function erstelleLegendEventsTechUDimEinzel(index) {
   seriesEinzelProjekt[index].on("visible", function (visible, target) {
     updateTitleText();
     updateProjektBeschreibungText();
@@ -608,8 +705,10 @@ function erstelleLegendEventsTechUDimEinzel(index) { //noch nicht fertig
 
       for (var i = 1; i <= projekteNamen.length; i++) {
         if (i == index) {
-          console.log("i==index show", i, index)
+          // console.log("i==index show", i, index)
           seriesEinzelProjekt[i].show();
+          nameProjekt = projekteNamen[i - 1];
+          console.log("on.visible p=" + nameProjekt);
         }
         else {
           //console.log("i<>index hide", i, index)
@@ -690,6 +789,7 @@ var sliderTextStandA = chartTechUDimEinzel.children.push(am5.Label.new(root, {
   fontSize: 14,
   fontWeight: 500,
   fill: ColorBlackYAxisText,
+  cursorOverStyle: "pointer",
   tooltipText: "[fontWeight: 500 fontSize: 13px]Datengrundlage\n[fontWeight: 400 fontSize: 12px]Fremdeinschätzung der Projektanträge,\ndie im Zeitraum März – September 2021 \n(in zwei Förderwellen) eingegangen sind,\nsowie ergänzende Antragsgespräche.",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
@@ -707,6 +807,7 @@ var sliderTextStandB = chartTechUDimEinzel.children.push(am5.Label.new(root, {
   fontSize: 14,
   fontWeight: 500,
   fill: ColorBlackYAxisText,
+  cursorOverStyle: "pointer",
   tooltipText: "[fontWeight: 500 fontSize: 13px]Datengrundlage\n[fontWeight: 400 fontSize: 12px]Fremdeinschätzung der ersten Zwischenberichte\nfür den Berichtszeitraum 2021, anschließend\nerfolge eine erste Validierungsschleife mittels\nSelbsteinschätzung der Projektkonsortien.",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
@@ -722,6 +823,7 @@ var sliderTextStandC = chartTechUDimEinzel.children.push(am5.Label.new(root, {
   fontSize: 14,
   fontWeight: 500,
   fill: ColorBlackYAxisText,
+  cursorOverStyle: "pointer",
   tooltipText: "[fontWeight: 500 fontSize: 13px]Datengrundlage\n[fontWeight: 400 fontSize: 12px]Fremdeinschätzung der zweiten Zwischenberichte\nfür den Berichtszeitraum 2022, anschließend\nerfolge eine zweite Validierungsschleife mittels\nSelbsteinschätzung der Projektkonsortien.",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
@@ -764,7 +866,21 @@ function updateSliderDatensatz(sliderWert) { /// bei slider move updatevalues fu
 };
 
 //#endregion ///-----------D End Slider-------------------------------------------------------
-
+function changeProjekt(name) {
+  // change Auswahlbox Projekte zu nameProjekt
+  for (var i = 0; i < projekteNamen.length; i++) {
+    //console.log("i,projekteNamen[i],nameProjekt=", i, projekteNamen[i].toLowerCase(), nameProjekt)
+    if (name == projekteNamen[i].toLowerCase()) {
+      seriesEinzelProjekt[i + 1].show();
+      nameProjekt = projekteNamen[i].toLowerCase();
+      console.log("p=" + nameProjekt);
+    }
+    else {
+      //console.log("i<>index hide", i, index)
+      seriesEinzelProjekt[i + 1].hide();
+    }
+  };
+}
 //#region ///--------E Main Init Chart Data, Hide Series at startup etc-----------------------------------
 
 //chartTechUDimEinzel.set("scale", 0.95); /// intial chart herunterskalieren da evtl. schriften zu gross
