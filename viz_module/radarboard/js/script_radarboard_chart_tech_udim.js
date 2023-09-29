@@ -379,7 +379,7 @@ series3TechUDim.bullets.push(function () {
         tooltipText: tooltipMitProjektNamenSeries3,
     });
 
-    circleTechUDimSeries3[series3TechUDimCounter].states.create("hover", { scale: 1.4, fillOpacity: 0.4 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+    circleTechUDimSeries3[series3TechUDimCounter].states.create("hover", { scale: 1.1, fillOpacity: 0.4 }); //bei mouse over circle, diesen auf das doppelte vergrössern
 
     labelTechUDimSeries3[series3TechUDimCounter] = container.children.push(am5.Label.new(root, {
         text: "{valueY}",
@@ -480,7 +480,7 @@ series2TechUDim.bullets.push(function () {
         tooltipText: textTooltipMitProjektNamenSeries2,
     });
 
-    circleTechUDimSeries2[series2TechUDimCounter].states.create("hover", { scale: 1.4, fillOpacity: 0.2 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+    circleTechUDimSeries2[series2TechUDimCounter].states.create("hover", { scale: 1.1, fillOpacity: 0.2 }); //bei mouse over circle, diesen auf das doppelte vergrössern
 
     labelTechUDimSeries2[series2TechUDimCounter] = container.children.push(am5.Label.new(root, {
         text: "{valueY}",
@@ -569,14 +569,20 @@ series1TechUDim.bullets.push(function () {
         tooltipText: tooltipMitProjektNamenSeries1
     });
 
-    if (dataUnterDimensionen[series1TechUDimCounter - 1].value3 > 0) {
-        circleLabelText = "{valueY}"
-    } else { circleLabelText = "x" };
+
+
+    /*  if (dataUnterDimensionen[series1TechUDimCounter - 1].valueProzentGesamt1 == '0') {
+         circleLabelText = "{valueY}";
+     } else {
+         circleLabelText = "";
+         console.log("series1 valueProzentGesamt1=" + dataUnterDimensionen[series1TechUDimCounter - 1].valueProzentGesamt1);
+     }; */
     //circleLabelText = "99";
 
     labelTechUDimSeries1[series1TechUDimCounter] = series1bulletContainerTechUDim.children.push(am5.Label.new(root, {
         // text: "{valueY}",
-        text: circleLabelText,
+        //text: circleLabelText,
+        text: "",
         fontSize: fontSizeUDimValue,
         fontWeight: 400,
         fill: colorLabelCircleSeries1,
@@ -584,11 +590,13 @@ series1TechUDim.bullets.push(function () {
         centerX: am5.p50,
         populateText: true
     }));
-    circleTechUDimSeries1[series1TechUDimCounter].states.create("hover", { scale: 1.3, fillOpacity: 0.3 }); //bei mouse over circle, diesen auf das doppelte vergrössern
+    circleTechUDimSeries1[series1TechUDimCounter].states.create("hover", { scale: 0.9, fillOpacity: 0.3 }); //bei mouse over circle, diesen auf das doppelte vergrössern
 
     return am5.Bullet.new(root, {
         locationY: 0.5,
-        sprite: (wertValue1 == 0) ? undefined : series1bulletContainerTechUDim //wenn wert von value1 (Dim ausgeprägt) 0 ist keine bullet zeichnen
+        //sprite: (dataUnterDimensionenEinzel[series1TechUDimCounter - 1].valueProzentGesamt1 == 0) ? undefined : series1bulletContainerTechUDim //wenn wert von value1 (Dim ausgeprägt) 0 ist keine bullet zeichnen
+
+        sprite: series1bulletContainerTechUDim //wenn wert von value1 (Dim ausgeprägt) 0 ist keine bullet zeichnen
     });
 });
 
@@ -616,7 +624,7 @@ seriesProzentValuesUDim.on("visible", function (visible, target) {
 
 /// pseudo series für keineAussage ausblenden
 seriesUDimKeineAussageAusblenden = chartTechUDim.series.push(am5radar.RadarLineSeries.new(root, {
-    name: "alle Ausprägungen",
+    name: "alle Ausprägungen anzeigen",
     xAxis: xAxisTechUDim,
     yAxis: yAxisTechUDim,
     fill: ColorGrauValue1,
@@ -625,11 +633,23 @@ seriesUDimKeineAussageAusblenden = chartTechUDim.series.push(am5radar.RadarLineS
 }));
 
 seriesUDimKeineAussageAusblenden.on("visible", function (visible, target) { //UDim werte in Ansätzen / nicht relevant ein und ausblenden
-    if (visible) { series3TechUDim.show(); }
-    else { series3TechUDim.hide(); }
+    // wegen bug UDim Ausprägung keine Aussage anzeigen problem in darstellung
+
+    if (visible) {
+        series3TechUDim.show();
+        // wegen bug anzeige UDim keine AUssage über Rand hinaus, slider kurz hin und her bewegen, dann anzeige wieder korrekt
+        sliderTechUDimStand = sliderTechUDim.get("start");
+        sliderTechUDim.set("start", 0.45);
+        sliderTechUDim.set("start", sliderTechUDimStand);
+    }
+    else {
+        series3TechUDim.hide();
+    }
+
+
 });
 
-/// pseudo series für in Ansätzen und wird adressiert ausblenden
+/// pseudo series für wird adressiert ausblenden
 seriesUDimWirdAdressiertAusblenden = chartTechUDim.series.push(am5radar.RadarLineSeries.new(root, {
     name: "Dim vorhanden",
     xAxis: xAxisTechUDim,
@@ -934,8 +954,13 @@ function updateValuesDatensatzTechUDim(datensatz, indexDatensatz) { ///update de
 
     var counterUDimDatensatz = 0; /// update series1 values
     am5.array.each(series1TechUDim.dataItems, function (dataItem) {
+        // var newValue = (dataUnterDimensionen[counterUDimDatensatz].valueProzentGesamt1 > 0) ? dataUnterDimensionen[counterUDimDatensatz].valueProzentGesamt1 : "";
         var newValue = dataUnterDimensionen[counterUDimDatensatz].valueProzentGesamt1;
+
         var newTooltipText = textTooltipProjekteSeries1 + tooltipNamenProjekteSeries1[indexDatensatz][counterUDimDatensatz];
+
+        if (newValue == 0) { newValue = ""; newTooltipText = "" };
+
         //*console.log("newvalue1:" + newValue);
         counterUDimDatensatz = counterUDimDatensatz + 1;
         dataItem.set("valueY", newValue);
@@ -1023,6 +1048,7 @@ function erstelleSeriesLegendEventsTechUDim(index) {
         if (visible) {
             series2TechUDim.dataItems[index].show();
             series3TechUDim.dataItems[index].show();
+
             //*rangeTechUDim[index].get("axisFill").setAll({ fillOpacity: 1 });
             //*rangeTechUDim[index].get("axisFill").setAll({ visible: true });
         }
