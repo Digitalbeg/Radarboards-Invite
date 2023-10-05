@@ -36,18 +36,17 @@ var title = containerTitle.children.push(am5.Label.new(root, {
   text: "", //wird später über update Title gesetzt
   fontSize: 18,
   fontWeight: 700,
-  paddingLeft: 540,
+  paddingLeft: 520,
   // x: 450,
 }));
 
 var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
   paddingLeft: -10,
-  text: " / Fachlich & Didaktisch",
   fontSize: 18,
-  fontWeight: 600,
+  text: "[fontWeight: 500]   ►Fachlich & Didaktisch",
   fill: ColorGrauValue2,
   cursorOverStyle: "pointer",
-  tooltipText: "[fontWeight: 400 fontSize: 11px]zum Radarboard Fachlich-Didaktisch wechseln",
+  tooltipText: "[fontWeight: 600 fontSize: 13px]zum Radarboard Fachlich-Didaktisch\nwechseln",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
     fillOpacity: 0
@@ -55,8 +54,8 @@ var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
 }));
 
 if (thema == "Fachlich") {
-  labelTechFachUmschalten.set("text", " / Technologisch");
-  labelTechFachUmschalten.set("tooltipText", "[fontWeight: 400 fontSize: 11px]zum Radarboard Technologie wechseln");
+  labelTechFachUmschalten.set("text", "[fontWeight: 500]   ►Technologisch");
+  labelTechFachUmschalten.set("tooltipText", "[fontWeight: 500 fontSize: 13px]zum Radarboard Technologie\nwechseln");
 }
 
 labelTechFachUmschalten.events.on("click", function (ev) {
@@ -74,13 +73,15 @@ labelTechFachUmschalten.events.on("click", function (ev) {
 
 var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
   paddingLeft: 30,
+  paddingTop: 3,
   x: am5.percent(0),
   text: "🛈",
   fontSize: 22,
   //fontWeight: 200,
-  fill: ColorGrauValue2,
+  //fill: ColorGrauValue1,
+  fill: ColorBlackYAxisText,
   cursorOverStyle: "pointer",
-  tooltipText: "[fontWeight: 400 fontSize: 11px]Animierte Erklärung anzeigen / verbergen",
+  tooltipText: "[fontWeight: 400 fontSize: 11px #fff]Animierte Erklärung anzeigen / verbergen",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
     fillOpacity: 0
@@ -174,14 +175,14 @@ function updateTitleText() {
 
 var containerTextRadarboardTech = root.container.children.push(
   am5.Container.new(root, {
-    //width: am5.percent(30),
-    width: 300,
-    height: 340,
+    width: 320,
+    // height: 340,
     x: 20,
     y: 210,
+    layout: root.verticalLayout,
     background: am5.Rectangle.new(root, {
       fill: ColorGrauTextBoxEinzelprojekt,
-      fillOpacity: 0.0 //war 0.3
+      fillOpacity: 0.25 //war 0.3
     })
   })
 );
@@ -197,19 +198,31 @@ function updateProjektBeschreibungText() {
     }
   };
   if (indexVisible >= 0) {
-    var text1Projekt = "[fontWeight: 600 fontSize: 14px]Entwicklungsfeld: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["entwicklungsfeld"];
-    var text2Projekt = "[fontWeight: 600 fontSize: 14px]Thema: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["thema"];
-    var text3Projekt = "[fontWeight: 600 fontSize: 14px]Branche: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["branche"];
-    var text4Projekt = "[fontWeight: 600 fontSize: 14px]Schwerpunkte: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["schwerpunkte"];
-    var text5Projekt = "[fontWeight: 600 fontSize: 14px]Technologische Ziel: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["technologischeZiel"];
+    //var text1Projekt = "[fontWeight: 600 fontSize: 14px]Entwicklungsfeld: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["entwicklungsfeld"];
+    var text1Projekt = "[fontWeight: 600 fontSize: 14px]Thema: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["thema"];
+    var text2Projekt = "[fontWeight: 600 fontSize: 14px]Zielgruppe: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["zielgruppe"];
+    var text3Projekt = "[fontWeight: 600 fontSize: 14px]Innovation: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["innovation"];
+    var text4Projekt = "[fontWeight: 600 fontSize: 14px]Weiterbildungsplattform: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["weiterbildungsplattform"];
 
-    var text6Projekt = "[fontWeight: 600 fontSize: 14px]Weiterbildungsplattformen: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["weiterbildungsplattformen"];
-    var text7Projekt = "[fontWeight: 600 fontSize: 14px]Zielgruppe: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["zielgruppe"];
-    var text8Projekt = "[fontWeight: 600 fontSize: 14px]Besonderheiten: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["besonderheiten"];
 
-    textProjektBeschreibung = text1Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text2Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text3Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text4Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text5Projekt;
-    // textProjektBeschreibung = textProjektBeschreibung + "\n[fontSize: 26px][fontSize: 16px]" + text6Projekt + "\n[fontSize: 26px][fontSize: 16px]" + text7Projekt + "\n[fontSize: 26px][fontSize: 16px]" + text8Projekt;
-    textRadarboardTech.set("text", textProjektBeschreibung);;
+    textProjektBeschreibung = text1Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text2Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text3Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text4Projekt;
+    textRadarboardTech.set("text", textProjektBeschreibung);
+
+    textProjektZiel = "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
+    tooltipTextProjektZiel = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"];
+    labelProjektziel.set("text", textProjektZiel);
+    labelProjektziel.set("tooltipText", tooltipTextProjektZiel);
+
+    textProjektMehrwert = "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
+    tooltipTextProjektMehrwert = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"];
+    labelProjektMehrwert.set("text", textProjektMehrwert);
+    labelProjektMehrwert.set("tooltipText", tooltipTextProjektMehrwert);
+
+    textProjektVerbundpartner = "[fontWeight: 600 fontSize: 14px]Verbundpartner:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px #000]mehr";
+    tooltipTextProjektVerbundpartner = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"];
+    labelProjektVerbundpartner.set("text", textProjektVerbundpartner);
+    labelProjektVerbundpartner.set("tooltipText", tooltipTextProjektVerbundpartner);
+
   }
   else {
     // containerTextRadarboardTech.hide(1500); //wird schon in update Title gemacht
@@ -219,18 +232,76 @@ function updateProjektBeschreibungText() {
 var textRadarboardTech = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   text: textProjektBeschreibung,
   oversizedBehavior: "wrap",
-  maxWidth: 298,
+  maxWidth: 320, // war 298
 
 }));
 
-/* var bildWordcloud = containerTextRadarboardTech.children.push(am5.Picture.new(root, {
-  x: 0,
-  y: am5.percent(100),
-  dy: 2,
-  width: 300,
-  height: 168,
-   src: "./img/wordcloud-b2.png"
-})); */
+var tooltipProjektZiel = am5.Tooltip.new(root, {
+  pointerOrientation: "left",
+  getFillFromSprite: false,
+  dy: 15,
+  dx: 140,
+  width: 730,
+});
+tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
+
+var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+  //dy: 150,
+  text: "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]",
+  oversizedBehavior: "wrap",
+  maxWidth: 320,
+  cursorOverStyle: "pointer",
+  tooltip: tooltipProjektZiel,
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
+var tooltipMehrwert = am5.Tooltip.new(root, {
+  pointerOrientation: "left",
+  getFillFromSprite: false,
+  dy: 15,
+  dx: 125,
+  width: 790,
+});
+tooltipMehrwert.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauDunkel });
+
+var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+  //dy: 150,
+  text: "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:[fontSize: 13px]",
+  oversizedBehavior: "wrap",
+  maxWidth: 320,
+  cursorOverStyle: "pointer",
+  tooltip: tooltipMehrwert,
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
+var tooltipVerbundpartner = am5.Tooltip.new(root, {
+  pointerOrientation: "left",
+  getFillFromSprite: false,
+  dy: 12,
+  dx: 125,
+  width: 590,
+});
+tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauDunkel });
+
+var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+  //dy: 150,
+  text: "[fontWeight: 600 fontSize: 14px]Verbundpartner:[fontSize: 13px]",
+  oversizedBehavior: "wrap",
+  maxWidth: 320,
+  cursorOverStyle: "pointer",
+  tooltip: tooltipVerbundpartner,
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
 
 
 //-----------------ende container & textRadarboard Links-------------------------
@@ -618,12 +689,12 @@ function erstelleSeriesEinzelTechUDimEinzel(index) { /// index= Index für Proje
 
   }));
 
-  seriesEinzelProjekt[index].strokes.template.setAll({ strokeWidth: 1.35, fillOpacity: 0, fill: color }); //war fillOpacity: 0.2 weg wegen grau zonen
+  seriesEinzelProjekt[index].strokes.template.setAll({ strokeWidth: 2, fillOpacity: 0, fill: color }); //war fillOpacity: 0.2 weg wegen grau zonen
   seriesEinzelProjekt[index].bullets.push(function () {
     return am5.Bullet.new(root, {
       sprite: am5.Circle.new(root, {
-        radius: 4,
-        fillOpacity: 0.7,
+        radius: 5,
+        fillOpacity: 0.9,
         //fill: color
         fill: am5.Color.lighten(seriesEinzelProjekt[index].get("fill"), 0)
       })
@@ -708,7 +779,7 @@ function erstelleLegendEventsTechUDimEinzel(index) {
           // console.log("i==index show", i, index)
           seriesEinzelProjekt[i].show();
           nameProjekt = projekteNamen[i - 1];
-          console.log("on.visible p=" + nameProjekt);
+          //console.log("on.visible p=" + nameProjekt);
         }
         else {
           //console.log("i<>index hide", i, index)
@@ -908,7 +979,7 @@ for (var index = 1; index <= projekteNamen.length; index++) {
   legendTechUDimEinzel.data.push(seriesEinzelProjekt[index]);
 };
 
-legendTechUDimEinzel.data.push(seriesGesamtValues);
+//legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
 
 legendTechUDimEinzel.appear(2000, 10);
 
