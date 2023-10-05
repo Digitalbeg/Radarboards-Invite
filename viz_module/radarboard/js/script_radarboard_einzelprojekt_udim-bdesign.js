@@ -73,7 +73,7 @@ labelTechFachUmschalten.events.on("click", function (ev) {
 
 var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
   paddingLeft: 30,
-  paddingTop: 3,
+  paddingTop: 4,
   x: am5.percent(0),
   text: "🛈",
   fontSize: 22,
