@@ -40,6 +40,13 @@ body {
   left: 28px;
 }
 
+#logo {
+  position: absolute;
+  display: inline-block;
+  bottom: -5px;
+  right: 10px;
+}
+
 /* Grundstil für den Tooltip */
 
 /* Allgemeiner Tooltip-Stil, der für beide Tooltip-Typen (`.tooltip` und `.tooltip-text`) gilt */
@@ -111,7 +118,7 @@ body {
 #selector {
   display: inline-block;
   padding-top: 8px;
-  padding-left: 450px;
+  padding-left: 36em;
   font-family: "Arial";
   font-size: 14px;
   font-weight: bold;
