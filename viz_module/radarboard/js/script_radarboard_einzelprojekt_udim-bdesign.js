@@ -672,7 +672,7 @@ function generiereRangesGrauCircleInnen() {
     if (thema == "Fachlich") { dim = Math.ceil(udim / 3) }
     var labelText = "";
     var tooltipText = "";
-    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.12);
+    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.17);
     erstelleRangeGrauCircleInnen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
