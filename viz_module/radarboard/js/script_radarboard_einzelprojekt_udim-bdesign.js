@@ -496,7 +496,7 @@ function erstelleRangeTechUDimEinzelLabelOnly(indexRange, colorAchseLabel, radiu
     toggleKey: "active",
     cursorOverStyle: "pointer",
     dRadius: 70, //war 74
-    innerRadius: -39 //war -39
+    innerRadius: -49 //war -39
   });
 }
 
@@ -539,10 +539,10 @@ function erstelleRangeTechUDimEinzel(indexRange, colorAchseLabel, colorAchseFill
     /*  toggleKey: "active", */
     cursorOverStyle: "pointer",
     visible: true,
-    fillOpacity: 0.04,
+    fillOpacity: 0.08,
     fill: colorAchseLabel,
-    dRadius: 31, //war 31 
-    innerRadius: -26, //war -59, wenn negativ dann pixel distance from outer radius 
+    dRadius: 21, //war 31 
+    innerRadius: -30, //war -26, war -59, wenn negativ dann pixel distance from outer radius 
   });
 }
 
