@@ -11,7 +11,6 @@ var myChartHeightEinzel = 750;
 // bei <15 zoll bildschirm oder font size 150% chart in höhe kleiner machen
 if (window.innerHeight < 700) { myChartHeightEinzel = 600, myChartWidthEinzel = 1100 }
 
-
 const anzahlSliderKategorienDimUDim = 11; /// Anzahl der slider kategorien zwischen denen ausgewählt werden kann DIM/UDim
 const anzahlSliderKategorienEinzel = 11; /// Anzahl der slider kategorien zwischen denen ausgewählt werden kann DIM/UDim
 const anzahlSliderKategorien = 5; //alte einstellung
@@ -20,11 +19,14 @@ const anzahlSliderKategorien = 5; //alte einstellung
 var scaleChartDim = 1; //wird von js funktion unten auf 0.84 gesetzt wenn bildschirm klein und damit window.innerHeight <800 ist
 var scaleChartUDim = 1; //wird unten in js neu gesetzt da abhängig von browser window höhe
 
-
+var nameProjekt = ""; //Startwert für ausgewähltes porjekt
+//
 ///farben di ein Dim gebrtaucht werden hier schon festlegen
 const ColorGrauValue1 = am5.Color.lighten(am5.color(0x909090), 0.0); // für inneren Kreis bei Einzelradarboard als Hintergrund
 const ColorGrauValue2 = am5.Color.lighten(am5.color(0xD1D1D1), 0.0); // für mittleren Kreis bei Einzelradarboard als Hintergrund
 const ColorGrauValue3 = am5.Color.lighten(am5.color(0xF3F3F3), 0.2); // für äußeren Kreis bei Einzelradarboard als Hintergrund Farbe
+
+const ColorGrauDunkel = am5.Color.lighten(am5.color(0x909090), -0.3);
 
 const ColorGrauTextBoxEinzelprojekt = am5.Color.lighten(am5.color(0xF3F3F3), 0.0); // für inneren Krei
 //const ColorGrauValue3 = am5.Color.lighten(am5.color(0xF3F3D2), 0.0);
