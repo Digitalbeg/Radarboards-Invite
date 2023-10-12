@@ -442,7 +442,7 @@ var yAxisTechUDimEinzel = chartTechUDimEinzel.yAxes.push(am5xy.ValueAxis.new(roo
   visible: false,
   min: 0,
   //max: 3.3,
-  max: 3.4, //war 3.5
+  max: 3.4, //war 3.4 , 3.5, 3.1
 
   //max: 3.04, //damit bullets bei value=3 komplett sichtbar sind 
   strictMinMax: true,
@@ -659,7 +659,6 @@ function updateLabelGesamtValues() {
   };
 };
 
-
 /// Hilsfunktion für Aufruf der Gesamtvalue Beschriftung um aufruf aus series hide/show event zu ermöglichen
 function generiereRangesGesamtValues() {
   var radius = -19; var fontWeight = 300; var fontSize = "0.8em"; var color = ColorBlackYAxisText;
@@ -679,15 +678,18 @@ function generiereRangesGesamtValues() {
   };
 };
 
+var rangeCircleAussen = [];
+var rangeDataItemCircleAussen = [];
+
 /// Hilsfunktion für Aufruf der Gesamtvalue Beschriftung um aufruf aus series hide/show event zu ermöglichen
-function erstelleRangeGrauCircleAussen(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
+function erstelleRangeCircleAussen(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
-  rangeTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelGesamtValues[indexRange]);
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 1, dRadius: -18, innerRadius: -82, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleAussen[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
+  rangeCircleAussen[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleAussen[indexRange]);
+  rangeDataItemCircleAussen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 1, dRadius: -18, innerRadius: -82, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
-function generiereRangesGrauCircleAussen() {
+function generiereRangesCircleAussen() {
   var radius = -23; var fontWeight = 300; var fontSize = "0.8em"; //radius war -23
   // var color = am5.Color.lighten(ColorGrauValue3, -0.04); 
 
@@ -698,20 +700,23 @@ function generiereRangesGrauCircleAussen() {
     var labelText = "";
     var tooltipText = "";
     var color = am5.Color.brighten(eval('ColorDim' + dim + 'Value3'), -0.05);
-    //  erstelleRangeGrauCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
-    erstelleRangeGrauCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+    //  erstelleRangeCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+    erstelleRangeCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
 
   };
 };
 
-function erstelleRangeGrauCircleMitte(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
+var rangeCircleMitte = [];
+var rangeDataItemCircleMitte = [];
+
+function erstelleRangeCircleMitte(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
-  rangeTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelGesamtValues[indexRange]);
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -99, innerRadius: -72, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleMitte[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
+  rangeCircleMitte[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleMitte[indexRange]);
+  rangeDataItemCircleMitte[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -99, innerRadius: -72, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
-function generiereRangesGrauCircleMitte() {
+function generiereRangesCircleMitte() {
   var radius = -23; var fontWeight = 300; var fontSize = "0.8em"; var color = am5.Color.lighten(ColorGrauValue2, -0.04);//war radius = -23;
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
@@ -720,19 +725,22 @@ function generiereRangesGrauCircleMitte() {
     var labelText = "";
     var tooltipText = "";
     var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value2'), 0.0);
-    erstelleRangeGrauCircleMitte(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+    erstelleRangeCircleMitte(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
 
 
-function erstelleRangeGrauCircleInnen(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
+var rangeCircleInnen = [];
+var rangeDataItemCircleInnen = [];
+
+function erstelleRangeCircleInnen(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
-  rangeTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelGesamtValues[indexRange]);
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -170, innerRadius: 0, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleInnen[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
+  rangeCircleInnen[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleInnen[indexRange]);
+  rangeDataItemCircleInnen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -170, innerRadius: 0, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
-function generiereRangesGrauCircleInnen() {
+function generiereRangesCircleInnen() {
   var radius = -23; var fontWeight = 300; var fontSize = "0.8em"; var color = am5.Color.lighten(ColorGrauValue1, -0.04); //war radius = -23;
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
@@ -741,7 +749,7 @@ function generiereRangesGrauCircleInnen() {
     var labelText = "";
     var tooltipText = "";
     var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.17);
-    erstelleRangeGrauCircleInnen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+    erstelleRangeCircleInnen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
 
@@ -785,7 +793,7 @@ for (var index = 1; index <= projekteNamen.length; index++) {
 
 /// pseudo series für Anzeige der Gesamtvalues erstellen
 seriesGesamtValues = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
-  name: "Summen Gesamtprogramm", //projekteNamen Array läuft von 0..33 deshalb index-1
+  name: "Infos Gesamtprogramm", //projekteNamen Array läuft von 0..33 deshalb index-1
   xAxis: xAxisTechUDimEinzel,
   yAxis: yAxisTechUDimEinzel,
   fill: ColorDim6Value1, //irgendeine Farbe für Legendeneintrag wählen
@@ -796,6 +804,13 @@ seriesGesamtValues = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.ne
 
 seriesGesamtValues.on("visible", function (visible, target) { //Dim1
   if (visible) {
+    yAxisTechUDimEinzel.setAll({ max: 3.4 });
+    for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
+      index = udim - 1;
+      rangeDataItemCircleAussen[index].get("axisFill").setAll({ dRadius: -18, innerRadius: -82, });
+      rangeDataItemCircleMitte[index].get("axisFill").setAll({ dRadius: -99, innerRadius: -72, });
+      rangeDataItemCircleInnen[index].get("axisFill").setAll({ dRadius: -170, innerRadius: 0, });
+    };
     generiereRangesGesamtValues();
   }
   else {
@@ -803,6 +818,18 @@ seriesGesamtValues.on("visible", function (visible, target) { //Dim1
       range = rangeTechUDimEinzelGesamtValues[index - 1];
       xAxisTechUDimEinzel.axisRanges.removeValue(range);
     };
+    //dynmisch range ausgeprägt nach oben erweitern wenn dunkler krei snicht sichtbar
+
+    yAxisTechUDimEinzel.setAll({ max: 3.1 });
+    for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
+      index = udim - 1;
+      rangeDataItemCircleAussen[index].get("axisFill").setAll({ dRadius: 0, innerRadius: -90, });
+      rangeDataItemCircleMitte[index].get("axisFill").setAll({ dRadius: -86, innerRadius: -75, });
+      rangeDataItemCircleInnen[index].get("axisFill").setAll({ dRadius: -160, innerRadius: 0, });
+
+    };
+
+
 
   }
 });
@@ -849,7 +876,7 @@ seriesUmschaltenTechnologisch.on("visible", function (visible, target) {
   } */
 });
 
-seriesGrauCircleAussen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
+seriesCircleAussen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
   //name: "G3", //projekteNamen Array läuft von 0..33 deshalb index-1
   xAxis: xAxisTechUDimEinzel,
   yAxis: yAxisTechUDimEinzel,
@@ -857,9 +884,9 @@ seriesGrauCircleAussen = chartTechUDimEinzel.series.push(am5radar.RadarLineSerie
   valueYField: undefined,
   categoryXField: "dimension",
 }));
-generiereRangesGrauCircleAussen();
+generiereRangesCircleAussen();
 
-seriesGrauCircleMitte = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
+seriesCircleMitte = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
   //name: "G2", //projekteNamen Array läuft von 0..33 deshalb index-1
   xAxis: xAxisTechUDimEinzel,
   yAxis: yAxisTechUDimEinzel,
@@ -867,9 +894,9 @@ seriesGrauCircleMitte = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries
   valueYField: undefined,
   categoryXField: "dimension",
 }));
-generiereRangesGrauCircleMitte();
+generiereRangesCircleMitte();
 
-seriesGrauCircleInnen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
+seriesCircleInnen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
   //name: "G1", //projekteNamen Array läuft von 0..33 deshalb index-1
   xAxis: xAxisTechUDimEinzel,
   yAxis: yAxisTechUDimEinzel,
@@ -877,7 +904,7 @@ seriesGrauCircleInnen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries
   valueYField: undefined,
   categoryXField: "dimension",
 }));
-generiereRangesGrauCircleInnen();
+generiereRangesCircleInnen();
 
 
 function erstelleLegendEventsTechUDimEinzel(index) {
