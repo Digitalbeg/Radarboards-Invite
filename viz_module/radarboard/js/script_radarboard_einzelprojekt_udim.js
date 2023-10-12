@@ -85,7 +85,7 @@ var legendUmschaltenFachlichTechnologisch = containerTitle.children.push(am5.Leg
   useDefaultMarker: true,
   layout: root.horizontalLayout,
   tooltip: tooltipLabelTechFachUmschalten,
-  tooltipText: "[fontWeight: 600 #fff fontSize: 14px]Radarboard umschalten",
+  tooltipText: "[fontWeight: 500 #fff fontSize: 13px]Radarboard umschalten",
 
 }));
 legendUmschaltenFachlichTechnologisch.valueLabels.template.set("forceHidden", true);
