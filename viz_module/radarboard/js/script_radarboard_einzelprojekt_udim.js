@@ -381,7 +381,10 @@ cursor.lineX.set("visible", false);
 
 //#region ///--------A.5 Axes und Legend---------------------------------------
 // Create axes and their renderers
-var xRendererTechUDimEinzel = am5radar.AxisRendererCircular.new(root, {});
+var xRendererTechUDimEinzel = am5radar.AxisRendererCircular.new(root, {
+  minGridDistance: 30,
+});
+
 xRendererTechUDimEinzel.labels.template.setAll({
   fontSize: 0.1,
   textType: "circular",
@@ -425,7 +428,7 @@ var xAxisTechUDimEinzel = chartTechUDimEinzel.xAxes.push(am5xy.CategoryAxis.new(
 xRendererTechUDimEinzel.grid.template.setAll({
   stroke: ColorGridEinzelProjekt,
   //stroke: ColorWhite,
-  strokeWidth: 0.25 ///Bestimmt dicke und farbe des grids
+  strokeWidth: 0.7 ///Bestimmt dicke und farbe des grids
   //strokeWidth: 2 ///Bestimmt dicke und farbe des grids
 });
 
@@ -538,8 +541,8 @@ function erstelleRangeTechUDimEinzelLabelOnly(indexRange, colorAchseLabel, radiu
   rangeTechUDimEinzelLabelOnly[indexRange].get("axisFill").setAll({
     tooltip: tooltip,
     tooltipText: text,
-    tooltipX: 500,
-    tooltipY: -600,
+    tooltipX: 450,
+    tooltipY: -210,
     visible: true,
     fillOpacity: 0.08, //war 0.15, 0.08
     fill: colorAchseLabel,
@@ -584,8 +587,8 @@ function erstelleRangeTechUDimEinzel(indexRange, colorAchseLabel, colorAchseFill
   rangeTechUDimEinzel[indexRange].get("axisFill").setAll({
     tooltip: tooltip,
     tooltipText: text,
-    tooltipX: 450,
-    tooltipY: -600,
+    tooltipX: 470,
+    tooltipY: -400,
     /*  toggleKey: "active", */
     cursorOverStyle: "pointer",
     visible: true,
@@ -634,7 +637,7 @@ function erstelleRangeTechUDimEinzelGesamtValues(indexRange, colorAchseLabel, ra
     tooltip: tooltip,
     tooltipText: tooltipText,
     tooltipX: 400,
-    tooltipY: -300,
+    tooltipY: -220,
     cursorOverStyle: "pointer"
   }); //innerRadius dicke farbiger streifen
 
@@ -642,18 +645,20 @@ function erstelleRangeTechUDimEinzelGesamtValues(indexRange, colorAchseLabel, ra
 
 }
 
-function clearLabelGesamtValues() {
+function updateLabelGesamtValues() {
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
     rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("label").setAll({ text: "" });
+
+    var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2;
+    var tooltipText = "[fontSize: 14px fontWeight: 600]Invite Gesamtprogramm:\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + " Vorhaben: Merkmal ausgeprägt[/]\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " Vorhaben: Merkmal vorhanden[/]\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " Vorhaben: Merkmal in Ansätzen/nicht relevant";
+
+    rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("label").setAll({ text: labelText });
+    rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("axisFill").setAll({ tooltipText: tooltipText, });
+
   };
-
-  xRendererTechUDimEinzel.grid.template.setAll({
-    //strokeWidth: 0.3,
-    //strokeOpacity: 0.01,
-  }); //bug grid wird bei slider bewegung immer dicker
-
 };
+
 
 /// Hilsfunktion für Aufruf der Gesamtvalue Beschriftung um aufruf aus series hide/show event zu ermöglichen
 function generiereRangesGesamtValues() {
@@ -798,10 +803,6 @@ seriesGesamtValues.on("visible", function (visible, target) { //Dim1
       range = rangeTechUDimEinzelGesamtValues[index - 1];
       xAxisTechUDimEinzel.axisRanges.removeValue(range);
     };
-
-    /*  for (var index = 1; index <= dataUnterDimensionenEinzel.length; index++) {
-       seriesEinzelProjekt[index].strokes.template.setAll({ strokeWidth: 2, fillOpacity: 0.2 })
-     }; */
 
   }
 });
@@ -1046,22 +1047,18 @@ function updateSliderDatensatz(sliderWert) { /// bei slider move updatevalues fu
   // console.log("slider wert:" + sliderWert);
   if (sliderWert == 0 || sliderWert == 1) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandAntrag, indexDatensatz = 0);
+    updateLabelGesamtValues();
 
-    clearLabelGesamtValues();
-    generiereRangesGesamtValues();
   }
   else if (sliderWert == 4 || sliderWert == 5 || sliderWert == 6) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandZB2021, indexDatensatz = 1);
-
-    clearLabelGesamtValues();
-    generiereRangesGesamtValues();
+    updateLabelGesamtValues();
 
   }
   else if (sliderWert == 9 || sliderWert == 10 || sliderWert == 11) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandTagung2022, indexDatensatz = 2);
+    updateLabelGesamtValues();
 
-    clearLabelGesamtValues();
-    generiereRangesGesamtValues();
   }
 };
 
@@ -1096,9 +1093,9 @@ for (var index = 2; index <= projekteNamen.length; index++) {
   seriesEinzelProjekt[index].hide();
 };
 
-//seriesGesamtValues.hide(); ///Anzeige Gesamtvalues beim start deaktivieren
+generiereRangesGesamtValues(); ///Anzeige Gesamtvalues beim start aktivieren, wird schon an anderer stelle gemacht
 seriesGesamtValues.show();
-//generiereRangesGesamtValues(); ///Anzeige Gesamtvalues beim start aktivieren, wird schon an anderer stelle gemacht
+//seriesGesamtValues.hide(); ///Anzeige Gesamtvalues beim start deaktivieren
 
 xAxisTechUDimEinzel.data.setAll(dataUnterDimensionenEinzel);
 
@@ -1120,7 +1117,7 @@ legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenFachlich);
 legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenTechnologisch);
 
 
-//legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
+legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
 
 legendTechUDimEinzel.appear(2000, 10);
 
