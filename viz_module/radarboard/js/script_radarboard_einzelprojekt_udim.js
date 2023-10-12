@@ -542,7 +542,7 @@ function erstelleRangeTechUDimEinzelLabelOnly(indexRange, colorAchseLabel, radiu
     tooltip: tooltip,
     tooltipText: text,
     tooltipX: 450,
-    tooltipY: -210,
+    tooltipY: -280,
     visible: true,
     fillOpacity: 0.08, //war 0.15, 0.08
     fill: colorAchseLabel,
