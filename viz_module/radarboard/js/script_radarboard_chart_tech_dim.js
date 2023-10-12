@@ -17,7 +17,9 @@ var chartTechDim = containerTechDim.children.push(am5radar.RadarChart.new(root, 
   wheelX: "panX",
   scale: scaleChartDim,
   dx: 100, //chart besser in mitte zentrieren, legend dann unten zurück schieben
-  dy: -50, //chart in mitte war 110
+  dy: -50, //chart in mitte war 110,
+  startAngle: -120,
+  endAngle: 240,
 }));
 
 

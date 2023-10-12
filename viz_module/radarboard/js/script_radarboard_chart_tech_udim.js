@@ -18,6 +18,8 @@ var chartTechUDim = containerTechUDim.children.push(am5radar.RadarChart.new(root
     //dy: -50,
     dx: 100, //chart besser in mitte zentrieren, legend dann unten zurück schieben
     dy: -35,
+    startAngle: -120,
+    endAngle: 240,
 }));
 
 
