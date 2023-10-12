@@ -3,8 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Fachlich Einzelprojekte</title>
+  <title>Einzelprojekte Fachlich-Didaktisch</title>
   <link rel="stylesheet" href="./css/style_radarboard.css">
+  <link rel="icon" href="./img/favicon.png">
 </head>
 
 <body>
@@ -23,15 +24,26 @@
   <script src="../../lib/dist/am/themes/Animated.js"></script>
   <script src="../../lib/dist/am/themes/Responsive.js"></script> -->
 
+  <div id="screenWarnung">
+    <h3>Diese Anwendung ist für größere Bildschirme (Desktop) optimiert.</h3>
+    <p>Maximieren Sie bitte Ihr Browserfenster
+      oder verschieben Sie falls möglich die Anwendung auf einen größeren Bildschirm.
+    <p> Sie können ggf. auch den Browser-Zoom verringern.
+      <br>(Drücken Sie dazu gleichzeitig „Strg“ und „-“ um den aktuellen Browserinhalt zu verkleinern.)
+    <h4>Diese Meldung wird dann automatisch ausgeblendet.</h4>
+  </div>
+
   <!-- Logos -->
   <div id="logo">
-    <img id="logo-img" width="150" height="17" src="./img/logo-bibb-vdivde.svg" title="Logo BIBB und VDI/VDE-IT">
+    <img id="logo-img" width="220" height="25" src="./img/logo-bibb-vdivde.svg" title="Logo BIBB und VDI/VDE-IT">
   </div>
 
   <!-- Legende -->
   <div id="legende-grau-top">
-    <img id="legend-img" width="225" height="146" src="./img/legende_graustufen_einzelprojekt.svg"
-      title="Der Farbcode zeigt die Ausprägung der Technologie Dimensionen in den Projekten des Förderprogrammes">
+    <!--   <img id="legend-img" width="225" height="146" src="./img/legende_graustufen_einzelprojekt.svg" -->
+
+    <img id="legend-img" width="152" height="152" src="./img/legende-einzelradarboard-lila.svg"
+      title="Der Farbcode zeigt die Ausprägung der Dimensionen in den Projekten des Förderprogrammes">
   </div>
 
   <div id="chartdiv"></div>
@@ -40,8 +52,11 @@
   <!-- konstanten und color definitionnen für alle radarboards -->
   <script src="./daten/projektdaten_radarboard_constants.js"></script>
 
-  <!-- json daten für alle radarboards -->
+  <!-- json daten für fachliche radarboards -->
   <script src="./daten/projektdaten_radarboard_f_json.js"></script>
+
+  <!-- json daten für alle radarboards -->
+  <script src="./daten/projektdaten_radarboard_texte_json.js"></script>
 
   <!-- Einzelradarboard als chart -->
   <script src="./js/script_radarboard_einzelprojekt_udim.js"></script>
@@ -55,7 +70,7 @@
     nameProjekt = urlParams.get('p');
     if (nameProjekt) {
       changeProjekt(nameProjekt);
-    };
+    } else { changeProjekt("adapt") }
 
   </script>
 
