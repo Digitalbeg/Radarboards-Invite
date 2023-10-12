@@ -748,7 +748,7 @@ function generiereRangesCircleInnen() {
     if (thema == "Fachlich") { dim = Math.ceil(udim / 3) }
     var labelText = "";
     var tooltipText = "";
-    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.17);
+    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.2); //war 1.7
     erstelleRangeCircleInnen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
