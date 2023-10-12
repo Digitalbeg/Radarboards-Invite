@@ -7,7 +7,22 @@ body {
   /* Verhindert das Scrollen auf der Seite */
 }
 
+#screenWarnung {
+  display: none;
+  /*  display: block; */
+  /* Standardmäßig versteckt */
+  color: rgb(229, 9, 9);
+  /* Textfarbe */
+  font-weight: medium;
+  /* Fettdruck */
+  font-size: 18px;
+  /* Schriftgröße */
+  /* margin-bottom: 20px; */
+  /* Abstand zum nächsten Element */
+}
+
 /* Stil für das obere Titel-Element */
+
 
 /* Stile für den Haupttitel festlegen */
 #title-top {
