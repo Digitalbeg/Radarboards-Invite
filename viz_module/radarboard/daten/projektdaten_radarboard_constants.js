@@ -301,12 +301,16 @@ function checkWindowSizeSetScaleChartDim() {
   const screenSelector = document.getElementById('selector');
   const screenLegendeTop = document.getElementById('legende-top');
 
+  const screenVizCluster = document.getElementById('vizcluster');
+  const screenVizNetwork = document.getElementById('viznetwork');
+  const screenCloseButton = document.getElementById('CloseButton');
+
 
   // Bedingungen definieren
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const isSmallScreen = window.innerHeight < 750 || window.innerWidth < 1200; // Annahme für einen 15-Zoll-Bildschirm
 
-  // Anzeigen oder Verbergen der Warnung jenachdem ob Browserfenster zu klein ist
+  // Anzeigen oder Verbergen der Warnung und der anderen divs jenachdem ob Browserfenster zu klein ist
   if (isMobile || isSmallScreen) {
     screenWarnung.style.display = 'block';
     screenChart.style.display = 'none';
@@ -314,8 +318,12 @@ function checkWindowSizeSetScaleChartDim() {
     if (screenLegende) { screenLegende.style.display = 'none' };
 
     if (screenTitleText) { screenTitleText.style.display = 'none' };
-    if (screenSelector) { screenSelector.style.display = 'none' };
-    if (screenLegendeTop) { screenLegendeTop.style.display = 'none' };
+    if (screenTitleText) { screenTitleText.style.display = 'none' };
+    if (screenTitleText) { screenTitleText.style.display = 'none' };
+
+    if (screenVizCluster) { screenVizCluster.style.display = 'none' };
+    if (screenVizNetwork) { screenVizNetwork.style.display = 'none' };
+    if (screenCloseButton) { screenCloseButton.style.display = 'none' };
 
   }
   else {
@@ -327,6 +335,11 @@ function checkWindowSizeSetScaleChartDim() {
     if (screenTitleText) { screenTitleText.style.display = 'block' };
     if (screenSelector) { screenSelector.style.display = 'block' };
     if (screenLegendeTop) { screenLegendeTop.style.display = 'block' };
+
+    //if (screenVizCluster) { screenVizCluster.style.display = 'block' }; //bei resize div nicht anzeigen sondernnur bei klick label cluster
+    //if (screenVizNetwork) { screenVizNetwork.style.display = 'block' };
+    //if (screenCloseButton) { screenCloseButton.style.display = 'block' };
+
   }
 
   // setze scale chart in Abhängigkeit von Browserzoom und Bildschirmgrösse
