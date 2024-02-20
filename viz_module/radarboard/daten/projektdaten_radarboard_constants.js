@@ -27,6 +27,7 @@ const ColorGrauValue2 = am5.Color.lighten(am5.color(0xD1D1D1), 0.0); // für mit
 const ColorGrauValue3 = am5.Color.lighten(am5.color(0xF3F3F3), 0.2); // für äußeren Kreis bei Einzelradarboard als Hintergrund Farbe
 
 const ColorGrauDunkel = am5.Color.lighten(am5.color(0x909090), -0.3);
+const ColorGrauHell = am5.Color.lighten(am5.color(0x909090), 0.7);
 
 const ColorGrauTextBoxEinzelprojekt = am5.Color.lighten(am5.color(0xF3F3F3), 0.0); // für inneren Krei
 //const ColorGrauValue3 = am5.Color.lighten(am5.color(0xF3F3D2), 0.0);
