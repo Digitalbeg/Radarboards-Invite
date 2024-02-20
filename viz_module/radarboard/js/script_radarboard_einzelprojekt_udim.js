@@ -282,16 +282,18 @@ var textRadarboardTech = containerTextRadarboardTech.children.push(am5.Label.new
 }));
 
 var tooltipProjektZiel = am5.Tooltip.new(root, {
+  autoTextColor: false, //textfarbe nocht automatisch
   pointerOrientation: "left",
   getFillFromSprite: false,
   dy: 15,
   dx: 140,
-  width: 730,
+  width: 790,
 });
-tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
+tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
+tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  //dy: 150,
+  paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
@@ -304,16 +306,18 @@ var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(r
 }));
 
 var tooltipMehrwert = am5.Tooltip.new(root, {
+  autoTextColor: false, //textfarbe nocht automatisch
   pointerOrientation: "left",
   getFillFromSprite: false,
   dy: 15,
   dx: 125,
   width: 790,
 });
-tooltipMehrwert.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauDunkel });
+tooltipMehrwert.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
+tooltipMehrwert.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  //dy: 150,
+  paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
@@ -326,16 +330,18 @@ var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.n
 }));
 
 var tooltipVerbundpartner = am5.Tooltip.new(root, {
+  autoTextColor: false, //textfarbe nocht automatisch
   pointerOrientation: "left",
   getFillFromSprite: false,
   dy: 12,
   dx: 125,
   width: 590,
 });
-tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauDunkel });
+tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
+tooltipVerbundpartner.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  //dy: 150,
+  paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Verbundpartner:[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
