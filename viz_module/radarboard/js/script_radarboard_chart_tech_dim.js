@@ -11,17 +11,16 @@ var containerTechDim = container.children.push(am5.Container.new(root, {
 
 //---------------------Menu links Hamburger rechts Hilfe Video------------------
 var labelMenu = containerTechDim.children.push(am5.Label.new(root, {
-  paddingTop: -3,
-  x: 6,
-  y: -1,
-  text: "☰",
+  paddingTop: 7,
+  x: 17,
+  text: "[fontWeight: 500 fontSize: 18px #000]☰[fontWeight: 500 fontSize: 13px #000 ]  Menü Visualisierung",
   fontSize: 18,
   fill: ColorBlackYAxisText,
   cursorOverStyle: "pointer",
   tooltip: am5.Tooltip.new(root, { paddingBottom: 5, paddingTop: 3, pointerOrientation:"left" }),
   tooltipX: 28,
   tooltipY: 18,
-  tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Auswahl Visualisierung",
+  tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Menü zur Auswahl\neiner Visualisierung",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
     fillOpacity: 0

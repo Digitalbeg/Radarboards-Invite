@@ -9,17 +9,16 @@ var containerTechUDim = container.children.push(am5.Container.new(root, {
 
 //---------------------Menu links Hamburger rechts Hilfe Video------------------
 var labelMenu = containerTechUDim.children.push(am5.Label.new(root, {
-    paddingTop: -3,
-    x: 6,
-    y: -1,
-    text: "☰",
+    paddingTop: 7,
+    x: 17,
+    text: "[fontWeight: 500 fontSize: 18px #000]☰[fontWeight: 500 fontSize: 13px #000 ]  Menü Visualisierung",
     fontSize: 18,
     fill: ColorBlackYAxisText,
     cursorOverStyle: "pointer",
     tooltip: am5.Tooltip.new(root, { paddingBottom: 5, paddingTop: 3, pointerOrientation:"left" }),
     tooltipX: 28,
     tooltipY: 18,
-    tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Auswahl Visualisierung",
+    tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Menü zur Auswahl\neiner Visualisierung",
     background: am5.Rectangle.new(root, {
       fill: am5.color(0x000000),
       fillOpacity: 0
@@ -846,7 +845,7 @@ function erstelleRangeTechUDimLabelOnly(indexRange, colorAchseLabel, radiusLabel
 
 fontWeightLabel2 = 500;  //fontWeightLabel1 ist erstes Label am Aussenkreis des Radarborads, Label 2 ist zweites Label weiter aussen
 /// Range für UDim 1-20 erstellen
-console.log("thema:", thema);
+//console.log("thema:", thema);
 
 for (var dim = 1; dim < dataDimensionen.length; dim++) {
     for (var udim = 1; udim <= dataUnterDimensionen.length; udim++) {
