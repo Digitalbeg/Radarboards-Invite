@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Einzelprojekte Fachlich-Didaktisch</title>
+  <title>Einzeldimension Fachlich-Didaktisch</title>
   <link rel="stylesheet" href="./css/style_radarboard.css">
   <link rel="stylesheet" href="./css/style_megamenu.css">
   <link rel="icon" href="./img/favicon.png">
@@ -49,7 +49,7 @@
 
   <div id="chartdiv"></div>
 
-  <script>var thema = "Fachlich"; //für Anpassungen in nachfolgenden Scripten bri fachliche Radarboards (fachlich 3UDim) Tech 4 UDim</script>
+  <script>var thema = "UDim-Fachlich"; //für Anpassungen in nachfolgenden Scripten bri fachliche Radarboards (fachlich 3UDim) Tech 4 UDim</script>
   <!-- konstanten und color definitionnen für alle radarboards -->
   <script src="./daten/projektdaten_radarboard_constants.js"></script>
 
@@ -60,8 +60,7 @@
   <script src="./daten/projektdaten_radarboard_texte_json.js"></script>
 
   <!-- Einzelradarboard als chart -->
-  <script src="./js/script_radarboard_einzelprojekt_udim.js"></script>
-
+  <script src="./js/script_radarboard_einzel_udim_alle_projekte.js"></script>
 
   <script>
 
@@ -71,7 +70,7 @@
     nameProjekt = urlParams.get('p');
     if (nameProjekt) {
       changeProjekt(nameProjekt);
-    } else { changeProjekt("adapt") }
+    } else { changeProjekt("plattformvernetzung") } //projekt esind hier die UDIms da Anzeige alle projekte pro single UDim
 
   </script>
 
@@ -93,8 +92,6 @@
     </script>
   </div>
   <!-----------------------------Ende div für help video --------------------------------->
-</body>
-
 <!-----------------------------Div Menü------------------------------------------------->
 <div id="menu-radar" class="mega-menu blog">
   <div class="content">
@@ -123,6 +120,6 @@
 </div>
 <!-----------------------------Ende Div Menü------------------------------------------------->
 
-
+</body>
 
 </html>
