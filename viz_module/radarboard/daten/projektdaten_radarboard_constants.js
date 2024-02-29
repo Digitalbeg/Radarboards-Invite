@@ -71,7 +71,8 @@ const fillOpacityWhiteCircleSeries3 = 0.0; // war 0.5
 const radiusUDimRadarboard = am5.percent(68) ///grösse chart in container, 70% lässtplatz für legende etc. war 70, 65
 
 var fontSizeLegendeUDim = 11; if (thema == "Fachlich") { fontSizeLegendeUDim = 9 }
-var fontSizeLegendeUmschalten = 16;
+var fontSizeLegendeUmschalten = 15
+  ;
 
 //const fontSizeUDimLabel = "0.7em"; //Font Size für Beschriftung UDim war0.75
 const fontSizeUDimLabel = 10; //Font Size für Beschriftung UDim 
@@ -100,17 +101,22 @@ const fillOpacitySeriesAusgepraegt = 1;
 
 
 ///EinzelTechUDim
-const radiusEinzelTechUDimLabel = 20; //war 16
+const radiusEinzelTechUDimLabel = 12; //war 20, war 16
 const radiusEinzelTechUDimLabelAussen = 40;
 const fontSizeLabelAussen = 14.5;
-const fontSizeLabelKreis = 10;
+const fontSizeLabelKreis = 10.5;
 const fontWeightLabelAussen = 500;
 const fontWeightUDimLabelAussen = 700;
 var fontSizeLegende = 11; if (window.innerHeight < 700) { fontSizeLegende = 10 };
+var fontSizeLegendeEinzelUDim = 12;
+var fontSizeLabelProjekteEinzelUDim = 12.5;
+var radiusLabelProjekteEinzelUDim = 16; //abstand label Projektnamen in Ansicht einzel UDim für alle Projekte
 
 const ColorGrid = ColorBlack;
 //const ColorGridEinzelProjekt = am5.Color.lighten(am5.color(0x000000), 0.85);
 const ColorGridEinzelProjekt = am5.Color.lighten(am5.color(0xffffff), 0.0);
+//const ColorGridEinzelProjekt = am5.Color.lighten(am5.color(0xffffff), -0.99);
+const ColorGridEinzelUDim = ColorBlack;
 
 //const ColorLineGesamt = ColorWhite;
 const ColorLineGesamt = am5.Color.lighten(am5.color(0x2D2F42), 0.4);

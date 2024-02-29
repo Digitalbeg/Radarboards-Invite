@@ -2,9 +2,15 @@
 var projekteNamen = ['ADAPT', 'APOLLO', 'ComP-ASS', 'DigiPlat4Train', 'EduPLEx_API', 'ELe-com', 'ExpanderWB3', 'HUBGrade', 'IWWB-PLUS', 'KAINE', 'KAMAELEON', 'KI4CoLearnET', 'KIM', 'KIPerWeb', 'KIRA', 'KIRA_Pro', 'KIWI', 'KUPPEL', 'LIMo', 'LiSiL', 'MINDED_RUHR', 'MyEduLife', 'NetOEV', 'OnCaPflege', 'PolyEx', 'SEARCH', 'SG4BB', 'SMALO', 'StuBu', 'TRIPLEADAPT', 'VerDatAs', 'WBsmart', 'Weiterb.4.OWL', 'WISYatKI'];
 var projekteAuspraegung = ['Dim k.A.', 'Dim in Ansätzen.', 'Dim adressiert.', 'Dim ausgepr.'];
 
+var unterdimensionenNamen = ['Plattformvernetzung','Regionale WB-Landschaften','Nachhaltige Geschäftsmodelle','Ansprache spezifischer Zielgruppen','Barrierefreiheit','Mehrsprachigkeit','Bestehende Kompetenzmodelle','Weiterentw. von Kompetenzmodellen','Erfassung informeller Kompetenzen','Innovative Lernarrangements','Adaptive Lernpfade','Recommendersysteme','Einbindung relevanter Stakeholder','Personalentwicklung','Organisationsentwicklung'];
+
+// für Ansicht alle projekte pro UDim
+if (thema == "UDim-Fachlich") { projekteNamen=unterdimensionenNamen; }
+//projekteNamen=unterdimensionenNamen;
 
 /// Zustand welche Projekte gerade in Einzeplorjektanzeige an sind
 var projekteEinzelStatusInLegende = Array(projekteNamen.length).fill(0);
+var unterdimensionenEinzelStatusInLegende = Array(unterdimensionenNamen.length).fill(0); // für Ansicht alle projekte pro Unterdimension
 //console.log("projekteEinzelStatusInLegende:" + projekteEinzelStatusInLegende);
 
 /// daten und Beschreibung der Oberdimensionen 
@@ -83,6 +89,47 @@ var dataUnterDimensionenEinzelStandAntrag = [ /// ------------------------------
     { id: "15", dimension: "Organisationsentwicklung", value1: 3, valueProzentGesamt1: 3, value2: 6, valueProzentGesamt2: 6, value3: 91, valueProzentGesamt3: 91, valueGesamt1: 31, valueGesamt2: 2, valueGesamt3: 1, value1: 1, value2: 1, value3: 1, value4: 1, value5: 1, value6: 2, value7: 1, value8: 1, value9: 1, value10: 1, value11: 1, value12: 1, value13: 1, value14: 1, value15: 1, value16: 1, value17: 1, value18: 1, value19: 3, value20: 1, value21: 1, value22: 1, value23: 1, value24: 1, value25: 1, value26: 1, value27: 1, value28: 1, value29: 1, value30: 2, value31: 1, value32: 1, value33: 1, value34: 1 },
 
 ];
+
+var dataUnterDimensionenProUDimProjekteStandAntrag = [ /// Array für Radarboard alle projekte für eine Unterdimensionen
+
+{id:"1", dimension: "ADAPT", value1:1, value2: 0,value3:1, value4:3, value5: 2,value6:3, value7:3, value8: 3,value9:3, value10:2, value11: 2,value12:3, value13:0, value14: 1, value15:1},
+{id:"2", dimension: "APOLLO", value1:3, value2: 2,value3:2, value4:2, value5: 3,value6:1, value7:3, value8: 2,value9:3, value10:2, value11: 2,value12:3, value13:0, value14: 2, value15:1},
+{id:"3", dimension: "ComP-A.", value1:1, value2: 1,value3:0, value4:2, value5: 1,value6:0, value7:1, value8: 1,value9:1, value10:3, value11: 2,value12:1, value13:0, value14: 1, value15:1},
+{id:"4", dimension: "DigiPl.", value1:1, value2: 1,value3:0, value4:3, value5: 2,value6:3, value7:3, value8: 0,value9:1, value10:3, value11: 3,value12:1, value13:0, value14: 3, value15:1},
+{id:"5", dimension: "EduPLEx_API", value1:2, value2: 0,value3:2, value4:0, value5: 1,value6:1, value7:3, value8: 1,value9:0, value10:0, value11: 3,value12:2, value13:0, value14: 3, value15:1},
+{id:"6", dimension: "ELe-com", value1:1, value2: 1,value3:2, value4:3, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:3, value11: 2,value12:1, value13:0, value14: 1, value15:2},
+{id:"7", dimension: "ExpanderWB3", value1:3, value2: 3,value3:2, value4:1, value5: 1,value6:0, value7:3, value8: 1,value9:1, value10:3, value11: 3,value12:3, value13:0, value14: 1, value15:1},
+{id:"8", dimension: "HUBGrade", value1:3, value2: 1,value3:1, value4:1, value5: 3,value6:0, value7:2, value8: 1,value9:1, value10:2, value11: 1,value12:2, value13:1, value14: 2, value15:1},
+{id:"9", dimension: "IWWB-PLUS", value1:2, value2: 1,value3:2, value4:3, value5: 3,value6:1, value7:3, value8: 3,value9:3, value10:2, value11: 2,value12:3, value13:0, value14: 0, value15:1},
+{id:"10", dimension: "KAINE", value1:1, value2: 0,value3:1, value4:0, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:2, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"11", dimension: "KAMAELE.", value1:1, value2: 0,value3:1, value4:1, value5: 3,value6:2, value7:1, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"12", dimension: "KI4CoL.ET", value1:3, value2: 1,value3:1, value4:1, value5: 1,value6:0, value7:3, value8: 3,value9:1, value10:2, value11: 1,value12:1, value13:0, value14: 2, value15:1},
+{id:"13", dimension: "KIM", value1:1, value2: 0,value3:1, value4:1, value5: 2,value6:0, value7:3, value8: 1,value9:1, value10:1, value11: 3,value12:1, value13:0, value14: 0, value15:1},
+{id:"14", dimension: "KIPerWeb", value1:1, value2: 1,value3:2, value4:2, value5: 1,value6:0, value7:3, value8: 1,value9:2, value10:3, value11: 3,value12:2, value13:0, value14: 1, value15:1},
+{id:"15", dimension: "KIRA", value1:0, value2: 2,value3:1, value4:1, value5: 2,value6:0, value7:3, value8: 1,value9:1, value10:3, value11: 2,value12:3, value13:0, value14: 1, value15:1},
+{id:"16", dimension: "KIRA_Pro", value1:1, value2: 0,value3:1, value4:1, value5: 2,value6:0, value7:3, value8: 2,value9:1, value10:2, value11: 3,value12:3, value13:1, value14: 3, value15:1},
+{id:"17", dimension: "KIWI", value1:3, value2: 0,value3:1, value4:0, value5: 2,value6:0, value7:0, value8: 0,value9:1, value10:3, value11: 3,value12:2, value13:1, value14: 2, value15:1},
+{id:"18", dimension: "KUPPEL", value1:3, value2: 1,value3:1, value4:3, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:3, value11: 3,value12:2, value13:1, value14: 3, value15:1},
+{id:"19", dimension: "LIMo", value1:1, value2: 0,value3:1, value4:1, value5: 3,value6:0, value7:1, value8: 1,value9:3, value10:3, value11: 3,value12:2, value13:1, value14: 3, value15:3},
+{id:"20", dimension: "LiSiL", value1:1, value2: 0,value3:1, value4:3, value5: 1,value6:0, value7:2, value8: 1,value9:3, value10:3, value11: 2,value12:1, value13:1, value14: 2, value15:1},
+{id:"21", dimension: "MINDED.", value1:3, value2: 2,value3:1, value4:1, value5: 1,value6:0, value7:1, value8: 0,value9:1, value10:2, value11: 3,value12:3, value13:0, value14: 1, value15:1},
+{id:"22", dimension: "MyEduL.", value1:0, value2: 0,value3:1, value4:1, value5: 1,value6:0, value7:3, value8: 1,value9:1, value10:1, value11: 2,value12:2, value13:0, value14: 3, value15:1},
+{id:"23", dimension: "NetOEV", value1:3, value2: 0,value3:2, value4:2, value5: 3,value6:0, value7:1, value8: 1,value9:3, value10:2, value11: 1,value12:1, value13:0, value14: 1, value15:1},
+{id:"24", dimension: "OncaPflege", value1:1, value2: 1,value3:1, value4:2, value5: 2,value6:3, value7:1, value8: 2,value9:1, value10:2, value11: 3,value12:1, value13:1, value14: 1, value15:1},
+{id:"25", dimension: "PolyEx", value1:0, value2: 0,value3:1, value4:2, value5: 2,value6:2, value7:2, value8: 3,value9:1, value10:1, value11: 3,value12:1, value13:1, value14: 2, value15:1},
+{id:"26", dimension: "SEARCH", value1:0, value2: 1,value3:2, value4:1, value5: 1,value6:0, value7:2, value8: 2,value9:0, value10:2, value11: 3,value12:2, value13:1, value14: 2, value15:1},
+{id:"27", dimension: "SG4BB", value1:2, value2: 1,value3:1, value4:3, value5: 3,value6:0, value7:0, value8: 0,value9:0, value10:3, value11: 1,value12:3, value13:0, value14: 2, value15:1},
+{id:"28", dimension: "SMALO", value1:3, value2: 3,value3:1, value4:3, value5: 1,value6:0, value7:1, value8: 0,value9:1, value10:3, value11: 2,value12:2, value13:1, value14: 3, value15:1},
+{id:"29", dimension: "StuBu", value1:0, value2: 0,value3:1, value4:1, value5: 1,value6:1, value7:2, value8: 1,value9:2, value10:2, value11: 3,value12:1, value13:0, value14: 1, value15:1},
+{id:"30", dimension: "TRIPLEA.", value1:3, value2: 1,value3:3, value4:2, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:2, value11: 3,value12:3, value13:2, value14: 3, value15:2},
+{id:"31", dimension: "VerDatAs", value1:3, value2: 1,value3:2, value4:1, value5: 1,value6:1, value7:1, value8: 3,value9:1, value10:1, value11: 2,value12:0, value13:1, value14: 2, value15:1},
+{id:"32", dimension: "WBsmart", value1:1, value2: 1,value3:1, value4:2, value5: 1,value6:1, value7:1, value8: 1,value9:2, value10:2, value11: 3,value12:3, value13:1, value14: 2, value15:1},
+{id:"33", dimension: "Weiterb.4.OWL", value1:3, value2: 3,value3:1, value4:1, value5: 1,value6:0, value7:1, value8: 1,value9:1, value10:1, value11: 1,value12:3, value13:1, value14: 3, value15:1},
+{id:"34", dimension: "WISYatKI", value1:3, value2: 3,value3:1, value4:1, value5: 2,value6:0, value7:3, value8: 3,value9:3, value10:2, value11: 3,value12:3, value13:2, value14: 1, value15:1},
+
+];
+if (thema == "UDim-Fachlich") { dataUnterDimensionenEinzelStandAntrag = dataUnterDimensionenProUDimProjekteStandAntrag; }
+
 var dataUnterDimensionenEinzelStandZeitpunktA = dataUnterDimensionenEinzelStandAntrag; //Datensatz Slider erste position (=links)
 
 var dataUnterDimensionenEinzelStandZB2021 = [ //Daten Array für Radarboard Einzelvorhaben ----------------Stand Dezember 2022------------------------------------------
@@ -103,6 +150,47 @@ var dataUnterDimensionenEinzelStandZB2021 = [ //Daten Array für Radarboard Einz
     { id: "15", dimension: "Organisationsentwicklung", valueProzentGesamt1: 20, valueProzentGesamt2: 18, valueProzentGesamt3: 62, valueGesamt1: 21, valueGesamt2: 6, valueGesamt3: 7, value1: 2, value2: 1, value3: 1, value4: 3, value5: 3, value6: 2, value7: 1, value8: 1, value9: 1, value10: 1, value11: 1, value12: 1, value13: 0, value14: 1, value15: 1, value16: 3, value17: 2, value18: 0, value19: 3, value20: 2, value21: 0, value22: 1, value23: 3, value24: 2, value25: 2, value26: 1, value27: 1, value28: 3, value29: 1, value30: 1, value31: 1, value32: 3, value33: 1, value34: 1 },
 
 ];
+
+var dataUnterDimensionenProUDimProjekteStandZB2021 = [ /// Array für Radarboard alle projekte für eine Unterdimensionen
+
+{id:"1", dimension: "ADAPT", value1:1, value2: 0,value3:1, value4:3, value5: 1,value6:1, value7:3, value8: 3,value9:3, value10:3, value11: 3,value12:3, value13:1, value14: 3, value15:2},
+{id:"2", dimension: "APOLLO", value1:3, value2: 2,value3:2, value4:2, value5: 3,value6:1, value7:3, value8: 2,value9:3, value10:2, value11: 2,value12:3, value13:0, value14: 2, value15:1},
+{id:"3", dimension: "ComP-A.", value1:1, value2: 1,value3:1, value4:3, value5: 0,value6:0, value7:1, value8: 1,value9:1, value10:3, value11: 3,value12:2, value13:1, value14: 1, value15:1},
+{id:"4", dimension: "DigiPl.", value1:2, value2: 2,value3:0, value4:3, value5: 2,value6:3, value7:2, value8: 0,value9:1, value10:3, value11: 3,value12:1, value13:0, value14: 3, value15:3},
+{id:"5", dimension: "EduPLEx_API", value1:2, value2: 1,value3:2, value4:0, value5: 1,value6:1, value7:2, value8: 2,value9:0, value10:2, value11: 3,value12:3, value13:0, value14: 3, value15:3},
+{id:"6", dimension: "ELe-com", value1:1, value2: 1,value3:3, value4:3, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:3, value11: 3,value12:3, value13:0, value14: 1, value15:2},
+{id:"7", dimension: "ExpanderWB3", value1:3, value2: 3,value3:2, value4:1, value5: 1,value6:0, value7:3, value8: 1,value9:1, value10:3, value11: 3,value12:3, value13:0, value14: 1, value15:1},
+{id:"8", dimension: "HUBGrade", value1:3, value2: 2,value3:1, value4:3, value5: 3,value6:0, value7:2, value8: 1,value9:1, value10:2, value11: 1,value12:2, value13:1, value14: 2, value15:1},
+{id:"9", dimension: "IWWB-PLUS", value1:2, value2: 1,value3:2, value4:3, value5: 3,value6:0, value7:2, value8: 1,value9:3, value10:1, value11: 1,value12:3, value13:0, value14: 0, value15:1},
+{id:"10", dimension: "KAINE", value1:1, value2: 0,value3:1, value4:0, value5: 2,value6:0, value7:1, value8: 0,value9:2, value10:2, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"11", dimension: "KAMAELE.", value1:1, value2: 0,value3:1, value4:1, value5: 1,value6:2, value7:1, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:1, value14: 2, value15:1},
+{id:"12", dimension: "KI4CoL.ET", value1:3, value2: 1,value3:1, value4:3, value5: 1,value6:0, value7:3, value8: 3,value9:2, value10:2, value11: 2,value12:1, value13:3, value14: 2, value15:1},
+{id:"13", dimension: "KIM", value1:1, value2: 0,value3:2, value4:1, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:1, value11: 3,value12:3, value13:0, value14: 0, value15:0},
+{id:"14", dimension: "KIPerWeb", value1:1, value2: 1,value3:2, value4:2, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:0, value14: 3, value15:1},
+{id:"15", dimension: "KIRA", value1:0, value2: 2,value3:1, value4:2, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:2, value11: 0,value12:1, value13:2, value14: 2, value15:1},
+{id:"16", dimension: "KIRA_Pro", value1:1, value2: 0,value3:1, value4:1, value5: 2,value6:0, value7:3, value8: 2,value9:1, value10:2, value11: 3,value12:3, value13:1, value14: 3, value15:3},
+{id:"17", dimension: "KIWI", value1:3, value2: 0,value3:1, value4:1, value5: 2,value6:2, value7:1, value8: 1,value9:1, value10:3, value11: 2,value12:3, value13:1, value14: 2, value15:2},
+{id:"18", dimension: "KUPPEL", value1:3, value2: 1,value3:1, value4:3, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:0, value14: 0, value15:0},
+{id:"19", dimension: "LIMo", value1:1, value2: 0,value3:3, value4:1, value5: 3,value6:0, value7:1, value8: 1,value9:2, value10:3, value11: 2,value12:2, value13:2, value14: 3, value15:3},
+{id:"20", dimension: "LiSiL", value1:1, value2: 0,value3:1, value4:3, value5: 1,value6:0, value7:2, value8: 1,value9:3, value10:3, value11: 2,value12:1, value13:2, value14: 2, value15:2},
+{id:"21", dimension: "MINDED.", value1:2, value2: 2,value3:1, value4:2, value5: 1,value6:0, value7:1, value8: 2,value9:0, value10:1, value11: 3,value12:2, value13:2, value14: 1, value15:0},
+{id:"22", dimension: "MyEduL.", value1:0, value2: 0,value3:3, value4:1, value5: 1,value6:3, value7:3, value8: 1,value9:1, value10:1, value11: 0,value12:2, value13:0, value14: 3, value15:1},
+{id:"23", dimension: "NetOEV", value1:3, value2: 0,value3:2, value4:3, value5: 2,value6:1, value7:2, value8: 1,value9:2, value10:1, value11: 1,value12:3, value13:3, value14: 3, value15:3},
+{id:"24", dimension: "OncaPflege", value1:2, value2: 1,value3:2, value4:2, value5: 2,value6:3, value7:3, value8: 3,value9:1, value10:3, value11: 3,value12:2, value13:3, value14: 2, value15:2},
+{id:"25", dimension: "PolyEx", value1:1, value2: 0,value3:1, value4:2, value5: 2,value6:0, value7:1, value8: 2,value9:1, value10:1, value11: 3,value12:3, value13:1, value14: 2, value15:2},
+{id:"26", dimension: "SEARCH", value1:0, value2: 0,value3:2, value4:1, value5: 1,value6:0, value7:2, value8: 1,value9:0, value10:1, value11: 3,value12:3, value13:0, value14: 1, value15:1},
+{id:"27", dimension: "SG4BB", value1:2, value2: 1,value3:2, value4:3, value5: 1,value6:0, value7:2, value8: 0,value9:0, value10:3, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"28", dimension: "SMALO", value1:3, value2: 3,value3:1, value4:3, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:2, value11: 2,value12:2, value13:1, value14: 3, value15:3},
+{id:"29", dimension: "StuBu", value1:2, value2: 2,value3:1, value4:1, value5: 2,value6:1, value7:2, value8: 1,value9:2, value10:2, value11: 3,value12:1, value13:2, value14: 1, value15:1},
+{id:"30", dimension: "TRIPLEA.", value1:3, value2: 1,value3:2, value4:2, value5: 1,value6:1, value7:2, value8: 3,value9:2, value10:3, value11: 3,value12:2, value13:2, value14: 2, value15:1},
+{id:"31", dimension: "VerDatAs", value1:3, value2: 2,value3:2, value4:1, value5: 1,value6:2, value7:2, value8: 2,value9:1, value10:2, value11: 2,value12:3, value13:2, value14: 2, value15:1},
+{id:"32", dimension: "WBsmart", value1:1, value2: 1,value3:1, value4:3, value5: 1,value6:1, value7:3, value8: 3,value9:2, value10:3, value11: 3,value12:3, value13:1, value14: 3, value15:3},
+{id:"33", dimension: "Weiterb.4.OWL", value1:3, value2: 3,value3:3, value4:1, value5: 1,value6:0, value7:2, value8: 1,value9:0, value10:2, value11: 1,value12:1, value13:3, value14: 3, value15:1},
+{id:"34", dimension: "WISYatKI", value1:3, value2: 2,value3:2, value4:1, value5: 2,value6:0, value7:3, value8: 3,value9:2, value10:0, value11: 0,value12:3, value13:1, value14: 2, value15:1},
+
+];
+if (thema == "UDim-Fachlich") { dataUnterDimensionenEinzelStandZB2021 = dataUnterDimensionenProUDimProjekteStandZB2021; }
+
 var dataUnterDimensionenEinzelStandZeitpunktB = dataUnterDimensionenEinzelStandZB2021; //Datensatz Slider 2. position (=mitte)
 
 var dataUnterDimensionenEinzelStandTagung2022 = [ //Daten Array für Radarboard Einzelvorhaben --------------Stand August 2023-------------------------
@@ -123,6 +211,47 @@ var dataUnterDimensionenEinzelStandTagung2022 = [ //Daten Array für Radarboard 
     { id: "15", dimension: "Organisationsentwicklung", valueProzentGesamt1: 17, valueProzentGesamt2: 24, valueProzentGesamt3: 59, valueGesamt1: 20, valueGesamt2: 8, valueGesamt3: 6, value1: 2, value2: 1, value3: 1, value4: 3, value5: 3, value6: 2, value7: 2, value8: 1, value9: 1, value10: 1, value11: 1, value12: 1, value13: 0, value14: 1, value15: 1, value16: 3, value17: 2, value18: 0, value19: 3, value20: 2, value21: 0, value22: 1, value23: 3, value24: 2, value25: 2, value26: 1, value27: 1, value28: 2, value29: 0, value30: 1, value31: 1, value32: 3, value33: 1, value34: 1 },
 
 ];
+
+var dataUnterDimensionenProUDimProjekteStandTagung2022 = [ /// Array für Radarboard alle projekte für eine Unterdimensionen
+
+{id:"1", dimension: "ADAPT", value1:1, value2: 0,value3:1, value4:3, value5: 1,value6:1, value7:3, value8: 3,value9:3, value10:3, value11: 3,value12:3, value13:1, value14: 3, value15:2},
+{id:"2", dimension: "APOLLO", value1:3, value2: 2,value3:2, value4:2, value5: 3,value6:1, value7:3, value8: 2,value9:3, value10:2, value11: 2,value12:3, value13:0, value14: 2, value15:1},
+{id:"3", dimension: "ComP-A.", value1:1, value2: 1,value3:1, value4:3, value5: 0,value6:0, value7:1, value8: 1,value9:1, value10:3, value11: 2,value12:3, value13:1, value14: 1, value15:1},
+{id:"4", dimension: "DigiPl.", value1:2, value2: 2,value3:0, value4:3, value5: 2,value6:3, value7:2, value8: 0,value9:1, value10:3, value11: 3,value12:1, value13:0, value14: 3, value15:3},
+{id:"5", dimension: "EduPLEx_API", value1:2, value2: 1,value3:2, value4:1, value5: 1,value6:1, value7:2, value8: 2,value9:0, value10:2, value11: 3,value12:3, value13:2, value14: 3, value15:3},
+{id:"6", dimension: "ELe-com", value1:1, value2: 1,value3:3, value4:3, value5: 2,value6:0, value7:1, value8: 0,value9:1, value10:3, value11: 3,value12:3, value13:0, value14: 1, value15:2},
+{id:"7", dimension: "ExpanderWB3", value1:3, value2: 3,value3:2, value4:1, value5: 1,value6:0, value7:3, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:0, value14: 0, value15:2},
+{id:"8", dimension: "HUBGrade", value1:3, value2: 2,value3:1, value4:3, value5: 3,value6:0, value7:2, value8: 1,value9:1, value10:2, value11: 1,value12:2, value13:1, value14: 2, value15:1},
+{id:"9", dimension: "IWWB-PLUS", value1:3, value2: 1,value3:2, value4:3, value5: 3,value6:0, value7:1, value8: 0,value9:1, value10:1, value11: 0,value12:3, value13:1, value14: 1, value15:1},
+{id:"10", dimension: "KAINE", value1:1, value2: 0,value3:1, value4:0, value5: 2,value6:0, value7:0, value8: 0,value9:0, value10:2, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"11", dimension: "KAMAELE.", value1:0, value2: 0,value3:0, value4:1, value5: 1,value6:2, value7:1, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:1, value14: 2, value15:1},
+{id:"12", dimension: "KI4CoL.ET", value1:3, value2: 1,value3:1, value4:3, value5: 1,value6:0, value7:3, value8: 3,value9:2, value10:2, value11: 2,value12:1, value13:3, value14: 2, value15:1},
+{id:"13", dimension: "KIM", value1:1, value2: 0,value3:2, value4:1, value5: 2,value6:0, value7:3, value8: 1,value9:2, value10:1, value11: 3,value12:3, value13:0, value14: 0, value15:0},
+{id:"14", dimension: "KIPerWeb", value1:1, value2: 1,value3:2, value4:2, value5: 2,value6:0, value7:1, value8: 1,value9:2, value10:3, value11: 3,value12:3, value13:2, value14: 3, value15:1},
+{id:"15", dimension: "KIRA", value1:1, value2: 2,value3:2, value4:3, value5: 1,value6:0, value7:3, value8: 1,value9:3, value10:1, value11: 0,value12:3, value13:2, value14: 1, value15:1},
+{id:"16", dimension: "KIRA_Pro", value1:1, value2: 0,value3:1, value4:1, value5: 2,value6:1, value7:3, value8: 2,value9:1, value10:2, value11: 3,value12:3, value13:1, value14: 3, value15:3},
+{id:"17", dimension: "KIWI", value1:3, value2: 0,value3:1, value4:1, value5: 2,value6:2, value7:2, value8: 1,value9:1, value10:3, value11: 2,value12:3, value13:1, value14: 2, value15:2},
+{id:"18", dimension: "KUPPEL", value1:3, value2: 1,value3:1, value4:3, value5: 1,value6:0, value7:3, value8: 2,value9:2, value10:3, value11: 3,value12:3, value13:1, value14: 0, value15:0},
+{id:"19", dimension: "LIMo", value1:1, value2: 0,value3:3, value4:1, value5: 3,value6:0, value7:2, value8: 1,value9:3, value10:3, value11: 1,value12:2, value13:2, value14: 3, value15:3},
+{id:"20", dimension: "LiSiL", value1:1, value2: 2,value3:1, value4:1, value5: 0,value6:0, value7:2, value8: 1,value9:1, value10:3, value11: 2,value12:0, value13:2, value14: 2, value15:2},
+{id:"21", dimension: "MINDED.", value1:2, value2: 1,value3:3, value4:2, value5: 1,value6:0, value7:1, value8: 1,value9:0, value10:1, value11: 3,value12:2, value13:2, value14: 1, value15:0},
+{id:"22", dimension: "MyEduL.", value1:0, value2: 0,value3:3, value4:1, value5: 1,value6:3, value7:3, value8: 1,value9:1, value10:1, value11: 0,value12:2, value13:0, value14: 3, value15:1},
+{id:"23", dimension: "NetOEV", value1:3, value2: 0,value3:3, value4:3, value5: 2,value6:1, value7:2, value8: 1,value9:3, value10:1, value11: 1,value12:3, value13:3, value14: 3, value15:3},
+{id:"24", dimension: "OncaPflege", value1:2, value2: 1,value3:2, value4:2, value5: 2,value6:3, value7:3, value8: 3,value9:1, value10:3, value11: 3,value12:2, value13:3, value14: 2, value15:2},
+{id:"25", dimension: "PolyEx", value1:1, value2: 0,value3:1, value4:2, value5: 2,value6:0, value7:1, value8: 2,value9:1, value10:1, value11: 3,value12:3, value13:1, value14: 2, value15:2},
+{id:"26", dimension: "SEARCH", value1:1, value2: 1,value3:2, value4:1, value5: 1,value6:0, value7:2, value8: 1,value9:0, value10:2, value11: 3,value12:3, value13:2, value14: 1, value15:1},
+{id:"27", dimension: "SG4BB", value1:2, value2: 1,value3:2, value4:3, value5: 1,value6:0, value7:2, value8: 0,value9:0, value10:3, value11: 3,value12:3, value13:0, value14: 2, value15:1},
+{id:"28", dimension: "SMALO", value1:3, value2: 3,value3:1, value4:3, value5: 2,value6:0, value7:0, value8: 0,value9:0, value10:2, value11: 3,value12:2, value13:3, value14: 3, value15:2},
+{id:"29", dimension: "StuBu", value1:2, value2: 2,value3:1, value4:1, value5: 2,value6:1, value7:0, value8: 0,value9:0, value10:2, value11: 2,value12:1, value13:1, value14: 0, value15:0},
+{id:"30", dimension: "TRIPLEA.", value1:3, value2: 1,value3:2, value4:2, value5: 1,value6:1, value7:2, value8: 3,value9:2, value10:3, value11: 3,value12:2, value13:2, value14: 2, value15:1},
+{id:"31", dimension: "VerDatAs", value1:3, value2: 2,value3:2, value4:1, value5: 1,value6:2, value7:2, value8: 2,value9:1, value10:2, value11: 2,value12:3, value13:2, value14: 2, value15:1},
+{id:"32", dimension: "WBsmart", value1:1, value2: 1,value3:1, value4:3, value5: 1,value6:1, value7:3, value8: 3,value9:2, value10:3, value11: 3,value12:3, value13:1, value14: 3, value15:3},
+{id:"33", dimension: "Weiterb.4.OWL", value1:3, value2: 3,value3:3, value4:1, value5: 1,value6:0, value7:2, value8: 1,value9:0, value10:2, value11: 1,value12:1, value13:3, value14: 3, value15:1},
+{id:"34", dimension: "WISYatKI", value1:3, value2: 2,value3:2, value4:2, value5: 2,value6:0, value7:3, value8: 3,value9:2, value10:0, value11: 0,value12:3, value13:1, value14: 2, value15:1},
+
+];
+if (thema == "UDim-Fachlich") { dataUnterDimensionenEinzelStandTagung2022 = dataUnterDimensionenProUDimProjekteStandTagung2022; }
+
 var dataUnterDimensionenEinzelStandZeitpunktC = dataUnterDimensionenEinzelStandTagung2022; //Datensatz Slider 3. position (=rechts) = Stand August 2023
 
 
