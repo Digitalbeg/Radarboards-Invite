@@ -7,6 +7,37 @@ var containerTechUDim = container.children.push(am5.Container.new(root, {
     //layout: root.verticalLayout
 }));
 
+//---------------------Menu links Hamburger rechts Hilfe Video------------------
+var labelMenu = containerTechUDim.children.push(am5.Label.new(root, {
+    paddingTop: -3,
+    x: 6,
+    y: -1,
+    text: "☰",
+    fontSize: 18,
+    fill: ColorBlackYAxisText,
+    cursorOverStyle: "pointer",
+    tooltip: am5.Tooltip.new(root, { paddingBottom: 5, paddingTop: 3, pointerOrientation:"left" }),
+    tooltipX: 28,
+    tooltipY: 18,
+    tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Auswahl Visualisierung",
+    background: am5.Rectangle.new(root, {
+      fill: am5.color(0x000000),
+      fillOpacity: 0
+    })
+  }));
+  
+  labelMenu.events.on("click", function (ev) {
+    if (labelMenu.get("active")) { //Menu war active -> hide div
+      console.log("Menu active");
+      labelMenu.set("active", false);
+      document.getElementById('menu-radar').style.display = 'none';
+    } else { //Menu war inactive -> div anzeigen
+      console.log("Menu inactive");
+      labelMenu.set("active", true);
+      document.getElementById('menu-radar').style.display = 'inline-block';
+    };
+  });
+
 var chartTechUDim = containerTechUDim.children.push(am5radar.RadarChart.new(root, {
     radius: radiusUDimRadarboard, //grösse chart in container, 80% lässtplatz für legende etc.
     innerRadius: radiusHoleDimUebersichtSeriesTausch, //grösse loch in der mitte

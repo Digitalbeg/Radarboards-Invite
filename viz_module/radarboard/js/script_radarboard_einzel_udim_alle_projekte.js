@@ -16,17 +16,6 @@ var container = root.container.children.push(
   })
 );
 
-//var textProjektTitel1 = "[#535353] Radarboard - Technologie";
-var textProjektTitel1 = "[#535353] Radarboard";
-//if (thema == "Fachlich") { textProjektTitel1 = "[#535353] Radarboard - Fachlich & Didaktisch" }
-if (thema == "Fachlich") { textProjektTitel1 = "[#535353] Radarboard" }
-
-//var textProjektTitel2 = "[#535353]Projekt_1 - ";
-var textProjektTitel2 = ""; //später wird dynamisch Name des projektes zugewiesen
-var textProjektTitel3 = ""; //für Umschalten Technisch / Fachlich einzelRadarboard 
-var textProjektTitel = textProjektTitel2 + textProjektTitel1;
-
-
 //------------------title------------------------------------------------
 var containerTitle = container.children.push(
   am5.Container.new(root, {
@@ -36,56 +25,30 @@ var containerTitle = container.children.push(
 
 var title = containerTitle.children.push(am5.Label.new(root, {
   text: "", //wird später über update Title gesetzt
+  x: am5.percent(52),
+  textAlign: "center",
   fontSize: 18,
-  fontWeight: 700,
-  paddingLeft: 520,
+  fontWeight: 600,
+
+  // paddingLeft: 400,
   // x: 450,
 }));
 
 var tooltipLabelTechFachUmschalten = am5.Tooltip.new(root, { getFillFromSprite: false, dy: 8, });
 tooltipLabelTechFachUmschalten.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
 
-/* var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
-  paddingLeft: -10,
-  fontSize: 18,
-  text: "[fontWeight: 500]   ►Fachlich & Didaktisch",
-  fill: ColorGrauValue2,
-  cursorOverStyle: "pointer",
-  tooltip: tooltipLabelTechFachUmschalten,
-  tooltipText: "[fontWeight: 500 #fff fontSize: 12px]zum Radarboard Fachlich-Didaktisch wechseln",
-  background: am5.Rectangle.new(root, {
-    fill: am5.color(0x000000),
-    fillOpacity: 0
-  })
-})); */
-
-/* if (thema == "Fachlich") {
-  labelTechFachUmschalten.set("text", "[fontWeight: 500]   ►Technologisch");
-  labelTechFachUmschalten.set("tooltipText", "[fontWeight: 500 #fff fontSize: 12px]zum Radarboard Technologie wechseln");
-}
-
-labelTechFachUmschalten.events.on("click", function (ev) {
-  console.log("umschalten:" + nameProjekt);
-  if (thema == "Fachlich") {
-    console.log("Fach,p" + nameProjekt);
-    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
-  }
-  else {
-    console.log("Technologisch");
-    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
-  }
-}); */
-
 
 //-------- pseudo legend für Umschalten Radarboard Fachlich <-> Technologisch----------
 var legendUmschaltenFachlichTechnologisch = containerTitle.children.push(am5.Legend.new(root, {
   nameField: "categoryX",
-  dy: 13,
-  dx: 400,
+  dy: 14,
+  // dx: 420,
+  // x: am5.percent(50),
+  x: 990,
   useDefaultMarker: true,
   layout: root.horizontalLayout,
   tooltip: tooltipLabelTechFachUmschalten,
-  tooltipText: "[fontWeight: 500 #fff fontSize: 13px]Radarboard umschalten",
+  tooltipText: "[fontWeight: 500 #fff fontSize: 13px]Umschalten Fachlich / Technologisch ",
 
 }));
 legendUmschaltenFachlichTechnologisch.valueLabels.template.set("forceHidden", true);
@@ -111,11 +74,10 @@ legendUmschaltenFachlichTechnologisch.markerRectangles.template.setAll({
 
 legendUmschaltenFachlichTechnologisch.labels.template.setAll({
   fontSize: fontSizeLegendeUmschalten,
-  fontWeight: "600"
+  fontWeight: "500"
 });
-
-
 //-------------------------------Ende pseudo legend ----------------------------
+
 //---------------------Menu links Hamburger rechts Hilfe Video------------------
 var labelMenu = containerTitle.children.push(am5.Label.new(root, {
   paddingTop: 7,
@@ -179,23 +141,22 @@ labelHilfe.events.on("click", function (ev) {
 });
 //---------------------Ende Menu links Hamburger rechts Hilfe Video------------------
 
+var tooltipNetworkViz = am5.Tooltip.new(root, { pointerOrientation: "up", getFillFromSprite: false, dy: 9, dx: 0 });
+tooltipNetworkViz.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
+
+var textProjektTitel1 = ""; var textProjektTitel2 = ""; var textProjektTitel3 = ""; var textProjektTitel = "";
+var indexDim = 1;
+var colorTextDim;
 
 function updateTitleText() {
-  var counterVisible = 0; var indexSingle = 0;
+  var counterVisible = 0;
+  var indexSingle = 0;
   for (var udim = 1; udim <= projekteNamen.length; udim++) { //array aller projekte durchgehen
     if (seriesEinzelProjekt[udim].isVisible()) {
       containerTextRadarboardTech.show(0);
       counterVisible = counterVisible + 1;
       indexSingle = udim;
-      textProjektTitel2 = "[#535353]" + projekteNamen[udim - 1]; //array projekteNamen geht ab 0 los
-
-    }
-    if (counterVisible > 1) { //mehr als 1 projekt in legende visible deshalb text weitere hinzufügen
-      textProjektTitel3 = "";
-
-
-    }
-    else if (counterVisible == 1) { //nur 1 projekt visible, text und weitere entfernen
+      textProjektTitel2 = "[fontWeight: 700]" + projekteNamen[udim - 1]; //array projekteNamen geht ab 0 los
 
     }
     else if (counterVisible == 0) {
@@ -203,44 +164,20 @@ function updateTitleText() {
     } //kein Legendeneintrag visible namen Projekt im Titel entfernen
 
   };
-  textProjektTitel = textProjektTitel2 + textProjektTitel3 + textProjektTitel1;
-  title.set("text", textProjektTitel);
-
+  indexDim = Math.ceil(indexSingle / 4);
+  //console.log("indexSingle, indexDim=" + indexSingle + "," + indexDim);
+  if (counterVisible > 0) {
+   textProjektTitel = "[fontWeight: 700 fontSize: 18px]" + dataDimensionen[indexDim - 1].dimension + ": " + textProjektTitel2 + textProjektTitel3 + textProjektTitel1;
+   title.set("fill", am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.2));
+   title.set("text", textProjektTitel);
+   colorTextDim = am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.2); //farbe aktuelle Dim 
+  };
 };
-
-///-----------------container & bild legende und textRadarboard Links--------------------------------------
-/* var containerLegendeGrau = root.container.children.push(
-  am5.Container.new(root, {
-    width: 300,
-    height: 120,
-    x: 35,
-    y: am5.percent(8),
-    
-  })
-); */
-
-/* var bildLegende = containerLegendeGrau.children.push(am5.Picture.new(root, {
-  x: 40,
-  y: am5.percent(0),
-  width: 264,
-  height: 130,
-   //tooltipText:  "[fontSize: 11px fontWeight: 400]Legende für technologische\nSchwerpunktsetzung im Projekt.",
-  tooltip: am5.Tooltip.new(root, { 
-    scale: 1.2, 
-    getFillFromSprite: false, 
-    getStrokeFromSprite: false, 
-    getLabelFillFromSprite: false,
-    pointerOrientation: "horizontal",
-  }),
-    src: "./img/legende_graustufen_einzelprojekt.svg",
-  
-})); */
 
 var containerTextRadarboardTech = root.container.children.push(
   am5.Container.new(root, {
-    width: 320,
-    // height: 340,
-    x: 20,
+    width: 325,
+    x: 18,
     y: 210,
     layout: root.verticalLayout,
     background: am5.Rectangle.new(root, {
@@ -250,41 +187,30 @@ var containerTextRadarboardTech = root.container.children.push(
   })
 );
 var textProjektBeschreibung = "";
+var indexVisibleUDim = 1; //für alle projekte pro UDim
 
 function updateProjektBeschreibungText() {
   var counterVisible = 0;
-  var indexVisible = -1;
-
+  var indexVisible = 0;
   for (var indexProjekt = 1; indexProjekt <= projekteNamen.length; indexProjekt++) { //array aller projekte durchgehen
     if (seriesEinzelProjekt[indexProjekt].isVisible()) {
       indexVisible = indexProjekt - 1;
     }
   };
-  if (indexVisible >= 0) {
-    //var text1Projekt = "[fontWeight: 600 fontSize: 14px]Entwicklungsfeld: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["entwicklungsfeld"];
-    var text1Projekt = "[fontWeight: 600 fontSize: 14px]Thema: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["thema"];
-    var text2Projekt = "[fontWeight: 600 fontSize: 14px]Zielgruppe: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["zielgruppe"];
-    var text3Projekt = "[fontWeight: 600 fontSize: 14px]Innovation: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["innovation"];
-    var text4Projekt = "[fontWeight: 600 fontSize: 14px]Weiterbildungsplattform: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["weiterbildungsplattform"];
+  //indexDim = Math.ceil(indexVisible / 4); // um Beschreibung Dim anzeigne zu können
+  var text2 = dataDimensionen[indexDim]["textLang"].replace(/\n/g, ' ');
+  var text4 = dataBeschreibungUnterDimensionen[indexVisible]["textLang"].replace(/\n/g, ' ');
+  //colorTextDim = am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.3);
+  //console.log("color text dimesnion:" + colorTextDim);
 
+  if (indexVisible > 0) {
+    var text1Projekt = "[fontSize: 13px fontWeight: 700 #" + colorTextDim + "]" + dataDimensionen[indexDim - 1].dimension; // Titel Dim
+    var text2Projekt = "[fontWeight: 400 fontSize: 13px]" + text2; // Text Definition Dim
+    var text3Projekt = "[fontSize: 13px fontWeight: 700 #" + colorTextDim + "]" + dataBeschreibungUnterDimensionen[indexVisible].dimension; //Titel UDim
+    var text4Projekt = "[fontWeight: 400 fontSize: 13px]" + text4; //Titel UDim
 
-    textProjektBeschreibung = text1Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text2Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text3Projekt + "\n[fontSize: 20px][fontSize: 13px]" + text4Projekt;
+    textProjektBeschreibung = text1Projekt + "\n[fontSize: 16px][fontSize: 13px]" + text2Projekt + "\n[fontSize: 25px][fontSize: 13px]" + text3Projekt + "\n[fontSize: 14px][fontSize: 13px]" + text4Projekt;
     textRadarboardTech.set("text", textProjektBeschreibung);
-
-    textProjektZiel = "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
-    tooltipTextProjektZiel = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"];
-    labelProjektziel.set("text", textProjektZiel);
-    labelProjektziel.set("tooltipText", tooltipTextProjektZiel);
-
-    textProjektMehrwert = "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
-    tooltipTextProjektMehrwert = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"];
-    labelProjektMehrwert.set("text", textProjektMehrwert);
-    labelProjektMehrwert.set("tooltipText", tooltipTextProjektMehrwert);
-
-    textProjektVerbundpartner = "[fontWeight: 600 fontSize: 14px]Verbundpartner:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px #000]mehr";
-    tooltipTextProjektVerbundpartner = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"];
-    labelProjektVerbundpartner.set("text", textProjektVerbundpartner);
-    labelProjektVerbundpartner.set("tooltipText", tooltipTextProjektVerbundpartner);
 
   }
   else {
@@ -295,83 +221,8 @@ function updateProjektBeschreibungText() {
 var textRadarboardTech = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   text: textProjektBeschreibung,
   oversizedBehavior: "wrap",
-  maxWidth: 320, // war 298
-
+  maxWidth: 328, // war 298
 }));
-
-var tooltipProjektZiel = am5.Tooltip.new(root, {
-  autoTextColor: false, //textfarbe nocht automatisch
-  pointerOrientation: "left",
-  getFillFromSprite: false,
-  dy: 15,
-  dx: 140,
-  width: 790,
-});
-tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
-tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
-
-var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  paddingTop: -2,
-  text: "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]",
-  oversizedBehavior: "wrap",
-  maxWidth: 320,
-  cursorOverStyle: "pointer",
-  tooltip: tooltipProjektZiel,
-  background: am5.Rectangle.new(root, {
-    fill: am5.color(0x000000),
-    fillOpacity: 0
-  })
-}));
-
-var tooltipMehrwert = am5.Tooltip.new(root, {
-  autoTextColor: false, //textfarbe nocht automatisch
-  pointerOrientation: "left",
-  getFillFromSprite: false,
-  dy: 15,
-  dx: 125,
-  width: 790,
-});
-tooltipMehrwert.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
-tooltipMehrwert.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
-
-var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  paddingTop: -2,
-  text: "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:[fontSize: 13px]",
-  oversizedBehavior: "wrap",
-  maxWidth: 320,
-  cursorOverStyle: "pointer",
-  tooltip: tooltipMehrwert,
-  background: am5.Rectangle.new(root, {
-    fill: am5.color(0x000000),
-    fillOpacity: 0
-  })
-}));
-
-var tooltipVerbundpartner = am5.Tooltip.new(root, {
-  autoTextColor: false, //textfarbe nocht automatisch
-  pointerOrientation: "left",
-  getFillFromSprite: false,
-  dy: 12,
-  dx: 125,
-  width: 590,
-});
-tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
-tooltipVerbundpartner.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
-
-var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-  paddingTop: -2,
-  text: "[fontWeight: 600 fontSize: 14px]Verbundpartner:[fontSize: 13px]",
-  oversizedBehavior: "wrap",
-  maxWidth: 320,
-  cursorOverStyle: "pointer",
-  tooltip: tooltipVerbundpartner,
-  background: am5.Rectangle.new(root, {
-    fill: am5.color(0x000000),
-    fillOpacity: 0
-  })
-}));
-
-
 
 //-----------------ende container & textRadarboard Links-------------------------
 
@@ -410,19 +261,20 @@ var xRendererTechUDimEinzel = am5radar.AxisRendererCircular.new(root, {
 });
 
 xRendererTechUDimEinzel.labels.template.setAll({
-  fontSize: 0.1,
-  textType: "circular",
+  fontSize: fontSizeLabelProjekteEinzelUDim,
+  textType: "adjusted", // optionen "circular","radial","regular"
+  fill: am5.Color.brighten(ColorBlack, 0.40),
+  //fontFamily: "Helvetica",
+  fontWeight: 500,
+  radius: radiusLabelProjekteEinzelUDim,
 
-  // textType: "adjusted",
-  // fontSize: fontSizeUDimLabel, //wird direkt in Range festgelegt
-  //fontSize: "0.95em", //fontWeight: 0, //fill: ColorBlack,
-  fill: ColorWhite, //damit text nicht doppelt erscheint, range druckt auch noch mal text
-  radius: radiusUDimValue
+  //fontSize: 0.1,
+  // textType: "circular",
+  //fill: ColorWhite, //damit text nicht doppelt erscheint, range druckt auch noch mal text
+
 });
 
 var tooltip = am5.Tooltip.new(root, {
-  //tooltipX: am5.percent(50),
-  //tooltipY: am5.percent(100),
   getFillFromSprite: true,
   getLabelFillFromSprite: true,
   autoTextColor: true,
@@ -440,25 +292,18 @@ var xAxisTechUDimEinzel = chartTechUDimEinzel.xAxes.push(am5xy.CategoryAxis.new(
   maxDeviation: 0,
   categoryField: "dimension",
   renderer: xRendererTechUDimEinzel,
-  // tooltip: tooltip, //tooltip für categorien x achse nicht benötigt
-  /* tooltip: am5.Tooltip.new(root, { 
-    autoTextColor: true,
-    getLabelFillFromSprite: true,
-    pointerOrientation: "up",
-    labelText: "[fontSize: 14px fontWeight: 500]Dim:[fontSize: 13px fontWeight: 400]{name}"
-   })  */
+
 }));
 
 xRendererTechUDimEinzel.grid.template.setAll({
-  stroke: ColorGridEinzelProjekt,
+  stroke: ColorGridEinzelUDim,
   //stroke: ColorWhite,
-  strokeWidth: 0.7 ///Bestimmt dicke und farbe des grids
-  //strokeWidth: 2 ///Bestimmt dicke und farbe des grids
+  strokeWidth: 0.13 ///Bestimmt dicke und farbe des grids
 });
 
 xRendererTechUDimEinzel.labels.template.setAll({
-  oversizedBehavior: "wrap",
-  textAlign: "center"
+  // oversizedBehavior: "wrap",
+  //textAlign: "center",
 });
 
 
@@ -466,18 +311,16 @@ var yAxisTechUDimEinzel = chartTechUDimEinzel.yAxes.push(am5xy.ValueAxis.new(roo
   visible: false,
   min: 0,
   //max: 3.3,
-  max: 3.4, //war 3.4 , 3.5, 3.1
+  max: 3.1, //war 3.4 , 3.5, 3.1
 
   //max: 3.04, //damit bullets bei value=3 komplett sichtbar sind 
   strictMinMax: true,
   renderer: am5radar.AxisRendererRadial.new(root, { minGridDistance: 50 })
 }));
 
-
-
 var yRendererTechUDimEinzel = yAxisTechUDimEinzel.get("renderer");
 yRendererTechUDimEinzel.grid.template.setAll({
-  stroke: ColorGridEinzelProjekt,
+  stroke: ColorGridEinzelUDim,
   //strokeWidth: 0 //funktoniert nicht
 });
 
@@ -497,29 +340,51 @@ yRendererTechUDimEinzel.labels.template.setAll({
 
 
 /// legend horizontal
+var maxLegendGridUDim = 5;
+if (thema == "UDim-Fachlich") {maxLegendGridUDim = 4}
+
 var legendTechUDimEinzel = container.children.push(am5.Legend.new(root, {
   nameField: "categoryX",
-  dx: 60,
-
+  dx: 365,
   useDefaultMarker: true,
   //layout: root.horizontalLayout
-  //layout: root.gridLayout
-
   layout: am5.GridLayout.new(root, {
-    maxColumns: 13,
+    maxColumns: maxLegendGridUDim,
     fixedWidthGrid: false
   })
 }));
 
+
 legendTechUDimEinzel.labels.template.setAll({
-  fontSize: fontSizeLegende,
-  fontWeight: "500"
+  fill: ColorDim1Value1,
+  fontSize: fontSizeLegendeEinzelUDim,
+  fontWeight: "700",
 });
+
+counterLegendItem = 0;
+legendTechUDimEinzel.labels.template.events.on("dataitemchanged", function (ev) {
+  counterLegendItem = counterLegendItem + 1;
+  dim = Math.ceil(counterLegendItem / 8);
+  if (thema == "UDim-Fachlich") {dim = Math.ceil(counterLegendItem / 6);}
+ 
+  //console.log("Leg. ev DataItCh. counter,dim: ", counterLegendItem + "," + dim)
+  if (thema == "UDim-Technologisch" && counterLegendItem < 41) {
+    //console.log("Leg. ev DataItCh. counter,dim: ", counterLegendItem + "," + dim)
+    color1 = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.0);
+    ev.target.set("fill", color1);
+  };
+  if (thema == "UDim-Fachlich" && counterLegendItem < 31) {
+    color1 = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.0);
+    ev.target.set("fill", color1);
+  };
+});
+
 legendTechUDimEinzel.valueLabels.template.set("forceHidden", true);
 
 legendTechUDimEinzel.markers.template.setup = function (marker) {
   var check = am5.Graphics.new(root, {
-    fill: am5.Color.brighten(am5.color(0x000000), 0.3),
+    fill: am5.Color.brighten(am5.color(0x000000), 0.0),
+    //fill: series1TechDimColors[0],
     fillOpacity: 0.7,
     layer: 50,
     scale: 0.85,
@@ -535,16 +400,14 @@ legendTechUDimEinzel.markers.template.setAll({ width: 15, height: 15 });
 
 legendTechUDimEinzel.markerRectangles.template.setAll({
   fillOpacity: 0.3,
-  strokeOpacity: 0
+  strokeOpacity: 0,
+  // fill: ColorWhite,
+  //fill: am5.Color.brighten(colorTextDim, 0.3),
 });
-
 //#endregion ///--------A.5 End Axes, Legends----------------------------------------
-
 //#endregion ///-----A End Set root, Loading Indicator, Themes, Container, Title, Filter, Buttons, Legende----
 
-//#region ///--------B Ranges-----------------------------------------------------------------------------
-
-/// Range über Unterdim für Zusatz Beschriftung der UDim mit den Dim Namen Aussen
+//-----------------Range Beschriftung mit Projektnamen Aussen------------------------------------------------------
 var rangeTechUDimEinzelLabelOnly = [];
 var rangeDataItemTechUDimEinzelLabelOnly = [];
 
@@ -552,10 +415,7 @@ function erstelleRangeTechUDimEinzelLabelOnly(indexRange, colorAchseLabel, radiu
   rangeDataItemTechUDimEinzelLabelOnly[indexRange] = xAxisTechUDimEinzel.makeDataItem({ above: true, category: startKategorie, endCategory: endKategorie });
   rangeTechUDimEinzelLabelOnly[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelLabelOnly[indexRange]);
 
-  var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
-  tooltip.get("background").setAll({ fillOpacity: 0.8 });
-
-  rangeDataItemTechUDimEinzelLabelOnly[indexRange].get("label").setAll({
+   rangeDataItemTechUDimEinzelLabelOnly[indexRange].get("label").setAll({
     fill: colorAchseLabel,
     fontWeight: fontWeightUDimLabelAussen,
     radius: radiusLabel, fontSize: fontSize,
@@ -563,144 +423,32 @@ function erstelleRangeTechUDimEinzelLabelOnly(indexRange, colorAchseLabel, radiu
   });
 
   rangeTechUDimEinzelLabelOnly[indexRange].get("axisFill").setAll({
-    tooltip: tooltip,
-    tooltipText: text,
-    tooltipX: 450,
-    tooltipY: -280,
     visible: true,
-    fillOpacity: 0.08, //war 0.15, 0.08
+    fillOpacity: 0.99, //war 0.15, 0.08
     fill: colorAchseLabel,
     toggleKey: "active",
     cursorOverStyle: "pointer",
     dRadius: 70, //war 74
-    innerRadius: -40 //war -49, -39
+    innerRadius: -70 //war -49, -39
   });
 }
 
-for (var index = 0; index < dataDimensionen.length - 1; index++) {
-  start = index * 4;
-  end = start + 3;
-  if (thema == "Fachlich") { //wenn fachliches Radarboard dann nur 15 UDim statt 20 UDim
-    start = index * 3;
-    end = start + 2;
-  }
-  textDimTooltip = "[fontSize: 13px fontWeight: 700]" + dataDimensionen[index].name + "[/]\n[fontSize: 13px fontWeight: 400]" + dataDimensionen[index].textLang + "[/]";
-
-  erstelleRangeTechUDimEinzelLabelOnly(index, eval('ColorDim' + (index + 1) + 'Value1'), radiusEinzelTechUDimLabelAussen, fontSizeLabelAussen, dataDimensionen[index].dimension, textDimTooltip, dataUnterDimensionenEinzel[start].dimension, dataUnterDimensionenEinzel[end].dimension);
-};
-
-/// Range über Unterdim für Beschriftung der Unterdim
-var rangeTechUDimEinzel = [];
-var rangeDataItemTechUDimEinzel = [];
-
-function erstelleRangeTechUDimEinzel(indexRange, colorAchseLabel, colorAchseFill, radiusLabel, fontWeightLabel, fontSizeLabel, labelText, text, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
-  rangeDataItemTechUDimEinzel[indexRange] = xAxisTechUDimEinzel.makeDataItem({ above: true, category: startKategorie, endCategory: endKategorie });
-  rangeTechUDimEinzel[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzel[indexRange]);
-
-  var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
-  tooltip.get("background").setAll({ fillOpacity: 0.8 });
-
-  rangeDataItemTechUDimEinzel[indexRange].get("label").setAll({
-    text: labelText,
-    fill: colorAchseLabel,
-    fontWeight: fontWeightLabel,
-    fontSize: fontSizeLabel,
-    radius: radiusLabel,
-
-  });
-  rangeTechUDimEinzel[indexRange].get("axisFill").setAll({
-    tooltip: tooltip,
-    tooltipText: text,
-    tooltipX: 470,
-    tooltipY: -400,
-    /*  toggleKey: "active", */
-    cursorOverStyle: "pointer",
-    visible: true,
-    fillOpacity: 0.08,
-    fill: colorAchseLabel,
-    dRadius: 31, //war 21, 31 
-    innerRadius: -30, //war -26, war -59, wenn negativ dann pixel distance from outer radius 
-  });
-}
-
-const fontSizeUDimLabel2 = fontSizeLabelKreis;
-for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
+function generiereRangesProjektNamen() {
+ for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
   index = udim;
-  dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
-  if (thema == "Fachlich") { //wenn fachliches Radarboard dann nur 15 UDim statt 20
-    dim = Math.ceil(udim / 3);
-  }
-  textDimTooltip = "[fontSize: 13px fontWeight: 700]" + dataBeschreibungUnterDimensionen[index - 1].name + "[/]\n[fontSize: 13px fontWeight: 400]" + dataBeschreibungUnterDimensionen[index - 1].textLang + "[/]";
-
-  erstelleRangeTechUDimEinzel(index - 1, eval('ColorDim' + dim + 'Value1'), eval('ColorDim' + dim + 'Value1'), radiusEinzelTechUDimLabel, fontWeightUDimLabel, fontSizeUDimLabel2, dataBeschreibungUnterDimensionen[index - 1].nameKurz, textDimTooltip, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+  dim = Math.ceil(indexVisibleUDim / 4);
+    if (thema == "UDim-Fachlich") { dim = Math.ceil(indexVisibleUDim / 3) }
+    var labelText = "";
+    var tooltipText = "";
+    console.log("dim:"+ dim)
+  var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.97);
+  radiusProjektNamen = 0;
+  erstelleRangeTechUDimEinzelLabelOnly(index, color, radiusProjektNamen, fontSizeLabelAussen, "", "", dataUnterDimensionenEinzel[index-1].dimension, dataUnterDimensionenEinzel[index-1].dimension);
+ }
 };
 
-
-/// Range über Unterdim für Zusatz-Beschriftung der Gesamtvalues
-var rangeTechUDimEinzelGesamtValues = [];
-var rangeDataItemTechUDimEinzelGesamtValues = [];
-
-function erstelleRangeTechUDimEinzelGesamtValues(indexRange, colorAchseLabel, radiusLabel, fontWeightLabel, fontSize, labelText, tooltipText, startKategorie, endKategorie) { //radius ist abstand des Textlabels in px vom äußeren Kreis
-  var tooltip = am5.Tooltip.new(root, {
-    pointerOrientation: "down",
-    getFillFromSprite: true,
-    //keepTargetHover: true
-  });
-  tooltip.get("background").setAll({ fillOpacity: 0.85 });
-
-  // ändern und 2 dim array machen für datesatz 0,1,2 um später .set label text machen zu können wenn slider bewegt wird
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
-  rangeTechUDimEinzelGesamtValues[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemTechUDimEinzelGesamtValues[indexRange]);
-
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("axisFill").setAll({
-    visible: true,
-    fill: colorAchseLabel,
-    fillOpacity: 0.9,
-    dRadius: 7,
-    innerRadius: -29,
-    tooltip: tooltip,
-    tooltipText: tooltipText,
-    tooltipX: 400,
-    tooltipY: -220,
-    cursorOverStyle: "pointer"
-  }); //innerRadius dicke farbiger streifen
-
-  rangeDataItemTechUDimEinzelGesamtValues[indexRange].get("label").setAll({ fill: ColorWhite /* colorAchseLabel */, fontWeight: fontWeightLabel, radius: radiusLabel, fontSize: fontSize, text: labelText });
-
-}
-
-function updateLabelGesamtValues() {
-  for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
-    index = udim;
-    rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("label").setAll({ text: "" });
-
-    var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2;
-    var tooltipText = "[fontSize: 14px fontWeight: 600]Invite Gesamtprogramm:\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + " Vorhaben: Merkmal ausgeprägt[/]\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " Vorhaben: Merkmal vorhanden[/]\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " Vorhaben: Merkmal in Ansätzen/nicht relevant";
-
-    rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("label").setAll({ text: labelText });
-    rangeDataItemTechUDimEinzelGesamtValues[index - 1].get("axisFill").setAll({ tooltipText: tooltipText, });
-
-  };
-};
-
-/// Hilsfunktion für Aufruf der Gesamtvalue Beschriftung um aufruf aus series hide/show event zu ermöglichen
-function generiereRangesGesamtValues() {
-  var radius = -19; var fontWeight = 300; var fontSize = "0.8em"; var color = ColorBlackYAxisText;
-  for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
-    index = udim;
-    dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
-    if (thema == "Fachlich") { //wenn facjliches Radarboard dann nur 15 UDim statt 20
-      dim = Math.ceil(udim / 3);
-    }
-    // var labelText = "[bold]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt3;
-    //var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt1;
-    var labelText = "[fontWeight:300]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + "[/]" + " | " + dataUnterDimensionenEinzel[index - 1].valueGesamt2;
-
-    var tooltipText = "[fontSize: 14px fontWeight: 600]Invite Gesamtprogramm:\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt3 + " Vorhaben: Merkmal ausgeprägt[/]\n" + "[fontSize: 13px fontWeight: 500]" + dataUnterDimensionenEinzel[index - 1].valueGesamt2 + " Vorhaben: Merkmal vorhanden[/]\n" + "[fontSize: 13px fontWeight: 400]" + dataUnterDimensionenEinzel[index - 1].valueGesamt1 + " Vorhaben: Merkmal in Ansätzen/nicht relevant";
-    var color = am5.Color.brighten(eval('ColorDim' + dim + 'Value1'), 0.1);
-    erstelleRangeTechUDimEinzelGesamtValues(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
-  };
-};
+generiereRangesProjektNamen();
+//-----------------Ende Range Beschriftung mit Projektnamen Aussen------------------------------------------------------
 
 var rangeCircleAussen = [];
 var rangeDataItemCircleAussen = [];
@@ -710,7 +458,7 @@ function erstelleRangeCircleAussen(indexRange, colorAchseLabel, radiusLabel, fon
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
   rangeDataItemCircleAussen[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
   rangeCircleAussen[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleAussen[indexRange]);
-  rangeDataItemCircleAussen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 1, dRadius: -18, innerRadius: -82, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleAussen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 1, dRadius: 0, innerRadius: -76, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
 function generiereRangesCircleAussen() {
@@ -719,12 +467,13 @@ function generiereRangesCircleAussen() {
 
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
-    dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
-    if (thema == "Fachlich") { dim = Math.ceil(udim / 3) }
+    // dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    dim = Math.ceil(indexVisibleUDim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    if (thema == "UDim-Fachlich") { dim = Math.ceil(indexVisibleUDim / 3) }
     var labelText = "";
     var tooltipText = "";
-    var color = am5.Color.brighten(eval('ColorDim' + dim + 'Value3'), -0.05);
-    //  erstelleRangeCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
+    // var color = am5.Color.brighten(ColorGrauValue3, -0.09);
+    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value3'), 0.4);
     erstelleRangeCircleAussen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
 
   };
@@ -737,22 +486,23 @@ function erstelleRangeCircleMitte(indexRange, colorAchseLabel, radiusLabel, font
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
   rangeDataItemCircleMitte[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
   rangeCircleMitte[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleMitte[indexRange]);
-  rangeDataItemCircleMitte[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -99, innerRadius: -72, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleMitte[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -75, innerRadius: -65, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
 function generiereRangesCircleMitte() {
   var radius = -23; var fontWeight = 300; var fontSize = "0.8em"; var color = am5.Color.lighten(ColorGrauValue2, -0.04);//war radius = -23;
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
-    dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
-    if (thema == "Fachlich") { dim = Math.ceil(udim / 3) }
+    //dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    dim = Math.ceil(indexVisibleUDim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    if (thema == "UDim-Fachlich") { dim = Math.ceil(indexVisibleUDim / 3) }
     var labelText = "";
     var tooltipText = "";
-    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value2'), 0.0);
+    //var color = am5.Color.brighten(ColorGrauValue2, -0.06);
+    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value2'), 0.35);
     erstelleRangeCircleMitte(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
-
 
 var rangeCircleInnen = [];
 var rangeDataItemCircleInnen = [];
@@ -761,18 +511,23 @@ function erstelleRangeCircleInnen(indexRange, colorAchseLabel, radiusLabel, font
   var tooltip = am5.Tooltip.new(root, { getFillFromSprite: true });
   rangeDataItemCircleInnen[indexRange] = xAxisTechUDimEinzel.makeDataItem({ category: startKategorie, endCategory: endKategorie });
   rangeCircleInnen[indexRange] = xAxisTechUDimEinzel.createAxisRange(rangeDataItemCircleInnen[indexRange]);
-  rangeDataItemCircleInnen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -170, innerRadius: 0, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
+  rangeDataItemCircleInnen[indexRange].get("axisFill").setAll({ visible: true, fill: colorAchseLabel, fillOpacity: 0.9, dRadius: -140, innerRadius: 0, tooltip: tooltip, tooltipText: tooltipText }); //innerRadius -55 ist dicker dicke farbiger streifen
 }
 
 function generiereRangesCircleInnen() {
   var radius = -23; var fontWeight = 300; var fontSize = "0.8em"; var color = am5.Color.lighten(ColorGrauValue1, -0.04); //war radius = -23;
   for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
     index = udim;
-    dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
-    if (thema == "Fachlich") { dim = Math.ceil(udim / 3) }
+    //dim = Math.ceil(udim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    dim = Math.ceil(indexVisibleUDim / 4); //runden auf nächst höheren integer damit dim von 1 bis 5 läuft während udim von 1 bis 20 läuft
+    if (thema == "UDim-Fachlich") { dim = Math.ceil(indexVisibleUDim / 3) }
     var labelText = "";
     var tooltipText = "";
-    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.2); //war 1.7
+    //var color = ColorGrauValue1;
+    var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.35); //war 0.2
+    if (dim == 2) { color = am5.Color.brighten(eval('ColorDim' + dim + 'Value1'), 0.65); };
+    if (dim == 3) { color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.55); };
+
     erstelleRangeCircleInnen(index - 1, color, radius, fontWeight, fontSize, labelText, tooltipText, dataUnterDimensionenEinzel[index - 1].dimension, dataUnterDimensionenEinzel[index - 1].dimension);
   };
 };
@@ -784,7 +539,8 @@ function generiereRangesCircleInnen() {
 var seriesEinzelProjekt = [];
 function erstelleSeriesEinzelTechUDimEinzel(index) { /// index= Index für Projekt geht von 1..34
   //var auspraegung = projekteAuspraegung[{ valueY }];
-  color = colorSetKoordinatoren[index]; color = am5.Color.lighten(am5.color(color), -0.65); //war 0.1
+  color = colorSetKoordinatoren[index];
+  color = am5.Color.lighten(am5.color(color), -0.65); //war 0.1
 
   seriesEinzelProjekt[index] = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
     name: projekteNamen[index - 1], //projekteNamen Array läuft von 0..33 deshalb index-1
@@ -796,14 +552,14 @@ function erstelleSeriesEinzelTechUDimEinzel(index) { /// index= Index für Proje
     fill: color,
 
   }));
-
+  
   seriesEinzelProjekt[index].strokes.template.setAll({ strokeWidth: 2.3, fillOpacity: 0, fill: color }); //war fillOpacity: 0.2 weg wegen grau zonen
   seriesEinzelProjekt[index].bullets.push(function () {
     return am5.Bullet.new(root, {
       sprite: am5.Circle.new(root, {
         radius: 5,
         fillOpacity: 0.9,
-        //fill: color
+        //fill: ColorWhite
         fill: am5.Color.lighten(seriesEinzelProjekt[index].get("fill"), 0)
       })
     });
@@ -814,49 +570,6 @@ function erstelleSeriesEinzelTechUDimEinzel(index) { /// index= Index für Proje
 for (var index = 1; index <= projekteNamen.length; index++) {
   erstelleSeriesEinzelTechUDimEinzel(index);
 };
-
-/// pseudo series für Anzeige der Gesamtvalues erstellen
-seriesGesamtValues = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
-  name: "Infos Gesamtprogramm", //projekteNamen Array läuft von 0..33 deshalb index-1
-  xAxis: xAxisTechUDimEinzel,
-  yAxis: yAxisTechUDimEinzel,
-  fill: ColorDim6Value1, //irgendeine Farbe für Legendeneintrag wählen
-  //valueYField: "value" + index,
-  valueYField: undefined,
-  categoryXField: "dimension",
-}));
-
-seriesGesamtValues.on("visible", function (visible, target) { //Dim1
-  if (visible) {
-    yAxisTechUDimEinzel.setAll({ max: 3.4 });
-    for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
-      index = udim - 1;
-      rangeDataItemCircleAussen[index].get("axisFill").setAll({ dRadius: -18, innerRadius: -82, });
-      rangeDataItemCircleMitte[index].get("axisFill").setAll({ dRadius: -99, innerRadius: -72, });
-      rangeDataItemCircleInnen[index].get("axisFill").setAll({ dRadius: -170, innerRadius: 0, });
-    };
-    generiereRangesGesamtValues();
-  }
-  else {
-    for (var index = 1; index <= dataUnterDimensionenEinzel.length; index++) {
-      range = rangeTechUDimEinzelGesamtValues[index - 1];
-      xAxisTechUDimEinzel.axisRanges.removeValue(range);
-    };
-    //dynmisch range ausgeprägt nach oben erweitern wenn dunkler krei snicht sichtbar
-
-    yAxisTechUDimEinzel.setAll({ max: 3.1 });
-    for (var udim = 1; udim <= dataUnterDimensionenEinzel.length; udim++) {
-      index = udim - 1;
-      rangeDataItemCircleAussen[index].get("axisFill").setAll({ dRadius: 0, innerRadius: -90, });
-      rangeDataItemCircleMitte[index].get("axisFill").setAll({ dRadius: -86, innerRadius: -75, });
-      rangeDataItemCircleInnen[index].get("axisFill").setAll({ dRadius: -160, innerRadius: 0, });
-
-    };
-
-
-
-  }
-});
 
 /// pseudo series für Umschalten Radarboard Fachlich <-> Technologisch
 seriesUmschaltenFachlich = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
@@ -881,23 +594,15 @@ seriesUmschaltenTechnologisch = chartTechUDimEinzel.series.push(am5radar.RadarLi
 seriesUmschaltenFachlich.on("visible", function (visible, target) {
   if (visible) {
     seriesUmschaltenTechnologisch.hide();
-    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
+    window.location.href = "radar-broschuere-f-einzel_udim_alle_projekte.html";
   }
-  /* else {
-    seriesUmschaltenTechnologisch.show();
-    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
-  } */
 });
 
 seriesUmschaltenTechnologisch.on("visible", function (visible, target) {
   if (visible) {
     seriesUmschaltenFachlich.hide();
-    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
+    window.location.href = "radar-broschuere-t-einzel_udim_alle_projekte.html";
   }
-  /* else {
-    seriesUmschaltenFachlich.show();
-    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
-  } */
 });
 
 seriesCircleAussen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
@@ -930,21 +635,31 @@ seriesCircleInnen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new
 }));
 generiereRangesCircleInnen();
 
-
 function erstelleLegendEventsTechUDimEinzel(index) {
-  seriesEinzelProjekt[index].on("visible", function (visible, target) {
+  seriesEinzelProjekt[index].on("visible", function (visible, ev) {
     updateTitleText();
     updateProjektBeschreibungText();
 
     if (visible) {
-      //console.log("visible: ",index)
+      var dim = Math.ceil(index / 4);
+      // console.log("Legend Event visible Dim: ", dim)
+      var color1 = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.0);
+     
+      indexVisibleUDim = index;
+      //noch ändernnur wechsel farbe range wenn nötig also neue dim  
+      generiereRangesProjektNamen();
+      generiereRangesCircleAussen();
+      generiereRangesCircleMitte();
+      generiereRangesCircleInnen();
 
       for (var i = 1; i <= projekteNamen.length; i++) {
         if (i == index) {
           // console.log("i==index show", i, index)
           seriesEinzelProjekt[i].show();
           nameProjekt = projekteNamen[i - 1];
-          //console.log("on.visible p=" + nameProjekt);
+          // console.log("on.visible p=" + nameProjekt);
+          indexVisibleUDim = i;
+
         }
         else {
           //console.log("i<>index hide", i, index)
@@ -1098,17 +813,17 @@ function updateSliderDatensatz(sliderWert) { /// bei slider move updatevalues fu
   // console.log("slider wert:" + sliderWert);
   if (sliderWert == 0 || sliderWert == 1) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandAntrag, indexDatensatz = 0);
-    updateLabelGesamtValues();
+    //updateLabelGesamtValues();
 
   }
   else if (sliderWert == 4 || sliderWert == 5 || sliderWert == 6) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandZB2021, indexDatensatz = 1);
-    updateLabelGesamtValues();
+    //updateLabelGesamtValues();
 
   }
   else if (sliderWert == 9 || sliderWert == 10 || sliderWert == 11) {
     updateValuesDatensatz(dataUnterDimensionenEinzelStandTagung2022, indexDatensatz = 2);
-    updateLabelGesamtValues();
+    //updateLabelGesamtValues();
 
   }
 };
@@ -1121,7 +836,7 @@ function changeProjekt(name) {
     if (name == projekteNamen[i].toLowerCase()) {
       seriesEinzelProjekt[i + 1].show();
       nameProjekt = projekteNamen[i].toLowerCase();
-      console.log("p=" + nameProjekt);
+      //console.log("p=" + nameProjekt);
     }
     else {
       //console.log("i<>index hide", i, index)
@@ -1144,8 +859,8 @@ for (var index = 2; index <= projekteNamen.length; index++) {
   seriesEinzelProjekt[index].hide();
 };
 
-generiereRangesGesamtValues(); ///Anzeige Gesamtvalues beim start aktivieren, wird schon an anderer stelle gemacht
-seriesGesamtValues.show();
+//generiereRangesGesamtValues(); ///Anzeige Gesamtvalues beim start aktivieren, wird schon an anderer stelle gemacht
+//seriesGesamtValues.show();
 //seriesGesamtValues.hide(); ///Anzeige Gesamtvalues beim start deaktivieren
 
 xAxisTechUDimEinzel.data.setAll(dataUnterDimensionenEinzel);
@@ -1156,23 +871,49 @@ for (var index = 1; index <= projekteNamen.length; index++) {
   legendTechUDimEinzel.data.push(seriesEinzelProjekt[index]);
 };
 
+function insertLegendLabel(text, index, color) {
+  var label = legendTechUDimEinzel.children.insertIndex(index, am5.Label.new(root, {
+    text: text,
+    fontSize: 12,
+    fontWeight: "bold",
+    fill: color,
+    paddingTop: 5,
+    //paddingLeft: 0
+  }));
+}
+if (thema == "UDim-Technologisch") {
+  insertLegendLabel("Informationssicherheit & Datensouveränität", 16, ColorDim5Value1);
+  insertLegendLabel("Nachnutzbarkeit durch Dritte", 12, ColorDim4Value1);
+  insertLegendLabel("Zugänglichkeit und Zusammenarbeit", 8, ColorDim3Value1);
+  insertLegendLabel("Algorithmen zur Unterstützung der Lernenden", 4, ColorDim2Value1);
+  insertLegendLabel("Interoperabilität durch Bildungstandards", 0, ColorDim1Value1);
+};
 
-if (thema == "Fachlich") {
+if (thema == "UDim-Fachlich") {
+  insertLegendLabel("Unterstützung von KMU beim Strukturwandel", 12, ColorDim5Value1);
+  insertLegendLabel("Personalisierung und Adaptivität", 9, ColorDim4Value1);
+  insertLegendLabel("Digitale Kompetenzvalidierung", 6, ColorDim3Value1);
+  insertLegendLabel("Niedrigschwellige Zugangsmöglichkeiten", 3, ColorDim2Value1);
+  insertLegendLabel("Digitale Ökosysteme", 0, ColorDim1Value1);
+};
+
+
+if (thema == "UDim-Fachlich") {
   seriesUmschaltenTechnologisch.hide();
 }
 
-if (thema == "Technologisch") {
+if (thema == "UDim-Technologisch") {
   seriesUmschaltenFachlich.hide();
 }
 legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenFachlich);
 legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenTechnologisch);
 
-
-legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
+// weg wegen alle projekte pro UDim
+//legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
 
 legendTechUDimEinzel.appear(2000, 10);
 
-//seriesEinzelProjekt[1].appear(2000); //erstes Projekt anzeigen, die anderen ausgeblendet lassen
+seriesEinzelProjekt[1].appear(2000); //erstes Projekt anzeigen, die anderen ausgeblendet lassen
 
 chartTechUDimEinzel.appear(300, 10);
 

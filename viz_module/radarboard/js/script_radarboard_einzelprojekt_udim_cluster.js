@@ -117,26 +117,69 @@ legendUmschaltenFachlichTechnologisch.labels.template.setAll({
 
 //-------------------------------Ende pseudo legend ----------------------------
 
-var tooltipHilfeViz = am5.Tooltip.new(root, { pointerOrientation: "up", getFillFromSprite: false, dy: 9, dx: 9 });
-tooltipHilfeViz.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
-
-var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
-  paddingLeft: 30,
-  paddingTop: 4,
-  x: am5.percent(0),
-  text: "🛈",
-  fontSize: 22,
+//---------------------Menu links Hamburger rechts Hilfe Video------------------
+var labelMenu = containerTitle.children.push(am5.Label.new(root, {
+  //paddingLeft: 28,
+  paddingTop: 7,
+  x: 17,
+  text: "☰",
+  fontSize: 18,
   fill: ColorBlackYAxisText,
   cursorOverStyle: "pointer",
-  tooltip: tooltipHilfeViz,
-  //tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Animierte Hilfe anzeigen[fontSize: 7px] [fontSize: 12px]/[fontSize: 7px] [fontWeight: 500 fontSize: 12px]verbergen",
-  tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Animierte Hilfe",
-
+  tooltip: am5.Tooltip.new(root, { paddingBottom: 5, paddingTop: 3, pointerOrientation:"left" }),
+  tooltipX: 28,
+  tooltipY: 18,
+  tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Auswahl Visualisierung",
   background: am5.Rectangle.new(root, {
     fill: am5.color(0x000000),
     fillOpacity: 0
   })
 }));
+
+labelMenu.events.on("click", function (ev) {
+  if (labelMenu.get("active")) { //Menu war active -> hide div
+    console.log("Menu active");
+    labelMenu.set("active", false);
+    document.getElementById('menu-radar').style.display = 'none';
+  } else { //Menu war inactive -> div anzeigen
+    console.log("Menu inactive");
+    labelMenu.set("active", true);
+    document.getElementById('menu-radar').style.display = 'inline-block';
+  };
+});
+
+var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
+ // paddingLeft: 65,
+  paddingTop: 7,
+  x: 59,
+  x: 1290,
+  text: "🛈",
+  fontSize: 21,
+  fill: ColorBlackYAxisText,
+  cursorOverStyle: "pointer",
+  tooltip: am5.Tooltip.new(root, { paddingBottom: 4, paddingTop: 2, pointerOrientation:"up" }),
+  tooltipX: 20,
+  tooltipY: 30,
+  tooltipText: "[fontWeight: 500 fontSize: 12px #fff]Video-Erklärung anzeigen",
+  background: am5.Rectangle.new(root, {
+    fill: am5.color(0x000000),
+    fillOpacity: 0
+  })
+}));
+
+labelHilfe.events.on("click", function (ev) {
+  helpVideoStatus = document.getElementById('helpvideo').style.display;
+
+  if (helpVideoStatus == 'none') {
+    document.getElementById('CloseButton').style.display = 'inline-block';
+    document.getElementById('helpvideo').style.display = 'inline-block';
+  }
+  else {
+    document.getElementById('helpvideo').style.display = 'none';
+    document.getElementById('CloseButton').style.display = 'none';
+  }
+});
+//---------------------Ende Menu links Hamburger rechts Hilfe Video------------------
 
 //var tooltipNetworkViz = am5.Tooltip.new(root, { pointerOrientation: "horizontal", getFillFromSprite: false, dy: 0, dx: 12 });
 //tooltipNetworkViz.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
@@ -361,13 +404,13 @@ var tooltipProjektZiel = am5.Tooltip.new(root, {
   dx: 140,
   width: 790,
 });
-tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauHell });
+tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 
 var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
  
-  paddingTop: -3,
+  paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
@@ -387,13 +430,13 @@ var tooltipMehrwert = am5.Tooltip.new(root, {
   dx: 125,
   width: 790,
 });
-tooltipMehrwert.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauHell });
+tooltipMehrwert.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipMehrwert.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 
 var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
  
-  paddingTop: -3,
+  paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
@@ -413,11 +456,11 @@ var tooltipVerbundpartner = am5.Tooltip.new(root, {
   dx: 125,
   width: 590,
 });
-tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.95, fill: ColorGrauHell });
+tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipVerbundpartner.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
 var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
-   paddingTop: -3,
+   paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Verbundpartner:[fontSize: 13px]",
   oversizedBehavior: "wrap",
   maxWidth: 320,
