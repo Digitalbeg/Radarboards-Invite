@@ -440,7 +440,7 @@ function generiereRangesProjektNamen() {
     if (thema == "UDim-Fachlich") { dim = Math.ceil(indexVisibleUDim / 3) }
     var labelText = "";
     var tooltipText = "";
-    console.log("dim:"+ dim)
+    //console.log("dim:"+ dim)
   var color = am5.Color.lighten(eval('ColorDim' + dim + 'Value1'), 0.97);
   radiusProjektNamen = 0;
   erstelleRangeTechUDimEinzelLabelOnly(index, color, radiusProjektNamen, fontSizeLabelAussen, "", "", dataUnterDimensionenEinzel[index-1].dimension, dataUnterDimensionenEinzel[index-1].dimension);
