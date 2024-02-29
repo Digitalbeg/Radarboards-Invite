@@ -29,11 +29,11 @@ var labelMenu = containerTechDim.children.push(am5.Label.new(root, {
 
 labelMenu.events.on("click", function (ev) {
   if (labelMenu.get("active")) { //Menu war active -> hide div
-    console.log("Menu active");
+    //console.log("Menu active");
     labelMenu.set("active", false);
     document.getElementById('menu-radar').style.display = 'none';
   } else { //Menu war inactive -> div anzeigen
-    console.log("Menu inactive");
+    //console.log("Menu inactive");
     labelMenu.set("active", true);
     document.getElementById('menu-radar').style.display = 'inline-block';
   };
