@@ -14,7 +14,6 @@ body {
   /* visibility: hidden; */
   visibility: visible;
   transition: all 0.3s ease;
-  
 }
 
 .content {
@@ -25,7 +24,9 @@ body {
 }
 
 .mega-menu .content {
-  background: #f1f1f1;  /* Hintergrundfarbe war schwarz */
+  background: #ececec;  /* Hintergrundfarbe war schwarz */
+  border: 1px solid black;
+  
   /* padding-bottom: 30rem; */
   /* padding: 20rem; */
   display: grid;
