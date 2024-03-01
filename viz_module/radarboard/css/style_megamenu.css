@@ -5,7 +5,6 @@ body {
 .mega-menu {
   position: absolute;
   display: none;
-  left: 0;
   width: 1000px;
   height: 430px;
   top: 38px;
