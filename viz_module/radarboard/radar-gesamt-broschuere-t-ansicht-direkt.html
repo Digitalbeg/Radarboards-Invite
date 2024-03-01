@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gesamtprogramm Technologisch </title>
+    <link rel="stylesheet" href="./css/style_radarboard.css">
+    <link rel="stylesheet" href="./css/style_megamenu.css">
+    <link rel="icon" href="./img/favicon.png">
+    <style>
+        /* Stil für den Titeltext */
+        .title-text {
+            padding-left: 21em;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .tooltip2 {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: rgb(164, 164, 164);
+            text-decoration: underline;
+            font-weight: normal;
+            /* Unterstreicht das Textlabel */
+            /* Fügt graue Farbe zum Textlabel hinzu */
+        }
+
+        .tooltip2 .tooltiptext2 {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+            /* Setzt die Schriftgröße auf 12px (Sie können diesen Wert anpassen) */
+            font-weight: normal;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            /*  bottom: 125%; */
+            top: 100%;
+            /* Position des Textlabels */
+            left: 50%;
+            margin-left: -60px;
+            /* Verschiebt den Tooltip um 50% seiner Breite nach links */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip2:hover .tooltiptext2 {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- JavaScript-Dateien und Skripte -->
+    <!-- Zugriff über CDN für public access -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Responsive.js"></script>
+
+    <!-- lokaler Zugriff für offline version -->
+    <!-- <script src="../../lib/dist/am/index.js"></script>
+    <script src="../../lib/dist/am/xy.js"></script>
+    <script src="../../lib/dist/am/radar.js"></script>
+    <script src="../../lib/dist/am/themes/Animated.js"></script>
+    <script src="../../lib/dist/am/themes/Responsive.js"></script> -->
+    <!-- Titelbereich -->
+    <div id="screenWarnung">
+        <h3>Diese Anwendung ist für größere Bildschirme (Desktop) optimiert.</h3>
+        <p>Maximieren Sie bitte Ihr Browserfenster
+            oder verschieben Sie falls möglich die Anwendung auf einen größeren Bildschirm.
+        <p> Sie können ggf. auch den Browser-Zoom verringern.
+            <br>(Drücken Sie dazu gleichzeitig „Strg“ und „-“ um den aktuellen Browserinhalt zu verkleinern.)
+        <h4>Diese Meldung wird dann automatisch ausgeblendet.</h4>
+    </div>
+
+    <!-- Logos -->
+    <div id="logo">
+        <img id="logo-img" width="220" height="25" src="./img/logo-bibb-vdivde.svg" title="Logo BIBB und VDI/VDE-IT">
+    </div>
+
+    <div id="title-text" class="title-text">
+        <span class="tooltip2">Fachlich-Didaktisches
+            <span class="tooltiptext2">Umschalten zum Radarboard<br>Fachlich-Didaktisch</span>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;Technologisches Radarboard - Invite Gesamtprogramm
+    </div>
+
+    <!-- Dimensionenauswahl -->
+    <div id="selector">
+        <label class="tooltip-container">Dimensionen
+            <input type="radio" id="Tech-Dimensionen" value="Tech-Dimensionen" name="dataset" checked="true"
+                onclick="changeDatensatz('Tech-Dimensionen');" />
+            <span class="tooltip-text">Anzeige der Dimensionen. Der Farbcode<br>stellt die Schwerpunkte der
+                Projekte in % dar.</span>
+        </label>
+        <label class="tooltip-container">&nbsp;&nbsp;Unterdimensionen
+            <input type="radio" id="Tech-UnterDimensionen" value="Tech-UnterDimensionen" name="dataset"
+                onclick="changeDatensatz('Tech-UnterDimensionen');" />
+            <span class="tooltip-text">Anzeige der Unterdimensionen. Der Farbcode<br>stellt die Schwerpunkte der
+                Projekte in % dar.</span>
+        </label>
+    </div>
+
+    <!-- Legende -->
+    <div id="legende-top">
+        <img id="legend-img" width="225" height="144" src="./img/legende_techdim_einfarbig.svg"
+            title="Der Farbcode zeigt die Ausprägung der Technologie Dimensionen in den Projekten des Förderprogrammes">
+
+    </div>
+
+    <!-- Hauptdiagrammbereich -->
+    <div id="chartdiv"></div>
+
+    <script>var thema = "Technologisch"; //für Anpassungen in nachfolgenden Scripten bri fachliche Radarboards (fachlich 3UDim) Tech 4 UDim</script>
+
+    <!-- projektspezifische Daten und Scripte -->
+    <script src="./daten/projektdaten_radarboard_constants.js"></script>
+
+    <!-- <script src="./daten/projektdaten_radarboard_demo_json.js"></script> -->
+    <script src="./daten/projektdaten_radarboard_t_json.js"></script>
+
+    <script src="./js/script_radarboard_multichart_tech_dim.js"></script>
+    <script src="./js/script_radarboard_chart_tech_dim.js"></script>
+    <script src="./js/script_radarboard_chart_tech_udim.js"></script>
+
+
+    <script>
+
+        /* JavaScript für das Einlesen der URL-Parameter  */
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var ansicht = urlParams.get('ansicht');
+
+        if (ansicht) {
+            changeDatensatz(ansicht);
+        };
+        //console.log("ansicht:" + ansicht);
+        if (ansicht == 'Tech-Dimensionen') {
+            document.getElementById("Tech-Dimensionen").checked = true;
+
+        }
+        else if (ansicht == 'Tech-UnterDimensionen') {
+            document.getElementById("Tech-UnterDimensionen").checked = true;
+
+        };
+
+        document.querySelector('.tooltip2').addEventListener('click', function () {
+            window.location.href = './radar-gesamt-broschuere-f-ansicht-direkt.html';
+        });
+    </script>
+
+<!-----------------------------Div Menü------------------------------------------------->
+<div id="menu-radar" class="mega-menu blog" style="top:90px; left:22px;" >
+    <div class="content">
+      <div class="col" >
+        <a href="radar-gesamt-broschuere-t-ansicht-direkt.html" class="img-wrapper"><span class="img"><img src="./img/gesamt-weiss.jpg"
+          alt="Gesamtansicht Radarboards" /></span></a>
+       <br><h2>❶ Gesamtübersicht</h2>
+        <p>Schwerpunkte aller INVITE Projekte auf einen Blick. Fachlich-Didaktisch & Technologisch.
+        </p>
+        <a href="radar-gesamt-broschuere-t-ansicht-direkt.html" class="read-more">Zur Ansicht wechseln...</a>
+      </div>
+      <div class="col">
+        <a href="radar-broschuere-t.html" class="img-wrapper"><span class="img"><img src="./img/einzel-weiss.jpg"
+              alt="Projektansicht Radarboards" /></span></a>
+              <br><h2>❷ Einzelprojekte</h2><p>Schwerpunkte dargestellt pro Einzelprojekt.<br>Fachlich-Didaktisch & Technologisch.</p>
+        <a href="radar-broschuere-t.html" class="read-more">Zur Ansicht wechseln...</a>
+      </div>
+      <div class="col">
+        <a href="radar-broschuere-t-einzel_udim_alle_projekte.html" class="img-wrapper"><span class="img"><img src="./img/dim-weiss.jpg"
+              alt="Einzeldimension Radarboard" /></span></a>
+              <br><h2>❸ Einzeldimensionen</h2><p>Ausprägung einzelner Dimension.<br> Fachlich-Didaktisch & Technologisch.
+        </p>
+        <a href="radar-broschuere-t-einzel_udim_alle_projekte.html" class="read-more">Zur Ansicht wechseln...</a>
+      </div>          
+    </div>
+  </div>
+<!-----------------------------Ende Div Menü------------------------------------------------->
+
+</body>
+
+</html>
