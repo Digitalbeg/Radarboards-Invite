@@ -305,7 +305,7 @@ var tooltipProjektZiel = am5.Tooltip.new(root, {
   getFillFromSprite: false,
   dy: 15,
   dx: 140,
-  width: 790,
+  width: 820, //war 790 Breite Tooltip
 });
 tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
