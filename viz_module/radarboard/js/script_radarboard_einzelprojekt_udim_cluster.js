@@ -45,37 +45,6 @@ var title = containerTitle.children.push(am5.Label.new(root, {
 var tooltipLabelTechFachUmschalten = am5.Tooltip.new(root, { getFillFromSprite: false, dy: 8, });
 tooltipLabelTechFachUmschalten.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
 
-/* var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
-  paddingLeft: -10,
-  fontSize: 18,
-  text: "[fontWeight: 500]   ►Fachlich & Didaktisch",
-  fill: ColorGrauValue2,
-  cursorOverStyle: "pointer",
-  tooltip: tooltipLabelTechFachUmschalten,
-  tooltipText: "[fontWeight: 500 #fff fontSize: 12px]zum Radarboard Fachlich-Didaktisch wechseln",
-  background: am5.Rectangle.new(root, {
-    fill: am5.color(0x000000),
-    fillOpacity: 0
-  })
-})); */
-
-/* if (thema == "Fachlich") {
-  labelTechFachUmschalten.set("text", "[fontWeight: 500]   ►Technologisch");
-  labelTechFachUmschalten.set("tooltipText", "[fontWeight: 500 #fff fontSize: 12px]zum Radarboard Technologie wechseln");
-}
-
-labelTechFachUmschalten.events.on("click", function (ev) {
-  console.log("umschalten:" + nameProjekt);
-  if (thema == "Fachlich") {
-    console.log("Fach,p" + nameProjekt);
-    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
-  }
-  else {
-    console.log("Technologisch");
-    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
-  }
-}); */
-
 
 //-------- pseudo legend für Umschalten Radarboard Fachlich <-> Technologisch----------
 var legendUmschaltenFachlichTechnologisch = containerTitle.children.push(am5.Legend.new(root, {
@@ -151,7 +120,7 @@ labelMenu.events.on("click", function (ev) {
 var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
  // paddingLeft: 65,
   paddingTop: 7,
-  x: 59,
+  // x: 59,
   x: 1290,
   text: "🛈",
   fontSize: 21,
@@ -188,7 +157,7 @@ var tooltipNetworkViz = am5.Tooltip.new(root, { pointerOrientation: "up", getFil
 tooltipNetworkViz.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
 
 var labelVizCluster = containerTitle.children.push(am5.Label.new(root, {
-  dx: 53,
+  dx: 63,
   //dx: 250,
   paddingTop: 4,
   x: am5.percent(0),
@@ -208,7 +177,7 @@ var labelVizCluster = containerTitle.children.push(am5.Label.new(root, {
 }));
 
 var labelVizNetwork = containerTitle.children.push(am5.Label.new(root, {
-  dx: 87,
+  dx: 97,
   paddingTop: 4,
   x: am5.percent(0),
   // text: "☼ ⁂ ◉ ◎",
