@@ -38,12 +38,12 @@ var title = containerTitle.children.push(am5.Label.new(root, {
   text: "", //wird später über update Title gesetzt
   fontSize: 18,
   fontWeight: 700,
-  paddingLeft: 620,
+  paddingLeft: 520,
   // x: 450,
 }));
 
-/* var tooltipLabelTechFachUmschalten = am5.Tooltip.new(root, { getFillFromSprite: false, dy: 8, });
-tooltipLabelTechFachUmschalten.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel }); */
+var tooltipLabelTechFachUmschalten = am5.Tooltip.new(root, { getFillFromSprite: false, dy: 8, });
+tooltipLabelTechFachUmschalten.get("background").setAll({ fillOpacity: 0.9, fill: ColorGrauDunkel });
 
 /* var labelTechFachUmschalten = containerTitle.children.push(am5.Label.new(root, {
   paddingLeft: -10,
@@ -78,7 +78,7 @@ labelTechFachUmschalten.events.on("click", function (ev) {
 
 
 //-------- pseudo legend für Umschalten Radarboard Fachlich <-> Technologisch----------
-/* var legendUmschaltenFachlichTechnologisch = containerTitle.children.push(am5.Legend.new(root, {
+var legendUmschaltenFachlichTechnologisch = containerTitle.children.push(am5.Legend.new(root, {
   nameField: "categoryX",
   dy: 13,
   dx: 400,
@@ -86,8 +86,9 @@ labelTechFachUmschalten.events.on("click", function (ev) {
   layout: root.horizontalLayout,
   tooltip: tooltipLabelTechFachUmschalten,
   tooltipText: "[fontWeight: 500 #fff fontSize: 13px]Radarboard umschalten",
-})); */
-/* legendUmschaltenFachlichTechnologisch.valueLabels.template.set("forceHidden", true);
+
+}));
+legendUmschaltenFachlichTechnologisch.valueLabels.template.set("forceHidden", true);
 
 legendUmschaltenFachlichTechnologisch.markers.template.setup = function (marker) {
   var check = am5.Graphics.new(root, {
@@ -111,7 +112,7 @@ legendUmschaltenFachlichTechnologisch.markerRectangles.template.setAll({
 legendUmschaltenFachlichTechnologisch.labels.template.setAll({
   fontSize: fontSizeLegendeUmschalten,
   fontWeight: "600"
-}); */
+});
 
 
 //-------------------------------Ende pseudo legend ----------------------------
@@ -145,7 +146,7 @@ labelMenu.events.on("click", function (ev) {
   };
 });
 
-/* var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
+var labelHilfe = containerTitle.children.push(am5.Label.new(root, {
  // paddingLeft: 65,
   paddingTop: 7,
   x: 59,
@@ -175,7 +176,7 @@ labelHilfe.events.on("click", function (ev) {
     document.getElementById('helpvideo').style.display = 'none';
     document.getElementById('CloseButton').style.display = 'none';
   }
-}); */
+});
 //---------------------Ende Menu links Hamburger rechts Hilfe Video------------------
 
 
@@ -237,7 +238,7 @@ function updateTitleText() {
 
 var containerTextRadarboardTech = root.container.children.push(
   am5.Container.new(root, {
-    width: 350,
+    width: 320,
     // height: 340,
     x: 20,
     y: 210,
@@ -261,9 +262,9 @@ function updateProjektBeschreibungText() {
   };
   if (indexVisible >= 0) {
     //var text1Projekt = "[fontWeight: 600 fontSize: 14px]Entwicklungsfeld: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["entwicklungsfeld"];
-    var text1Projekt = "[fontWeight: 600 fontSize: 14px]Titel: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["thema"];
+    var text1Projekt = "[fontWeight: 600 fontSize: 14px]Thema: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["thema"];
     var text2Projekt = "[fontWeight: 600 fontSize: 14px]Zielgruppe: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["zielgruppe"];
-    var text3Projekt = "[fontWeight: 600 fontSize: 14px]Kurzbeschreibung: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["innovation"];
+    var text3Projekt = "[fontWeight: 600 fontSize: 14px]Innovation: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["innovation"];
     var text4Projekt = "[fontWeight: 600 fontSize: 14px]Weiterbildungsplattform: [fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["weiterbildungsplattform"];
 
 
@@ -272,18 +273,18 @@ function updateProjektBeschreibungText() {
 
     textProjektZiel = "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
     tooltipTextProjektZiel = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["projektzieleschwerpunkte"];
-    /* labelProjektziel.set("text", textProjektZiel);
-    labelProjektziel.set("tooltipText", tooltipTextProjektZiel); */
+    labelProjektziel.set("text", textProjektZiel);
+    labelProjektziel.set("tooltipText", tooltipTextProjektZiel);
 
     textProjektMehrwert = "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px]mehr";
     tooltipTextProjektMehrwert = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["mehrwert"];
-    /* labelProjektMehrwert.set("text", textProjektMehrwert);
-    labelProjektMehrwert.set("tooltipText", tooltipTextProjektMehrwert); */
+    labelProjektMehrwert.set("text", textProjektMehrwert);
+    labelProjektMehrwert.set("tooltipText", tooltipTextProjektMehrwert);
 
     textProjektVerbundpartner = "[fontWeight: 600 fontSize: 14px]Verbundpartner:\n[fontSize: 13px]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"].substring(0, 35) + "... [fontWeight: 500 fontSize: 12px #000]mehr";
     tooltipTextProjektVerbundpartner = "[fontSize: 13px fontFamily: Arial]" + dataUnterDimensionenEinzelTexte[indexVisible]["verbundpartner"];
-    /* labelProjektVerbundpartner.set("text", textProjektVerbundpartner);
-    labelProjektVerbundpartner.set("tooltipText", tooltipTextProjektVerbundpartner); */
+    labelProjektVerbundpartner.set("text", textProjektVerbundpartner);
+    labelProjektVerbundpartner.set("tooltipText", tooltipTextProjektVerbundpartner);
 
   }
   else {
@@ -294,7 +295,7 @@ function updateProjektBeschreibungText() {
 var textRadarboardTech = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   text: textProjektBeschreibung,
   oversizedBehavior: "wrap",
-  maxWidth: 350, // war 298
+  maxWidth: 320, // war 298
 
 }));
 
@@ -309,7 +310,7 @@ var tooltipProjektZiel = am5.Tooltip.new(root, {
 tooltipProjektZiel.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
-/* var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+var labelProjektziel = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Projektziel & Schwerpunkte:\n[fontSize: 13px]",
   oversizedBehavior: "wrap",
@@ -320,7 +321,7 @@ tooltipProjektZiel.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
     fill: am5.color(0x000000),
     fillOpacity: 0
   })
-})); */
+}));
 
 var tooltipMehrwert = am5.Tooltip.new(root, {
   autoTextColor: false, //textfarbe nocht automatisch
@@ -333,7 +334,7 @@ var tooltipMehrwert = am5.Tooltip.new(root, {
 tooltipMehrwert.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipMehrwert.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
-/* var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+var labelProjektMehrwert = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Mehrwert für berufliche Weiterbildung:[fontSize: 13px]",
   oversizedBehavior: "wrap",
@@ -344,7 +345,7 @@ tooltipMehrwert.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
     fill: am5.color(0x000000),
     fillOpacity: 0
   })
-})); */
+}));
 
 var tooltipVerbundpartner = am5.Tooltip.new(root, {
   autoTextColor: false, //textfarbe nocht automatisch
@@ -357,7 +358,7 @@ var tooltipVerbundpartner = am5.Tooltip.new(root, {
 tooltipVerbundpartner.get("background").setAll({ fillOpacity: 0.97, fill: ColorGrauHell });
 tooltipVerbundpartner.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
 
-/* var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
+var labelProjektVerbundpartner = containerTextRadarboardTech.children.push(am5.Label.new(root, {
   paddingTop: -2,
   text: "[fontWeight: 600 fontSize: 14px]Verbundpartner:[fontSize: 13px]",
   oversizedBehavior: "wrap",
@@ -368,7 +369,7 @@ tooltipVerbundpartner.label.setAll({fill: ColorBlack}); //Textfarbe auf schwarz
     fill: am5.color(0x000000),
     fillOpacity: 0
   })
-})); */
+}));
 
 
 
@@ -862,11 +863,11 @@ seriesUmschaltenFachlich = chartTechUDimEinzel.series.push(am5radar.RadarLineSer
   name: "Fachlich-Didaktisch",
   xAxis: xAxisTechUDimEinzel,
   yAxis: yAxisTechUDimEinzel,
+  // fill: ColorBlackYAxisText,
   fill: ColorGrauDunkel,
   valueYField: undefined,
   categoryXField: "dimension",
 }));
-
 
 seriesUmschaltenTechnologisch = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
   name: "Technologisch",
@@ -877,13 +878,15 @@ seriesUmschaltenTechnologisch = chartTechUDimEinzel.series.push(am5radar.RadarLi
   categoryXField: "dimension",
 }));
 
-
 seriesUmschaltenFachlich.on("visible", function (visible, target) {
   if (visible) {
     seriesUmschaltenTechnologisch.hide();
     window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
   }
-  
+  /* else {
+    seriesUmschaltenTechnologisch.show();
+    window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
+  } */
 });
 
 seriesUmschaltenTechnologisch.on("visible", function (visible, target) {
@@ -891,7 +894,10 @@ seriesUmschaltenTechnologisch.on("visible", function (visible, target) {
     seriesUmschaltenFachlich.hide();
     window.location.href = "radar-broschuere-t.html?p=" + nameProjekt.toLowerCase();
   }
-
+  /* else {
+    seriesUmschaltenFachlich.show();
+    window.location.href = "radar-broschuere-f.html?p=" + nameProjekt.toLowerCase();
+  } */
 });
 
 seriesCircleAussen = chartTechUDimEinzel.series.push(am5radar.RadarLineSeries.new(root, {
@@ -962,7 +968,7 @@ for (var index = 1; index <= projekteNamen.length; index++) {
 //#endregion ///--------C End Series-------------------------------------------------------
 
 //#region ///--------D Slider-----------------------------------------------------------------------------
-/* var containerSlider = chartTechUDimEinzel.children.push(am5.Container.new(root, {
+var containerSlider = chartTechUDimEinzel.children.push(am5.Container.new(root, {
   //y: am5.percent(101),
   y: am5.percent(95),
   dy: 85,
@@ -1065,7 +1071,7 @@ var sliderTextStandC = chartTechUDimEinzel.children.push(am5.Label.new(root, {
     fill: am5.color(0x000000),
     fillOpacity: 0
   })
-})); */
+}));
 
 function updateValuesDatensatz(datensatz, indexDatensatz) { ///update der value1..34 in series 1..34 bei slider bewegeung
   dataUnterDimensionenEinzel = datensatz;
@@ -1158,8 +1164,8 @@ if (thema == "Fachlich") {
 if (thema == "Technologisch") {
   seriesUmschaltenFachlich.hide();
 }
-/* legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenFachlich);
-legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenTechnologisch); */
+legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenFachlich);
+legendUmschaltenFachlichTechnologisch.data.push(seriesUmschaltenTechnologisch);
 
 
 legendTechUDimEinzel.data.push(seriesGesamtValues); //bug bei einausblenden, 
