@@ -99,6 +99,9 @@ const fillSeriesAusgepraegt = ColorGrauValue3; /// farbe fast egal da opacity ge
 //const fillOpacitySeriesAusgepraegt = 0.01; /// color ist grau siehe series eintrag, opacity bestimmt wie weit grau transparent oder sichtbar ist
 const fillOpacitySeriesAusgepraegt = 1;
 
+anzahlUDim = 4; //Für technologische Radarboards
+if (thema == "UDim-Fachlich") {anzahlUDim = 3}
+
 
 ///EinzelTechUDim
 const radiusEinzelTechUDimLabel = 12; //war 20, war 16
