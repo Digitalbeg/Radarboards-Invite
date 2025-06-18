@@ -164,13 +164,14 @@ function updateTitleText() {
     } //kein Legendeneintrag visible namen Projekt im Titel entfernen
 
   };
-  indexDim = Math.ceil(indexSingle / 4);
-  //console.log("indexSingle, indexDim=" + indexSingle + "," + indexDim);
+  indexDim = Math.ceil(indexSingle / anzahlUDim);
+ // console.log("anzahlUDim,iSingle, iDim=" + anzahlUDim + ","+ indexSingle + "," + indexDim);
   if (counterVisible > 0) {
    textProjektTitel = "[fontWeight: 700 fontSize: 18px]" + dataDimensionen[indexDim - 1].dimension + ": " + textProjektTitel2 + textProjektTitel3 + textProjektTitel1;
-   title.set("fill", am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.2));
+   title.set("fill", am5.Color.lighten(eval('ColorDim' + indexDim + 'Value2'), -0.2));
    title.set("text", textProjektTitel);
-   colorTextDim = am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.2); //farbe aktuelle Dim 
+   colorTextDim = am5.Color.lighten(eval('ColorDim' + indexDim + 'Value2'), -0.2); //farbe aktuelle Dim
+  
   };
 };
 
@@ -198,12 +199,14 @@ function updateProjektBeschreibungText() {
     }
   };
   //indexDim = Math.ceil(indexVisible / 4); // um Beschreibung Dim anzeigne zu können
-  var text2 = dataDimensionen[indexDim]["textLang"].replace(/\n/g, ' ');
+  if (indexDim > 0) {
+    var text2 = dataDimensionen[indexDim-1]["textLang"].replace(/\n/g, ' ');
+  }
   var text4 = dataBeschreibungUnterDimensionen[indexVisible]["textLang"].replace(/\n/g, ' ');
   //colorTextDim = am5.Color.lighten(eval('ColorDim' + indexDim + 'Value1'), -0.3);
   //console.log("color text dimesnion:" + colorTextDim);
 
-  if (indexVisible > 0) {
+  if (indexVisible >= 0 && indexDim > 0) {
     var text1Projekt = "[fontSize: 13px fontWeight: 700 #" + colorTextDim + "]" + dataDimensionen[indexDim - 1].dimension; // Titel Dim
     var text2Projekt = "[fontWeight: 400 fontSize: 13px]" + text2; // Text Definition Dim
     var text3Projekt = "[fontSize: 13px fontWeight: 700 #" + colorTextDim + "]" + dataBeschreibungUnterDimensionen[indexVisible].dimension; //Titel UDim
@@ -365,7 +368,7 @@ counterLegendItem = 0;
 legendTechUDimEinzel.labels.template.events.on("dataitemchanged", function (ev) {
   counterLegendItem = counterLegendItem + 1;
   dim = Math.ceil(counterLegendItem / 8);
-  if (thema == "UDim-Fachlich") {dim = Math.ceil(counterLegendItem / 6);}
+  if (thema == "UDim-Fachlich") {dim = Math.ceil(counterLegendItem / (2*anzahlUDim));}
  
   //console.log("Leg. ev DataItCh. counter,dim: ", counterLegendItem + "," + dim)
   if (thema == "UDim-Technologisch" && counterLegendItem < 41) {
